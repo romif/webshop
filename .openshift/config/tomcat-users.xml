@@ -16,6 +16,9 @@
   limitations under the License.
 -->
 <tomcat-users>
+
+<role rolename="manager-gui"/>
+<user username="tomcat" password="openshift" roles="manager-gui"/>
 <!--
   NOTE:  By default, no user is included in the "manager-gui" role required
   to operate the "/manager/html" web application.  If you wish to use this app,
