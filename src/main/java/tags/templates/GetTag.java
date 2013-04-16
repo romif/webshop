@@ -11,36 +11,36 @@ package tags.templates;
  public class GetTag extends TagSupport {
     private String name;
 
-    // метод для установки значения атибута name
+    // РјРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё Р·РЅР°С‡РµРЅРёСЏ Р°С‚РёР±СѓС‚Р° name
     public void setName(String name) {
        this.name = name;
     }
     public int doStartTag() throws JspException {
-       // получаем ссылку на стек шаблона
+       // РїРѕР»СѓС‡Р°РµРј СЃСЃС‹Р»РєСѓ РЅР° СЃС‚РµРє С€Р°Р±Р»РѕРЅР°
        Stack stack = (Stack)pageContext.getAttribute(
                 "template-stack", PageContext.REQUEST_SCOPE);
 
-       // стек не должен быть null
+       // СЃС‚РµРє РЅРµ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ null
        if(stack == null)
           throw new JspException("GetTag.doStartTag(): " +
                                   "NO STACK");
 
-       // считать(peek) в хеш-таблицу
+       // СЃС‡РёС‚Р°С‚СЊ(peek) РІ С…РµС€-С‚Р°Р±Р»РёС†Сѓ
        Hashtable params = (Hashtable)stack.peek();
 
-       // хеш-таблица не должна быть null
+       // С…РµС€-С‚Р°Р±Р»РёС†Р° РЅРµ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ null
        if(params == null)
           throw new JspException("GetTag.doStartTag(): " +
                                   "NO HASHTABLE");
 
-       // берем параметр страницы из хеш-таблицы
+       // Р±РµСЂРµРј РїР°СЂР°РјРµС‚СЂ СЃС‚СЂР°РЅРёС†С‹ РёР· С…РµС€-С‚Р°Р±Р»РёС†С‹
        PageParameter param = (PageParameter)params.get(name);
 
        if(param != null) {
           String content = param.getContent();
 
           if(param.isDirect()) {
-             // печатаем содержимое (content), если атрибут direct == true
+             // РїРµС‡Р°С‚Р°РµРј СЃРѕРґРµСЂР¶РёРјРѕРµ (content), РµСЃР»Рё Р°С‚СЂРёР±СѓС‚ direct == true
              try {
                 pageContext.getOut().print(content);
              }
@@ -49,7 +49,7 @@ package tags.templates;
              }
           }
           else {
-             // включить содержимое (include content), если атрибут direct == false
+             // РІРєР»СЋС‡РёС‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ (include content), РµСЃР»Рё Р°С‚СЂРёР±СѓС‚ direct == false
              try {
                 pageContext.getOut().flush();
                 pageContext.include(content);
@@ -59,10 +59,10 @@ package tags.templates;
              }
           }
        }
-       return SKIP_BODY; // пропустить тело тега
+       return SKIP_BODY; // РїСЂРѕРїСѓСЃС‚РёС‚СЊ С‚РµР»Рѕ С‚РµРіР°
     }
-    // обработчики тегов всегда должны реализовать release(), потому что
-    // обработчики могут повторно использоваться JSP контейнерами
+    // РѕР±СЂР°Р±РѕС‚С‡РёРєРё С‚РµРіРѕРІ РІСЃРµРіРґР° РґРѕР»Р¶РЅС‹ СЂРµР°Р»РёР·РѕРІР°С‚СЊ release(), РїРѕС‚РѕРјСѓ С‡С‚Рѕ
+    // РѕР±СЂР°Р±РѕС‚С‡РёРєРё РјРѕРіСѓС‚ РїРѕРІС‚РѕСЂРЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ JSP РєРѕРЅС‚РµР№РЅРµСЂР°РјРё
     public void release() {
        name = null;
     }

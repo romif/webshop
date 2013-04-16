@@ -10,39 +10,39 @@ package tags.templates;
     private String template;
     private Stack stack;
 
-    // метод для настройки атрибута template
+    // РјРµС‚РѕРґ РґР»СЏ РЅР°СЃС‚СЂРѕР№РєРё Р°С‚СЂРёР±СѓС‚Р° template
     public void setTemplate(String template) {
        this.template = template;
     }
     public int doStartTag() throws JspException {
-       stack = getStack(); // получаем ссылку на стек шаблона
-       stack.push(new Hashtable()); // помещаем новую хеш-таблицу в стек
-       return EVAL_BODY_INCLUDE; // передаем тело тега без изменений
+       stack = getStack(); // РїРѕР»СѓС‡Р°РµРј СЃСЃС‹Р»РєСѓ РЅР° СЃС‚РµРє С€Р°Р±Р»РѕРЅР°
+       stack.push(new Hashtable()); // РїРѕРјРµС‰Р°РµРј РЅРѕРІСѓСЋ С…РµС€-С‚Р°Р±Р»РёС†Сѓ РІ СЃС‚РµРє
+       return EVAL_BODY_INCLUDE; // РїРµСЂРµРґР°РµРј С‚РµР»Рѕ С‚РµРіР° Р±РµР· РёР·РјРµРЅРµРЅРёР№
     }
     public int doEndTag() throws JspException {
        try {
-          pageContext.include(template); // включаем шаблон
+          pageContext.include(template); // РІРєР»СЋС‡Р°РµРј С€Р°Р±Р»РѕРЅ
        }
        catch(Exception ex) { // IOException or ServletException
-          throw new JspException(ex.getMessage()); // вызываем исключение другого типа (recast exception)
+          throw new JspException(ex.getMessage()); // РІС‹Р·С‹РІР°РµРј РёСЃРєР»СЋС‡РµРЅРёРµ РґСЂСѓРіРѕРіРѕ С‚РёРїР° (recast exception)
        }
-       stack.pop(); // выталкиваем хеш-таблицу из стека
-       return EVAL_PAGE; // вычислить остаток страницы после тега
+       stack.pop(); // РІС‹С‚Р°Р»РєРёРІР°РµРј С…РµС€-С‚Р°Р±Р»РёС†Сѓ РёР· СЃС‚РµРєР°
+       return EVAL_PAGE; // РІС‹С‡РёСЃР»РёС‚СЊ РѕСЃС‚Р°С‚РѕРє СЃС‚СЂР°РЅРёС†С‹ РїРѕСЃР»Рµ С‚РµРіР°
     }
-    // обработчики тегов всегда реализуют release(), потому что
-    // обработчики могут повторно использоваться JSP контейнерами
+    // РѕР±СЂР°Р±РѕС‚С‡РёРєРё С‚РµРіРѕРІ РІСЃРµРіРґР° СЂРµР°Р»РёР·СѓСЋС‚ release(), РїРѕС‚РѕРјСѓ С‡С‚Рѕ
+    // РѕР±СЂР°Р±РѕС‚С‡РёРєРё РјРѕРіСѓС‚ РїРѕРІС‚РѕСЂРЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ JSP РєРѕРЅС‚РµР№РЅРµСЂР°РјРё
     public void release() {
        template = null;
        stack = null;
     }
     public Stack getStack() {
-       // попытаемся получить стек из области запроса
+       // РїРѕРїС‹С‚Р°РµРјСЃСЏ РїРѕР»СѓС‡РёС‚СЊ СЃС‚РµРє РёР· РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРѕСЃР°
        Stack s = (Stack)pageContext.getAttribute(
                          "template-stack",
                          PageContext.REQUEST_SCOPE);
 
-       // если нет стека — создать новый
-       // и положить его в область действия запроса
+       // РµСЃР»Рё РЅРµС‚ СЃС‚РµРєР° вЂ” СЃРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№
+       // Рё РїРѕР»РѕР¶РёС‚СЊ РµРіРѕ РІ РѕР±Р»Р°СЃС‚СЊ РґРµР№СЃС‚РІРёСЏ Р·Р°РїСЂРѕСЃР°
        if(s == null) {
           s = new Stack();
           pageContext.setAttribute("template-stack", s,

@@ -47,7 +47,7 @@ public class RequestDecoder {
 							}
 						MainServlet.restoreCodes.put(code, login);
 					}
-					String message="Для восстановления пароля перейдите по следующей ссылке: " +
+					String message="Р”Р»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїР°СЂРѕР»СЏ РїРµСЂРµР№РґРёС‚Рµ РїРѕ СЃР»РµРґСѓСЋС‰РµР№ СЃСЃС‹Р»РєРµ: " +
 							"\n http://192.168.3.153:8080/WebShop/index?mode=restore&code="+code;
 					
 					System.out.println("begin "+request.getSession().getId());
@@ -55,7 +55,7 @@ public class RequestDecoder {
 					PrintWriter out = response.getWriter();
 					if (SqlManager.IsUserExist(login)){
 						try {
-							GoogleMail.Send("romif.romif", "rjyjdfkj", login, "Восстановление пароля", message);
+							GoogleMail.Send("romif.romif", "rjyjdfkj", login, "Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїР°СЂРѕР»СЏ", message);
 						} catch (MessagingException e) {
 							e.printStackTrace();
 						}

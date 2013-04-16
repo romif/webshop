@@ -9,50 +9,50 @@ package tags.templates;
  public class PutTag extends TagSupport {
     private String name, content, direct="false";
 
-    // методы настройки атрибутов тега Put
+    // РјРµС‚РѕРґС‹ РЅР°СЃС‚СЂРѕР№РєРё Р°С‚СЂРёР±СѓС‚РѕРІ С‚РµРіР° Put
     public void setName(String s) { name = s; }
     public void setContent(String s) {content = s; }
     public void setDirect(String s) { direct = s; }
 
     public int doStartTag() throws JspException {
-       // получаем ссылку на объемлющий тег insert
+       // РїРѕР»СѓС‡Р°РµРј СЃСЃС‹Р»РєСѓ РЅР° РѕР±СЉРµРјР»СЋС‰РёР№ С‚РµРі insert
        InsertTag parent = (InsertTag)getAncestor(
                                "tags.templates.InsertTag");
 
-       // теги put должны включаться в тег insert
+       // С‚РµРіРё put РґРѕР»Р¶РЅС‹ РІРєР»СЋС‡Р°С‚СЊСЃСЏ РІ С‚РµРі insert
        if(parent == null)
           throw new JspException("PutTag.doStartTag(): " +
                                  "No InsertTag ancestor");
 
-       // получить стек шаблонов из тега insert
+       // РїРѕР»СѓС‡РёС‚СЊ СЃС‚РµРє С€Р°Р±Р»РѕРЅРѕРІ РёР· С‚РµРіР° insert
        Stack template_stack = parent.getStack();
 
-       // стек шаблона не должен быть пустым
+       // СЃС‚РµРє С€Р°Р±Р»РѕРЅР° РЅРµ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј
        if(template_stack == null)
           throw new JspException("PutTag: no template stack");
 
-       // прочитать хеш-таблицу на вершине стека
+       // РїСЂРѕС‡РёС‚Р°С‚СЊ С…РµС€-С‚Р°Р±Р»РёС†Сѓ РЅР° РІРµСЂС€РёРЅРµ СЃС‚РµРєР°
        Hashtable params = (Hashtable)template_stack.peek();
 
-       // хеш-таблица тоже не должна быть пустой
+       // С…РµС€-С‚Р°Р±Р»РёС†Р° С‚РѕР¶Рµ РЅРµ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РїСѓСЃС‚РѕР№
        if(params == null)
           throw new JspException("PutTag: no hashtable");
 
-       // положить новый PageParameter в хэш-таблицу
+       // РїРѕР»РѕР¶РёС‚СЊ РЅРѕРІС‹Р№ PageParameter РІ С…СЌС€-С‚Р°Р±Р»РёС†Сѓ
       params.put(name, new PageParameter(content, direct));
 
-      return SKIP_BODY; // не нужно тело тега, [даже] если есть
+      return SKIP_BODY; // РЅРµ РЅСѓР¶РЅРѕ С‚РµР»Рѕ С‚РµРіР°, [РґР°Р¶Рµ] РµСЃР»Рё РµСЃС‚СЊ
    }
-   // обработчики тегов всегда должны реализовать release(), потому что
-    // обработчики могут повторно использоваться JSP контейнерами
+   // РѕР±СЂР°Р±РѕС‚С‡РёРєРё С‚РµРіРѕРІ РІСЃРµРіРґР° РґРѕР»Р¶РЅС‹ СЂРµР°Р»РёР·РѕРІР°С‚СЊ release(), РїРѕС‚РѕРјСѓ С‡С‚Рѕ
+    // РѕР±СЂР°Р±РѕС‚С‡РёРєРё РјРѕРіСѓС‚ РїРѕРІС‚РѕСЂРЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ JSP РєРѕРЅС‚РµР№РЅРµСЂР°РјРё
    public void release() {
       name = content = direct = null;
    }
-   // удобный метод для поиска имен предшественников (ancestor)
-    // для заданного имени класса
+   // СѓРґРѕР±РЅС‹Р№ РјРµС‚РѕРґ РґР»СЏ РїРѕРёСЃРєР° РёРјРµРЅ РїСЂРµРґС€РµСЃС‚РІРµРЅРЅРёРєРѕРІ (ancestor)
+    // РґР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ РёРјРµРЅРё РєР»Р°СЃСЃР°
    private TagSupport getAncestor(String className)
                                  throws JspException {
-      Class klass = null; // нет переменных с именем "class"
+      Class klass = null; // РЅРµС‚ РїРµСЂРµРјРµРЅРЅС‹С… СЃ РёРјРµРЅРµРј "class"
       try {
          klass = Class.forName(className);
       }
