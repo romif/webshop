@@ -16,14 +16,14 @@ var regSubmit = function(ids) {
 
 		if(data == 'succes') {
 			alert('Регистрация прошла успешно!');
-			$.post('http://localhost:8080/WebShop/index', {
+			$.post('http://' + location.host + '/index', {
 				mode : 'login',
 				type : 'email_password',
 				email : email2,
 				password : pass
 				},
 				function(data) {
-					document.location = 'http://' + location.host + '/WebShop/index?mode=userinfo';
+					document.location = 'http://' + location.host + '/index?mode=userinfo';
 				});
 		//	document.location = '/profile/?mode=userinfo';
 		} else if(data == 'fail') {
