@@ -147,10 +147,8 @@ public class RequestDecoder {
 				} catch (ClassNotFoundException e) {
 					array.add(e.toString());
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					array.add(e.toString());
 				}
-				array.add("succes");
 				out.print(array);
 				out.flush();
 				out.close();
