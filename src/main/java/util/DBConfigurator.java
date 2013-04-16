@@ -22,6 +22,12 @@ public class DBConfigurator {
 		DBConfig[2]=root.getAttribute("RootUser").getValue();
 		DBConfig[3]=root.getAttribute("RootPassword").getValue();
 		DBConfig[4]=root.getAttribute("DatabaseName").getValue();
+		
+		String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
+		String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+		System.out.println(host);
+		System.out.println(port);
+		
 		return DBConfig;
 	}
 
