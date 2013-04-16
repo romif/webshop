@@ -48,7 +48,7 @@ public class RequestDecoder {
 						MainServlet.restoreCodes.put(code, login);
 					}
 					String message="Для восстановления пароля перейдите по следующей ссылке: " +
-							"\n http://192.168.3.153:8080/WebShop/index?mode=restore&code="+code;
+							"\n http://tomcat7-romif.rhcloud.com/index?mode=restore&code="+code;
 					
 					System.out.println("begin "+request.getSession().getId());
 					response.setContentType("text/html;charset=utf-8");
