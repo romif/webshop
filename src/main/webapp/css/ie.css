@@ -1,0 +1,69 @@
+* html div.itemsRow div.itemBlock .itemBlockSmall .itemOnePrice, * html .priceContent, * html .smallRaiting, * html #centerColumn div#linkedItems #linkedRow, * html div.itemsRow div.itemBlock h3, * html #centerColumn h2, * html #createReview p, * html .b-review .topHead, * html #centerColumn, * html #centerColumn .sortRazbItems, * html div.itemBlockSmall .itemBlockCont, * html div.itemBlockSmall .itemPrice, * html .searchbody, * html .findButton, * html .fcatalogBox, * html #wrapper .content, * html #rightcolbg, * html #main, * html #centerColumn div.itemBlockSmall, * html div.itemsRow div.itemBlock div.wrapper, * html #otzyvy {
+	_zoom:1;
+}
+* html .smallRaiting {
+	_margin: 7px 0 0 0;
+}
+* html #search #button_search {
+	 /* убираем обычный background */
+}
+* html div.itemBlockSmall img.newitems
+{
+	_bakcground:none;
+}
+* html .b-review {
+	margin-bottom:15px;
+}
+*+html .b-review {
+	margin-bottom:15px;
+}
+* html #createReview {
+	_height:1%;
+}
+* html .voting {
+	display:inline;
+	_zoom:1;
+}
+*+html .voting {
+	display:inline;
+}
+* html #TB_overlay2 { /* ie6 hack */
+	position: absolute;
+	height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+	width: expression(document.body.scrollWidth > document.body.offsetWidth ? document.body.scrollWidth : document.body.offsetWidth + 'px');
+}
+/*Прозрачность png для ie6 */
+* html .png{
+
+    position:relative;
+
+    behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",
+
+        this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
+
+        this.src = "../pics/transparent.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
+
+        this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",
+
+        this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)
+
+    );
+
+}
+
+/*
+min-width:1010px;
+max-width:1280px;
+*/
+* html #main, * html #footer {
+		width: expression((documentElement.clientWidth||document.body.clientWidth)<900?'900px':(documentElement.clientWidth||document.body.clientWidth)>1280?'1280px':'');
+}
+
+/*
+Запрет на обтекание float’ов
+http://flack.ru/2008/08/26/semantic-coding-howto-6/
+*/		
+		#footer #counter {
+	width:90px;
+	display:inline;
+}
