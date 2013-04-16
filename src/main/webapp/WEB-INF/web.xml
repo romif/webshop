@@ -11,7 +11,4 @@
   <servlet-name>WebShop</servlet-name>
   <url-pattern>/index/*</url-pattern>
  </servlet-mapping>
- <welcome-file-list>
-  <welcome-file>/snoop.jsp</welcome-file>
- </welcome-file-list>
 </web-app>
