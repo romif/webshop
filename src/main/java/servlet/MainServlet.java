@@ -67,6 +67,10 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 			user_id=session.getId();
 			session.setAttribute("user_id", user_id);
 		}
+		String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
+		String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+		System.out.println(host);
+		System.out.println(port);
 		
 		String page = null;
 		page="/jsp/Index.jsp";
