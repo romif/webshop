@@ -68,7 +68,7 @@ function loadAjaxContent (content, place) {
 function shopLogin() {
 	document.getElementById('preload').style.display='inline';
 	$('<div id="loading"></div>').appendTo($('.newLine'));
-	$.post('/WebShop/index', {
+	$.post('/index', {
 		mode : $('#log_mode').val(),
 		type : $('#log_type').val(),
 		email : $('#log_email').val(),
@@ -198,7 +198,7 @@ function checkCaptcha() {
 function restorePass() {
 	document.getElementById('preload').style.display='inline';
 	$('#b-restButton').css('background','url(/pics/loading_white.gif) 118px center no-repeat');
-	$.post('/WebShop/index', {
+	$.post('/index', {
 		mode : 'restore',
 		email : $('#res_email').val()
 		},

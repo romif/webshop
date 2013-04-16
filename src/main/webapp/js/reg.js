@@ -12,7 +12,7 @@ var regSubmit = function(ids) {
 		'captcha'		: $('#reg_captcha').val()	
 	};
 	
-	$.getJSON('http://' + location.host + '/WebShop/index', d, function(data) {
+	$.getJSON('http://' + location.host + '/index', d, function(data) {
 
 		if(data == 'succes') {
 			alert('Регистрация прошла успешно!');
@@ -134,7 +134,7 @@ var newPassSubmit = function() {
 		'password'	: $('#reg_password').val(),
 	};
 	
-	$.getJSON('http://' + location.host + '/WebShop/index', d, function(data) {
+	$.getJSON('http://' + location.host + '/index', d, function(data) {
 		
 		if(data == 'succes') {
 			alert('Пароль успешно изменен!');
@@ -145,7 +145,7 @@ var newPassSubmit = function() {
 				password : pass
 				},
 				function(data) {
-					document.location = 'http://' + location.host + '/WebShop/index?mode=userinfo';
+					document.location = 'http://' + location.host + '/index?mode=userinfo';
 				});
 		} else if(data == 'fail') {
 			alert('Ошибка при отправке запроса: такой логин не существует.');
