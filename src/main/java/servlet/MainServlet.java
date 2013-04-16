@@ -69,7 +69,7 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 		}
 		String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
 		String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
-		String url = String.format("jdbc:mysql://%s:%s/andi", host, port);
+		String url = String.format("jdbc:mysql://%s:%s/tomcat7", host, port);
 		System.err.println(host);
 		System.err.println(port);
 		System.err.println(url);
