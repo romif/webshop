@@ -69,8 +69,10 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 		}
 		String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
 		String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
-		System.out.println(host);
-		System.out.println(port);
+		String url = String.format("jdbc:mysql://%s:%s/andi", host, port);
+		System.err.println(host);
+		System.err.println(port);
+		System.err.println(url);
 		
 		String page = null;
 		page="/jsp/Index.jsp";
