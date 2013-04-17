@@ -9,7 +9,7 @@ import java.io.*;
 
 import javax.servlet.annotation.WebServlet;
  
-@WebServlet(name = "uploads",urlPatterns = {"/uploads/*"})
+@WebServlet(name = "logs",urlPatterns = {"/logs/*"})
 public class LogServlet extends HttpServlet {
  
   int BUFFER_LENGTH = 4;

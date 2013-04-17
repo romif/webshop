@@ -70,7 +70,7 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 		}
 		//PrintStream out=new PrintStream(new BufferedOutputStream(new FileOutputStream("/Text.txt")));
 		String st=getServletContext().getRealPath("Text.txt");
-		PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream(System.getenv("OPENSHIFT_DATA_DIR") + "Logs")));
+		PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream(System.getenv("OPENSHIFT_DATA_DIR") + "Logs")),true);
 		System.setOut(out);
 		System.out.println(request.getSession().getId());
 		
