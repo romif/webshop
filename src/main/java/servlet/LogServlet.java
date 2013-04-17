@@ -18,10 +18,8 @@ public class LogServlet extends HttpServlet {
   }
  
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
- 
-    /*String filePath = request.getRequestURI();
- 
-    File file = new File(System.getenv("OPENSHIFT_DATA_DIR") + filePath.replace("/uploads/",""));
+  
+    File file = new File(System.getenv("OPENSHIFT_DATA_DIR") + "Logs");
     InputStream input = new FileInputStream(file);
  
     response.setContentLength((int) file.length());
@@ -36,14 +34,14 @@ public class LogServlet extends HttpServlet {
         output.write(bytes, 0, read);
         output.flush();
       }
-    }*/
+    }
  
-	  response.setContentType("text/html;charset=utf-8");
+	  /*response.setContentType("text/html;charset=utf-8");
 	  PrintWriter out = response.getWriter();
-	  out.println("qqqq");
+	  out.println("qqqq");*/
 	  
-    //input.close();
-    out.close();
+    input.close();
+    output.close();
   }
  
  
