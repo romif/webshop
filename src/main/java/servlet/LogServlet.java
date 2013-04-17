@@ -28,7 +28,7 @@ public class LogServlet extends HttpServlet {
     response.setContentType(new MimetypesFileTypeMap().getContentType(file));*/
     response.setContentType("text/html;charset=utf-8");
  
-    OutputStream output = response.getOutputStream();
+    //OutputStream output = response.getOutputStream();
    /* byte[] bytes = new byte[BUFFER_LENGTH];
     int read = 0;
     while (read != -1) {
@@ -49,7 +49,7 @@ public class LogServlet extends HttpServlet {
 	  out.println("qqqq");*/
 	  
     input.close();
-    output.close();
+    //output.close();
   }
  
  
