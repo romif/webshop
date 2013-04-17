@@ -22,8 +22,9 @@ public class LogServlet extends HttpServlet {
     File file = new File(System.getenv("OPENSHIFT_DATA_DIR") + "Logs");
     InputStream input = new FileInputStream(file);
  
-    response.setContentLength((int) file.length());
-    response.setContentType(new MimetypesFileTypeMap().getContentType(file));
+    /*response.setContentLength((int) file.length());
+    response.setContentType(new MimetypesFileTypeMap().getContentType(file));*/
+    response.setContentType("text/html;charset=utf-8");
  
     OutputStream output = response.getOutputStream();
     byte[] bytes = new byte[BUFFER_LENGTH];
