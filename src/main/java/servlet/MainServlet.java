@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -36,7 +37,13 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 
 	public MainServlet() {
 		super();
-		//File file=new File("DBConfig1.xml");
+		try {
+			System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(
+					System.getenv("OPENSHIFT_DATA_DIR") + "Logs")),true));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		
 		
 	}
@@ -68,10 +75,6 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 			user_id=session.getId();
 			session.setAttribute("user_id", user_id);
 		}
-		//PrintStream out=new PrintStream(new BufferedOutputStream(new FileOutputStream("/Text.txt")));
-		String st=getServletContext().getRealPath("Text.txt");
-		PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream(System.getenv("OPENSHIFT_DATA_DIR") + "Logs")),true);
-		System.setOut(out);
 		System.out.println(request.getSession().getId());
 		
 		String page = null;
