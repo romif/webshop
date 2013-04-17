@@ -20,7 +20,7 @@ public class LogServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
   
     File file = new File(System.getenv("OPENSHIFT_DATA_DIR") + "Logs");
-    InputStream input = new FileInputStream(file);
+    //InputStream input = new FileInputStream(file);
     FileReader fr=new FileReader (file);
     
  
@@ -43,12 +43,13 @@ public class LogServlet extends HttpServlet {
     while ((c=(char) fr.read())!=-1)out.print(c);
     out.println();
     out.close();
+    fr.close();
  
 	  /*response.setContentType("text/html;charset=utf-8");
 	  PrintWriter out = response.getWriter();
 	  out.println("qqqq");*/
 	  
-    input.close();
+    //input.close();
     //output.close();
   }
  
