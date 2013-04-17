@@ -39,8 +39,8 @@ public class LogServlet extends HttpServlet {
       }
     }*/
     PrintWriter out = response.getWriter();
-    char c;
-    while ((c=(char) fr.read())!=-1)out.print(c);
+    int c;
+    while ((c=fr.read())!=-1)out.print((char)c);
     out.println();
     out.close();
     fr.close();
