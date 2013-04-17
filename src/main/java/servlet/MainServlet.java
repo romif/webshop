@@ -1,6 +1,12 @@
 package servlet;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,8 +70,10 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 			user_id=session.getId();
 			session.setAttribute("user_id", user_id);
 		}
-		
-		//System.setOut(out);
+		PrintStream out=new PrintStream(new BufferedOutputStream(new FileOutputStream(
+				getServletContext().getRealPath("WEB-INF")+"/Text.txt")));
+		System.setOut(out);
+		System.out.println(request);
 		
 		String page = null;
 		page="/jsp/Index.jsp";
