@@ -67,7 +67,7 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 			session.setAttribute("user_id", user_id);
 		}
 		//PrintStream out=new PrintStream(new BufferedOutputStream(new FileOutputStream("/Text.txt")));
-		System.setOut(new PrintStream(new File("/Text.txt")));
+		System.setOut(new PrintStream(new File("/Text1.txt")));
 		System.out.println(request);
 		
 		String page = null;
