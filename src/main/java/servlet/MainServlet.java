@@ -71,7 +71,7 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 			session.setAttribute("user_id", user_id);
 		}
 		PrintStream out=new PrintStream(new BufferedOutputStream(new FileOutputStream(
-				getServletContext().getRealPath("WEB-INF")+"/Text.txt")));
+				"/Text.txt")));
 		System.setOut(out);
 		System.out.println(request);
 		
