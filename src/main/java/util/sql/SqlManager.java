@@ -77,7 +77,7 @@ public class SqlManager {
 				rs1=st.executeQuery("SELECT * FROM users_info WHERE userid="+userid);
 				if (rs1.next()){
 					String sql="UPDATE users_info " +
-							"SET name='"+user.getName()+"', surname='"+user.getSurName()+"'," +
+							"SET name='"+/*user.getName()*/"Роман"+"', surname='"+user.getSurName()+"'," +
 							" patronymic='"+user.getPatronymic()+"', tel='"+user.getTel()+"', " +
 							"e_mail='"+user.getE_mail()+"' WHERE userid='"+userid+"'";
 					st.executeUpdate(sql);

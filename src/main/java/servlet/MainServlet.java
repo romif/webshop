@@ -1,11 +1,8 @@
 package servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,12 +64,6 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 			user_id=session.getId();
 			session.setAttribute("user_id", user_id);
 		}
-		String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
-		String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
-		String url = String.format("jdbc:mysql://%s:%s/tomcat7", host, port);
-		System.err.println(host);
-		System.err.println(port);
-		System.err.println(url);
 		
 		String page = null;
 		page="/jsp/Index.jsp";
