@@ -65,6 +65,8 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 			session.setAttribute("user_id", user_id);
 		}
 		
+		//System.setOut(out);
+		
 		String page = null;
 		page="/jsp/Index.jsp";
 		page=RequestDecoder.getInstance().getPage(request, response);
