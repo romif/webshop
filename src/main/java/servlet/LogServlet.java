@@ -21,13 +21,15 @@ public class LogServlet extends HttpServlet {
   
     File file = new File(System.getenv("OPENSHIFT_DATA_DIR") + "Logs");
     InputStream input = new FileInputStream(file);
+    FileReader fr=new FileReader (file);
+    
  
     /*response.setContentLength((int) file.length());
     response.setContentType(new MimetypesFileTypeMap().getContentType(file));*/
     response.setContentType("text/html;charset=utf-8");
  
     OutputStream output = response.getOutputStream();
-    byte[] bytes = new byte[BUFFER_LENGTH];
+   /* byte[] bytes = new byte[BUFFER_LENGTH];
     int read = 0;
     while (read != -1) {
       read = input.read(bytes, 0, BUFFER_LENGTH);
@@ -35,7 +37,12 @@ public class LogServlet extends HttpServlet {
         output.write(bytes, 0, read);
         output.flush();
       }
-    }
+    }*/
+    PrintWriter out = response.getWriter();
+    char c;
+    while ((c=(char) fr.read())!=-1)out.print(c);
+    out.println();
+    out.close();
  
 	  /*response.setContentType("text/html;charset=utf-8");
 	  PrintWriter out = response.getWriter();
