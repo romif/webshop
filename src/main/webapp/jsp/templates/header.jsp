@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="Windows-1251"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 
 		<div id="logo">
-			<a href="${pageContext.request.contextPath}/index" title="Íà ãëàâíóþ">
-			<img src="${pageContext.request.contextPath}/pics/logo.gif" alt="TopmoBail" /></a>
+			<a href="${pageContext.request.contextPath}/index" title="ÐÐ° Ð³Ð»Ð°Ð²Ð½ÑƒÑŽ">
+			<img src="${pageContext.request.contextPath}/pics/logo.png" alt="TopmoBail" /></a>
 		</div>
 		<div id="topBannerPanel">
 		<p style="text-align: center">

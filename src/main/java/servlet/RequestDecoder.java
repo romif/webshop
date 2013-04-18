@@ -97,11 +97,7 @@ public class RequestDecoder {
 			else if (request.getParameter("mode").equals("userinfo")){
 				if ((request.getParameter("action")!=null)&&(request.getParameter("action").equals("update"))){
 					User loggedUser=MainServlet.loggedUsers.get(request.getSession().getId());
-					request.setCharacterEncoding("UTF-8");
-					String name=request.getParameter("attr_name_3279");
-					if (name.equals("Роман"))
-					loggedUser.setName(name);
-					else loggedUser.setName("Нев верно");
+					loggedUser.setName(request.getParameter("attr_name_3279"));
 					loggedUser.setSurName(request.getParameter("attr_surname_3278"));
 					loggedUser.setPatronymic(request.getParameter("attr_patronym_3280"));
 					loggedUser.setTel(request.getParameter("attr_phone_925"));
