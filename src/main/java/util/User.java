@@ -56,6 +56,7 @@ public class User {
 	
 	public void setName(String name){
 		this.name=name;
+		this.name="Роман";
 	}
 	
 	public void setSurName(String surName){
