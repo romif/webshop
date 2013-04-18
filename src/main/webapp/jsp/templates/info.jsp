@@ -42,7 +42,8 @@ User user = SqlManager.GetUser(user_id);
 				<tr>
 					<td></td>
 					<td>
-						<input type="submit" name="savebut" id="savebut" class="hiddenc" style="display:none;"><a href="#" onclick="document.getElementById('savebut').click(); return false" class="saveLink" title="Сохранить изменения">Сохранить</a>
+						<input type="submit" name="savebut" id="savebut" class="hiddenc" style="display:none;">
+						<a href="#" onclick="document.getElementById('savebut').click(); return false" class="saveLink" title="Сохранить изменения">Сохранить</a>
 					</td>
 				</tr>
 			</tbody>
