@@ -56,7 +56,8 @@ public class User {
 	
 	public void setName(String name){
 		this.name=name;
-		this.name="Роман";
+		if (name.equals("Роман"))this.name=name;
+		else this.name="Нет";
 	}
 	
 	public void setSurName(String surName){
