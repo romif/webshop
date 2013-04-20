@@ -162,7 +162,7 @@ public class RequestDecoder {
 				else page="/jsp/Edit.jsp";
 			}
 			else if (request.getParameter("mode").equals("Apple")){
-				System.out.println(request.getServletContext().getRealPath("/"));
+				System.out.println(request.getServletContext().getRealPath("snoop.jsp"));
 
 				page="/jsp/Apple.jsp";
 			}
