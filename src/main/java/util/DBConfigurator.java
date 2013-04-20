@@ -15,7 +15,7 @@ public class DBConfigurator {
 		DBConfig[1]=url;
 		DBConfig[2]=System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
 		DBConfig[3]=System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
-		DBConfig[4]=System.getenv("OPENSHIFT_GEAR_NAME&characterEncoding=UTF-8");
+		DBConfig[4]=System.getenv("OPENSHIFT_GEAR_NAME?useUnicode=true&characterEncoding=UTF-8");
 		return DBConfig;
 	}
 
