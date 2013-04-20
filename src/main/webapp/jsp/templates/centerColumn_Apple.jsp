@@ -1,6 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.List"%>
+<%@ page import="util.sql.SqlManager"%>
+<%@ page import="util.Phone"%>
+<%
+List<Phone> phones=SqlManager.GetPhones("Apple");
+%>
 
 <ul id="sectionsTree">
 	<li class="firstSectionTree"><a href="/" alt="Главная">Главная</a>&nbsp;»&nbsp;</li>
@@ -14,7 +19,7 @@
 			<tbody>
 				<tr>
 					<td width="50%">Товаров:&nbsp;
-						<span class="bold">8</span>
+						<span class="bold"><%=phones.size()%></span>
 					</td>
 					<td>
 						<div class="sort">
@@ -60,27 +65,63 @@
 	</div>
 </div>
 
+<%for (int i=0;i<Math.ceil((double)phones.size()/2);i++){%>
+
 <div class="itemRows">
 
 	<div class="leftItem">
 		<div class="itemBlockSmall">
-			<h3><a href="/24/1001/" title="Apple iPhone 4 8Gb">Apple iPhone 4 8Gb</a></h3>
+			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>"><%=((Phone)phones.get(i*2)).getTextProperties()[1]%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="Apple iPhone 4 8Gb" href="/24/1001/">
-						<img alt="Apple iPhone 4 8Gb" src="/pics/items/Apple%20iPhone%204%208Gb_icon.jpg">
+					<a title="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%> href="/24/1001/">
+						<img alt="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>" src="/pics/items/Apple%20iPhone%204%208Gb_icon.jpg">
 					</a>
 				</div>
-				<div class="desc">14 дней на проверку телефона. доставка в пределах г.минска бесплатно. подарки . Трубка, 115 x 59 x 9 мм, 137 г, ios 4.0, емкостной экран ips 16 млн. цветов, 640x960, 3.5 дюйм, 330 ppi, камера 5 мп, видео 1280 x 720 30fps, встроенная память 8192 мб, 3g, edge, wi-fi, стерео bluetooth, gps, 1420 мач li-pol, белый, черный <br><br>
+				<div class="desc"><%=((Phone)phones.get(i*2)).getDescription()%><br><br>
 				</div>
 				<div class="itemPrice">
 					<table class="priceTable" cellpadding="0" cellspacing="0">
 						<tbody>
 							<tr>
 								<td>
-									<span class="firstPrice">495&nbsp;$</span>
+									<span class="firstPrice"><%=((Phone)phones.get(i*2)).getTextProperties()[2]%>&nbsp;$</span>
 									<span class="divider"><img src="/pics/blank.gif" alt=""></span>
-									<span class="secondPrice">4 281 750&nbsp;руб.</span>
+									<span class="secondPrice"><%=((Phone)phones.get(i*2)).getTextProperties()[3]%>&nbsp;руб.</span>
+								</td>
+								<td>
+									<div class="buttons">
+										<a class="buyButton" title="Купить" href="javascript:add_item(2254)"><img src="/pics/blank.gif" alt=""></a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	<%if (i*2<phones.size()-1) {%>
+	<div class="rightItem">
+		<div class="itemBlockSmall">
+			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%>"><%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%></a></h3>
+			<div class="itemBlockCont">
+				<div class="iconItem">
+					<a title="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%> href="/24/1001/">
+						<img alt="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%>" src="/pics/items/Apple%20iPhone%204%208Gb_icon.jpg">
+					</a>
+				</div>
+				<div class="desc"><%=((Phone)phones.get(i*2+1)).getDescription()%><br><br>
+				</div>
+				<div class="itemPrice">
+					<table class="priceTable" cellpadding="0" cellspacing="0">
+						<tbody>
+							<tr>
+								<td>
+									<span class="firstPrice"><%=((Phone)phones.get(i*2+1)).getTextProperties()[2]%>&nbsp;$</span>
+									<span class="divider"><img src="/pics/blank.gif" alt=""></span>
+									<span class="secondPrice"><%=((Phone)phones.get(i*2+1)).getTextProperties()[3]%>&nbsp;руб.</span>
 								</td>
 								<td>
 									<div class="buttons">
@@ -94,27 +135,11 @@
 			</div>
 		</div>
 	</div>
-	
-	<div class="rightItem">
-		<div class="itemBlockSmall">
-			<h3><a href="/24/998/" title="Apple iPhone 4S 16Gb">Apple iPhone 4S 16Gb</a></h3>
-			<div class="itemBlockCont">
-				<div class="iconItem"><a title="Apple iPhone 4S 16Gb" href="/24/998/"><img alt="Apple iPhone 4S 16Gb" src="/pics/items/Apple%20iPhone%204S%2016Gb_icon.jpg"></a>
-				</div>
-<div class="desc">14 дней на проверку телефона. доставка в пределах г.минска бесплатно. подарки . Трубка, 115 x 58.5 x 9.5 мм, 140 г, ios 5.0, емкостной экран ips 16 млн. цветов, 640x960, 3.5 дюйм, 326 ppi, камера 8 мп, видео 1920 x 1080 30fps, встроенная память 16384 мб, 3g, wi-fi, стерео bluetooth, gps, 1420 мач li-ion, белый, черный, <br><br>
-</div>
-<div class="itemPrice"><table class="priceTable" cellpadding="0" cellspacing="0"><tbody><tr>
-<td>
-<span class="firstPrice">590&nbsp;$</span><span class="divider"><img src="/pics/blank.gif" alt=""></span><span class="secondPrice">5 103 500&nbsp;руб.</span>
-</td>
-<td><div class="buttons"><a class="buyButton" title="Купить" href="javascript:add_item(2251)"><img src="/pics/blank.gif" alt=""></a></div></td>
-</tr></tbody></table></div>
-</div>
-</div></div>
+<%} %>
 </div>
 
-
-<div class="itemRows">
+<%} %>
+<!-- <div class="itemRows">
 <div class="leftItem"><div class="itemBlockSmall">
 <h3><a href="/24/1000/" title="Apple iPhone 4S 32Gb">Apple iPhone 4S 32Gb</a></h3>
 <div class="itemBlockCont">
@@ -213,3 +238,4 @@
 			&amp;page_id=1">10 товаров
 									</option></select></span>
 </div></div>
+-->

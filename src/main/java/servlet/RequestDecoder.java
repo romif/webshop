@@ -5,15 +5,15 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.List;
+
 import java.util.Map.Entry;
 import java.util.Random;
-import java.util.Set;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONArray;
 
 import util.GoogleMail;
@@ -139,6 +139,8 @@ public class RequestDecoder {
 			}
 			else if (request.getParameter("mode").equals("edit")){
 				if (request.getParameter("Button1")!=null){
+					ServletFileUpload.isMultipartContent(request);
+					
 					Phone phone=new Phone();
 					phone.setDescription(request.getParameter("TextArea1"));
 					phone.setTextProperties(request.getParameterValues("textProperty"));
@@ -160,8 +162,7 @@ public class RequestDecoder {
 				else page="/jsp/Edit.jsp";
 			}
 			else if (request.getParameter("mode").equals("Apple")){
-				List phones=SqlManager.GetPhones("Apple");
-				phones.size();
+
 				page="/jsp/Apple.jsp";
 			}
 		}

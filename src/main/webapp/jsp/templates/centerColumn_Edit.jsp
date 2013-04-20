@@ -24,6 +24,7 @@
 						<td width="100%" valign="top">
 							<table width="100%" cellspacing="0" cellpadding="0" border="0">
 								<tbody>  
+									<tr><td><div>Фото</div></td><td><input name="F1" size="20" type="file" /></td></tr>
 								    <tr><td><div>Производитель</div></td><td><input type="text" name="textProperty" value="input"></td></tr>
 									<tr><td><div>Название</div></td><td><input type="text" name="textProperty" value="input"></td></tr>
 									<tr><td><div>Краткое описание</div></td><td><textarea cols="20" name="TextArea1" style="height: 85px">input</textarea></td></tr>

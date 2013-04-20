@@ -388,7 +388,8 @@ public final class SqlManager {
 	}
 	
 	public static void main(String[] args){
-		System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
+		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
+		System.out.print(Math.ceil((double)1/2));
 
 	}
 
