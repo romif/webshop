@@ -3,7 +3,7 @@
 
 <h3>Каталог</h3>
 		<ul>
-			<div class="mi"><div class="level1"><a href="${pageContext.request.contextPath}/index" alt="Apple">Apple</a></div></div>
+			<div class="mi"><div class="level1"><a href="${pageContext.request.contextPath}/index?mode=Apple" alt="Apple">Apple</a></div></div>
 			<div class="ms sep1"></div>
 			<div class="mi"><div class="level1"><a href="${pageContext.request.contextPath}/index" alt="Fly">Fly</a></div></div>
 			<div class="ms sep1"></div>

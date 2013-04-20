@@ -58,26 +58,16 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (DBConfig==null)
-			try {
-				DBConfig=DBConfigurator.getConfig(getServletContext().getRealPath("WEB-INF"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (JDOMException e) {
-				e.printStackTrace();
-			}
-		
-		
+		if (DBConfig==null)	DBConfig=DBConfigurator.getConfig();
+
 		HttpSession session=request.getSession();
 		String user_id=(String)session.getAttribute("user_id");
 		if (user_id==null){
 			user_id=session.getId();
 			session.setAttribute("user_id", user_id);
 		}
-		System.out.println(request.getSession().getId());
-		
 		String page = null;
-		page="/jsp/Index.jsp";
+		//page="/jsp/Index.jsp";
 		page=RequestDecoder.getInstance().getPage(request, response);
 		if (page!=null){
 			RequestDispatcher dispatcher =getServletContext().getRequestDispatcher(page);

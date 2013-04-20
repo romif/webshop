@@ -10,7 +10,7 @@
    <template:put name='topMenu' content='/jsp/templates/topMenu.jsp' />
    <template:put name='leftColumn' content='/jsp/templates/leftColumn.jsp' />
    <template:put name='rightColumn' content='/jsp/templates/rightColumn.jsp' />
-   <template:put name='centerColumn' content='/jsp/templates/centerColumn.jsp' />
+   <template:put name='centerColumn' content='/jsp/templates/centerColumn_Delivery.jsp' />
    <template:put name='footer' content='/jsp/templates/footer.jsp' />
 
  </template:insert>

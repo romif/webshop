@@ -5,12 +5,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import servlet.MainServlet;
 import util.MD5;
+import util.Phone;
 import util.User;
 
-public class SqlManager {
+public final class SqlManager {
 	/*private static SqlManager instance=null;
 	public static SqlManager getInstance(){
 		if (instance==null) instance=new SqlManager();
@@ -274,6 +279,112 @@ public class SqlManager {
 	        }
 		} 
 		return bool;
+	}
+	
+	public static boolean AddPhone(Phone phone){
+		Connection cn = null;
+		Statement st = null; 
+		ResultSet rs = null; 
+		boolean bool=false;
+		try {
+			Class.forName(MainServlet.DBConfig[0]); 
+			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
+					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			st = cn.createStatement(); 
+			String FullDescription="";
+			String getTextProperties[]=phone.getTextProperties();
+			for (int i=0;i<getTextProperties.length;i++)FullDescription+=getTextProperties[i]+";";
+			byte[] checkboxes=phone.getCheckboxes();
+			for (int i=0;i<checkboxes.length;i++)FullDescription+=checkboxes[i]+";";
+			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDescription) " +
+					"VALUES ('"+phone.getTextProperties()[1]+"', '"+phone.getDescription()+"', '"+phone.getTextProperties()[2]+"', '"+phone.getTextProperties()[3]+"','"+FullDescription+"')");
+			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
+					"VALUES (LAST_INSERT_ID(),'"+phone.getTextProperties()[0]+"')");
+		}
+		catch (SQLException ex) {            
+            System.out.println(ex.toString());
+        } 
+		catch (ClassNotFoundException ex) {            
+            System.out.println(ex.toString());
+        } 
+		finally {
+			try{
+				if (rs != null) rs.close(); 
+				if (st != null) st.close(); 
+				if (cn != null) cn.close(); 
+			}
+			catch (SQLException ex) {            
+	            System.out.println(ex.toString());
+	        }
+		} 
+		return bool;
+	}
+	
+	public static List<Phone> GetPhones(String manufacture){
+		Connection cn = null;
+		Statement st = null; 
+		Statement st1 = null; 
+		ResultSet rs = null; 
+		ResultSet rs1 = null; 
+		List<Phone> phones=new ArrayList<Phone>();
+		try {
+			Class.forName(MainServlet.DBConfig[0]); 
+			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
+					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			st = cn.createStatement(); 
+			st1 = cn.createStatement();
+			rs = st.executeQuery("SELECT PhoneID FROM Phone_IDs "
+					+"WHERE PhoneMan='"+manufacture+"'");
+			while (rs.next()){
+				rs1=st1.executeQuery("SELECT * FROM Phones "
+						+"WHERE PhoneID='"+rs.getInt("PhoneID")+"'");
+				Phone phone=new Phone();
+				String[] FullDiscription;
+				if (rs1.next()) {
+					FullDiscription=rs1.getString("FullDescription").split(";");
+					String[] textProperties=new String[36];
+					String[] checkboxes_temp=new String[67];
+					byte[] checkboxes=new byte[67];
+					System.arraycopy(FullDiscription, 0, textProperties, 0, 36);
+					System.arraycopy(FullDiscription, 36, checkboxes_temp, 0, 67);
+					for (int i=0;i<checkboxes_temp.length;i++)
+						checkboxes[i]=Byte.parseByte(checkboxes_temp[i]);
+					phone.setCheckboxes(checkboxes);
+					phone.setTextProperties(textProperties);
+					phone.setDescription(rs1.getString("Description"));
+					phones.add(phone);
+				}
+			}
+			
+			/*String FullDiscription="";
+			String getTextProperties[]=phone.getTextProperties();
+			for (int i=0;i<getTextProperties.length;i++)FullDiscription+=getTextProperties[i]+";";
+			byte[] checkboxes=phone.getCheckboxes();
+			for (int i=0;i<checkboxes.length;i++)FullDiscription+=checkboxes[i]+";";
+			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDiscription) " +
+					"VALUES ('"+phone.getTextProperties()[1]+"', '"+phone.getDescription()+"', '"+phone.getTextProperties()[2]+"', '"+phone.getTextProperties()[3]+"','"+FullDiscription+"')");
+			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
+					"VALUES (LAST_INSERT_ID(),'"+phone.getTextProperties()[0]+"')");*/
+		}
+		catch (SQLException ex) {            
+            System.out.println(ex.toString());
+        } 
+		catch (ClassNotFoundException ex) {            
+            System.out.println(ex.toString());
+        } 
+		finally {
+			try{
+				if (rs != null) rs.close(); 
+				if (rs1 != null) rs1.close(); 
+				if (st != null) st.close(); 
+				if (st1 != null) st1.close(); 
+				if (cn != null) cn.close(); 
+			}
+			catch (SQLException ex) {            
+	            System.out.println(ex.toString());
+	        }
+		} 
+		return phones;
 	}
 	
 	public static void main(String[] args){

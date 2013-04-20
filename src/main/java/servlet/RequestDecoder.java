@@ -3,9 +3,12 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ import org.json.simple.JSONArray;
 
 import util.GoogleMail;
 import util.MD5;
+import util.Phone;
 import util.User;
 import util.sql.SqlManager;
 
@@ -132,6 +136,33 @@ public class RequestDecoder {
 			else if (request.getParameter("mode").equals("exit")){
 				MainServlet.loggedUsers.remove(request.getSession().getId());
 				page="/jsp/Index.jsp";
+			}
+			else if (request.getParameter("mode").equals("edit")){
+				if (request.getParameter("Button1")!=null){
+					Phone phone=new Phone();
+					phone.setDescription(request.getParameter("TextArea1"));
+					phone.setTextProperties(request.getParameterValues("textProperty"));
+					Enumeration<String> en=request.getParameterNames();
+					String st;
+					byte[] b=new byte[67];
+					while (en.hasMoreElements()){
+						if ((st=en.nextElement()).contains("Checkbox")){
+							b[Integer.parseInt(st.replace("Checkbox", ""))-1]=1;
+						}
+					}
+					phone.setCheckboxes(b);
+					SqlManager.AddPhone(phone);
+					
+					
+
+					page="/jsp/Index.jsp";
+				}
+				else page="/jsp/Edit.jsp";
+			}
+			else if (request.getParameter("mode").equals("Apple")){
+				List phones=SqlManager.GetPhones("Apple");
+				phones.size();
+				page="/jsp/Apple.jsp";
 			}
 		}
 		if (request.getParameter("model")!=null){

@@ -14,8 +14,8 @@
 <div id="leftColCont">
 	<div id="leftCatalog">
 		<%if ((request.getParameter("mode")!=null)&&(request.getParameter("mode").equals("userinfo"))){%>
-		<jsp:include page="/jsp/templates/userManageForm.jsp" /><%}else{ %>
-		<jsp:include page="/jsp/templates/catalog.jsp" /> <%} %>
+		<jsp:include page="/jsp/templates/leftCatalog_UserManageForm.jsp" /><%}else{ %>
+		<jsp:include page="/jsp/templates/leftCatalog_Catalog.jsp" /> <%} %>
 		
 	</div>
 	<div id="leftBannerPanel"><br><!--left admin banner--></div>
