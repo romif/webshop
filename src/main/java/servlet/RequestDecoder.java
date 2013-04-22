@@ -154,7 +154,7 @@ public class RequestDecoder {
 					ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
 					try {
 						List items = upload.parseRequest(request);
-						System.out.println(items.size());
+						System.out.println("Size: "+items.size());
 						Iterator iterator = items.iterator();
 						while (iterator.hasNext()) {
 							FileItem fileItem = (FileItem) iterator.next();
