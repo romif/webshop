@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 
 import java.util.Map.Entry;
 import java.util.Random;
@@ -15,6 +16,8 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONArray;
@@ -145,10 +148,45 @@ public class RequestDecoder {
 					//ServletFileUpload.isMultipartContent(request);
 					DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 					fileItemFactory.setRepository(new File(System.getenv("OPENSHIFT_TMP_DIR")));
-					File storageDir = new File(System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures");
+					String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
+					File storageDir = new File(uploadStorage);
 					if (!storageDir.isDirectory()) storageDir.mkdir();
 					ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
-					
+					try {
+						List items = upload.parseRequest(request);
+						Iterator iterator = items.iterator();
+						while (iterator.hasNext()) {
+							FileItem fileItem = (FileItem) iterator.next();
+							if ( !fileItem.isFormField() ) {
+								if ( fileItem.getSize() > 0 ) {
+									String fileName = new File(fileItem.getName()).getName();
+									int pintPosition = fileName.lastIndexOf("."); 
+									String mimeType = fileName.substring(pintPosition, fileName.length());
+									if (mimeType.equals(".jpeg") || 
+											mimeType.equals(".gif") || 
+											mimeType.equals(".png") || 
+											mimeType.equals(".jpg")) {
+										String filePath = uploadStorage + File.separator + fileName; 
+										File uploadedFile = new File(filePath); 
+										fileItem.write(uploadedFile); 
+										//request.setAttribute("successMessage", successMsg);  
+										//request.setAttribute("imgDir", STORAGE_DIR);  
+										//request.setAttribute("imgName", fileName);  
+									} else {
+										//errorMsg = "File must have correct extension."; 
+										break;
+									}
+									} else {
+										//errorMsg = "Select some file for the uplading.";
+										break;
+									}
+							}
+						}
+					} catch (FileUploadException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					
 					Phone phone=new Phone();
 					phone.setDescription(request.getParameter("TextArea1"));
