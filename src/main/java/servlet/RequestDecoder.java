@@ -154,6 +154,7 @@ public class RequestDecoder {
 					ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
 					try {
 						List items = upload.parseRequest(request);
+						System.out.println(items.size());
 						Iterator iterator = items.iterator();
 						while (iterator.hasNext()) {
 							FileItem fileItem = (FileItem) iterator.next();
@@ -200,7 +201,7 @@ public class RequestDecoder {
 						}
 					}
 					phone.setCheckboxes(b);
-					SqlManager.AddPhone(phone);
+					//SqlManager.AddPhone(phone);
 					
 					
 					
