@@ -35,8 +35,8 @@ public class UTFEncodingFilter implements javax.servlet.Filter {
 	        FilterChain chain) throws IOException, ServletException {
 	    // System.out.println("request: " + request.getCharacterEncoding());
 	    // System.out.println("response: " + response.getCharacterEncoding());
-	    request.setCharacterEncoding("UTF-8");
-	    response.setCharacterEncoding("UTF-8");
+	    //request.setCharacterEncoding("UTF-8");
+	    //response.setCharacterEncoding("UTF-8");
 	    chain.doFilter(request, response);
 	}
 
