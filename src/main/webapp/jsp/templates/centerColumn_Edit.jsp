@@ -10,7 +10,7 @@
 	</li>
 	<li>Phone Editor</li>
 </ul>
-<form name="login" action="index" method="get">
+<form name="login" action="index" method="post">
 <input type="hidden" name="mode" value="edit"/>
 <div class="itemsRow">
 	<div class="itemBlock">

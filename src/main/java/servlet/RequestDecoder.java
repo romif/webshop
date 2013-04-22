@@ -173,19 +173,19 @@ public class RequestDecoder {
 										//request.setAttribute("imgDir", STORAGE_DIR);  
 										//request.setAttribute("imgName", fileName);  
 									} else {
-										//errorMsg = "File must have correct extension."; 
+										System.out.println("File must have correct extension."); 
 										break;
 									}
 									} else {
-										//errorMsg = "Select some file for the uplading.";
+										System.out.println("Select some file for the uplading.");
 										break;
 									}
 							}
 						}
 					} catch (FileUploadException e) {
-						e.printStackTrace();
+						System.out.println(e);
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println(e);
 					}
 					
 					Phone phone=new Phone();
