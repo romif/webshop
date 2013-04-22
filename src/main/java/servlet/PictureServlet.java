@@ -23,13 +23,12 @@ public class PictureServlet extends HttpServlet {
   }
  
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //response.setContentType("multipart/form-data");
-    InputStream is=request.getServletContext().getResourceAsStream("/pics/logo.gif");
-    OutputStream os=response.getOutputStream();
-    int i;
-    while ((i=is.read())!=-1)os.write(i);
-    is.close();
-    os.close();
+	  InputStream is=request.getServletContext().getResourceAsStream("/pics/logo.gif");
+	  OutputStream os=response.getOutputStream();
+	  int i;
+	  while ((i=is.read())!=-1)os.write(i);
+	  is.close();
+	  os.close();
   }
  
  
