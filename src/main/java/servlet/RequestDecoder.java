@@ -152,9 +152,9 @@ public class RequestDecoder {
 					File storageDir = new File(uploadStorage);
 					if (!storageDir.isDirectory()) storageDir.mkdir();
 					ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
+					System.out.println(upload.getHeaderEncoding());
 					try {
 						List items = upload.parseRequest(request);
-						System.out.println("Size: "+items.size());
 						Iterator iterator = items.iterator();
 						while (iterator.hasNext()) {
 							FileItem fileItem = (FileItem) iterator.next();
