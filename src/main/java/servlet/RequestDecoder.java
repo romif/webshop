@@ -15,6 +15,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONArray;
 
@@ -141,7 +142,13 @@ public class RequestDecoder {
 			}
 			else if (request.getParameter("mode").equals("edit")){
 				if (request.getParameter("Button1")!=null){
-					ServletFileUpload.isMultipartContent(request);
+					//ServletFileUpload.isMultipartContent(request);
+					DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+					fileItemFactory.setRepository(new File(System.getProperty("OPENSHIFT_TMP_DIR")));
+					File storageDir = new File(System.getProperty("OPENSHIFT_DATA_DIR")+File.separator+"pictures");
+					if (!storageDir.isDirectory()) storageDir.mkdir();
+					ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
+					
 					
 					Phone phone=new Phone();
 					phone.setDescription(request.getParameter("TextArea1"));
@@ -156,6 +163,8 @@ public class RequestDecoder {
 					}
 					phone.setCheckboxes(b);
 					SqlManager.AddPhone(phone);
+					
+					
 					
 					
 
