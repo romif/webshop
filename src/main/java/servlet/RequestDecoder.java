@@ -164,11 +164,6 @@ public class RequestDecoder {
 				else page="/jsp/Edit.jsp";
 			}
 			else if (request.getParameter("mode").equals("Apple")){
-				File f = new File ("blah.html");
-				
-				InputStream is=request.getServletContext().getResourceAsStream("/snoop.jsp");
-				System.out.println( f.getAbsolutePath());
-
 				page="/jsp/Apple.jsp";
 			}
 		}

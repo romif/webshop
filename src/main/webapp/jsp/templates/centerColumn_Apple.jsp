@@ -75,7 +75,7 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 			<div class="itemBlockCont">
 				<div class="iconItem">
 					<a title="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>" href="/24/1001/">
-						<img alt="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>" src="/pics/items/Apple%20iPhone%204%208Gb_icon.jpg">
+						<img alt="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>" src="/picture">
 					</a>
 				</div>
 				<div class="desc"><%=((Phone)phones.get(i*2)).getDescription()%><br><br>
