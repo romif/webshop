@@ -162,7 +162,7 @@ public class RequestDecoder {
 				else page="/jsp/Edit.jsp";
 			}
 			else if (request.getParameter("mode").equals("Apple")){
-				System.out.println( this.getClass().getResourceAsStream("/snoop.jsp"));
+				System.out.println( this.getClass().getResourceAsStream("/WEB-INF"));
 
 				page="/jsp/Apple.jsp";
 			}
