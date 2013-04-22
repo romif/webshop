@@ -74,7 +74,7 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>"><%=((Phone)phones.get(i*2)).getTextProperties()[1]%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%> href="/24/1001/">
+					<a title="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>" href="/24/1001/">
 						<img alt="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>" src="/pics/items/Apple%20iPhone%204%208Gb_icon.jpg">
 					</a>
 				</div>
@@ -108,7 +108,7 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%>"><%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%> href="/24/1001/">
+					<a title="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%>" href="/24/1001/">
 						<img alt="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%>" src="/pics/items/Apple%20iPhone%204%208Gb_icon.jpg">
 					</a>
 				</div>
