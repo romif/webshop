@@ -1,6 +1,8 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Enumeration;
@@ -162,7 +164,10 @@ public class RequestDecoder {
 				else page="/jsp/Edit.jsp";
 			}
 			else if (request.getParameter("mode").equals("Apple")){
-				System.out.println( request.getServletContext().getResource("/snoop.jsp"));
+				File f = new File ("blah.html");
+				
+				InputStream is=request.getServletContext().getResourceAsStream("/snoop.jsp");
+				System.out.println( f.getAbsolutePath());
 
 				page="/jsp/Apple.jsp";
 			}
