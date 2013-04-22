@@ -23,19 +23,11 @@ public class PictureServlet extends HttpServlet {
   }
  
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//File file = new File(System.getenv("OPENSHIFT_DATA_DIR") + "Logs");
-    //BufferedReader br=new BufferedReader(new FileReader (file));
-    response.setContentType("multipart/form-data");
-    //PrintWriter out = response.getWriter();
+    //response.setContentType("multipart/form-data");
     InputStream is=request.getServletContext().getResourceAsStream("/pics/logo.gif");
     OutputStream os=response.getOutputStream();
     int i;
     while ((i=is.read())!=-1)os.write(i);
-    
-    /*String st;
-    while ((st=br.readLine())!=null)out.println(new java.util.Date()+" "+st+"<br/>");
-    out.close();
-    br.close();*/
     is.close();
     os.close();
   }
