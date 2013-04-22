@@ -144,8 +144,8 @@ public class RequestDecoder {
 				if (request.getParameter("Button1")!=null){
 					//ServletFileUpload.isMultipartContent(request);
 					DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-					fileItemFactory.setRepository(new File(System.getProperty("OPENSHIFT_TMP_DIR")));
-					File storageDir = new File(System.getProperty("OPENSHIFT_DATA_DIR")+File.separator+"pictures");
+					fileItemFactory.setRepository(new File(System.getenv("OPENSHIFT_TMP_DIR")));
+					File storageDir = new File(System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures");
 					if (!storageDir.isDirectory()) storageDir.mkdir();
 					ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
 					
