@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -21,14 +23,21 @@ public class PictureServlet extends HttpServlet {
   }
  
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	File file = new File(System.getenv("OPENSHIFT_DATA_DIR") + "Logs");
-    BufferedReader br=new BufferedReader(new FileReader (file));
+	//File file = new File(System.getenv("OPENSHIFT_DATA_DIR") + "Logs");
+    //BufferedReader br=new BufferedReader(new FileReader (file));
     response.setContentType("multipart/form-data");
-    PrintWriter out = response.getWriter();
-    String st;
+    //PrintWriter out = response.getWriter();
+    InputStream is=request.getServletContext().getResourceAsStream("/pics/logo.gif");
+    OutputStream os=response.getOutputStream();
+    int i;
+    while ((i=is.read())!=-1)os.write(i);
+    
+    /*String st;
     while ((st=br.readLine())!=null)out.println(new java.util.Date()+" "+st+"<br/>");
     out.close();
-    br.close();
+    br.close();*/
+    is.close();
+    os.close();
   }
  
  
