@@ -294,7 +294,7 @@ public final class SqlManager {
 			st = cn.createStatement(); 
 			String FullDescription="";
 			for (Map.Entry<String, String> entry:phone.entrySet()){
-				FullDescription+=entry.getKey()+";"+entry.getValue();
+				FullDescription+=entry.getKey()+";"+entry.getValue()+";";
 			}
 			
 			/*String getTextProperties[]=phone.getTextProperties();
