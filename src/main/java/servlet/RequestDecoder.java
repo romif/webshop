@@ -29,7 +29,7 @@ import util.User;
 import util.sql.SqlManager;
 
 
-public class RequestDecoder {
+public class RequestDecoder<MultipartRequestWrapper> {
 	private static RequestDecoder instance=null;
 	
 	public static RequestDecoder getInstance(){
@@ -145,6 +145,7 @@ public class RequestDecoder {
 			}
 			else if (request.getParameter("mode").equals("edit")){
 				if (request.getParameter("Button1")!=null){
+					
 					//ServletFileUpload.isMultipartContent(request);
 					DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 					fileItemFactory.setRepository(new File(System.getenv("OPENSHIFT_TMP_DIR")));
