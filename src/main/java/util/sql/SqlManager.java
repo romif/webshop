@@ -303,7 +303,7 @@ public final class SqlManager {
 			for (int i=0;i<checkboxes.length;i++)FullDescription+=checkboxes[i]+";";*/
 			
 			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDescription) " +
-					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+"', '"+("textProperty2")+"', '"+("textProperty3")+"','"+FullDescription+"')");
+					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+"', '"+phone.get("textProperty2")+"', '"+phone.get("textProperty3")+"','"+FullDescription+"')");
 			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
 					"VALUES (LAST_INSERT_ID(),'"+("textProperty0")+"')");
 		}
