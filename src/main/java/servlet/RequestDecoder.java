@@ -146,73 +146,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				page="/jsp/Index.jsp";
 			}
 			else if (request.getParameter("mode").equals("edit")){
-				if (request.getParameter("Button1")!=null){
-					
-					//ServletFileUpload.isMultipartContent(request);
-					DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-					fileItemFactory.setRepository(new File(System.getenv("OPENSHIFT_TMP_DIR")));
-					String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
-					File storageDir = new File(uploadStorage);
-					if (!storageDir.isDirectory()) storageDir.mkdir();
-					ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
-					System.out.println(upload.getHeaderEncoding());
-					try {
-						List items = upload.parseRequest(request);
-						Iterator iterator = items.iterator();
-						while (iterator.hasNext()) {
-							FileItem fileItem = (FileItem) iterator.next();
-							if ( !fileItem.isFormField() ) {
-								if ( fileItem.getSize() > 0 ) {
-									String fileName = new File(fileItem.getName()).getName();
-									int pintPosition = fileName.lastIndexOf("."); 
-									String mimeType = fileName.substring(pintPosition, fileName.length());
-									if (mimeType.equals(".jpeg") || 
-											mimeType.equals(".gif") || 
-											mimeType.equals(".png") || 
-											mimeType.equals(".jpg")) {
-										String filePath = uploadStorage + File.separator + fileName; 
-										File uploadedFile = new File(filePath); 
-										fileItem.write(uploadedFile); 
-										//request.setAttribute("successMessage", successMsg);  
-										//request.setAttribute("imgDir", STORAGE_DIR);  
-										//request.setAttribute("imgName", fileName);  
-									} else {
-										System.out.println("File must have correct extension."); 
-										break;
-									}
-									} else {
-										System.out.println("Select some file for the uplading.");
-										break;
-									}
-							}
-						}
-					} catch (FileUploadException e) {
-						System.out.println(e);
-					} catch (Exception e) {
-						System.out.println(e);
-					}
-					
-					Phone phone=new Phone();
-					phone.setDescription(request.getParameter("TextArea1"));
-					phone.setTextProperties(request.getParameterValues("textProperty"));
-					Enumeration<String> en=request.getParameterNames();
-					String st;
-					byte[] b=new byte[67];
-					while (en.hasMoreElements()){
-						if ((st=en.nextElement()).contains("Checkbox")){
-							b[Integer.parseInt(st.replace("Checkbox", ""))-1]=1;
-						}
-					}
-					phone.setCheckboxes(b);
-					//SqlManager.AddPhone(phone);
-					
-					
-					
-					
-
-					page="/jsp/Index.jsp";
-				}
-				else page="/jsp/Edit.jsp";
+				 page="/jsp/Edit.jsp";
 			}
 			else if (request.getParameter("mode").equals("Apple")){
 				page="/jsp/Apple.jsp";
