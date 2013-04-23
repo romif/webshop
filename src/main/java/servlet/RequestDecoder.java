@@ -222,6 +222,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 		
 		if (ServletFileUpload.isMultipartContent(request)){
 			Map<String,String> requestParameters=new HashMap<String,String>();
+			Phone phone=new Phone();
 			
 				
 				//ServletFileUpload.isMultipartContent(request);
@@ -261,7 +262,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 							}
 						}
 						else {
-							requestParameters.put(fileItem.getFieldName(), fileItem.getString());	
+							phone.put(fileItem.getFieldName(), fileItem.getString());	
 						}	
 					}
 				} catch (FileUploadException e) {
@@ -270,26 +271,14 @@ public class RequestDecoder<MultipartRequestWrapper> {
 					System.out.println(e);
 				}
 				
-				Phone phone=new Phone();
-				phone.setDescription(request.getParameter("TextArea1"));
-				phone.setTextProperties(request.getParameterValues("textProperty"));
-				Enumeration<String> en=request.getParameterNames();
-				String st;
-				byte[] b=new byte[67];
-				while (en.hasMoreElements()){
-					if ((st=en.nextElement()).contains("Checkbox")){
-						b[Integer.parseInt(st.replace("Checkbox", ""))-1]=1;
-					}
-				}
-				phone.setCheckboxes(b);
-				//SqlManager.AddPhone(phone);
+				SqlManager.AddPhone(phone);
 				
 				
 				
 				
 
 				page="/jsp/Index.jsp";
-			 page="/jsp/Edit.jsp";
+			 //page="/jsp/Edit.jsp";
 		}
 		
 		

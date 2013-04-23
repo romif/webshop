@@ -1,6 +1,8 @@
 package util;
 
-public class Phone {
+import java.util.HashMap;
+
+public class Phone extends HashMap<String,String>{
 
 	public Phone() {
 	}

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import servlet.MainServlet;
@@ -292,14 +293,19 @@ public final class SqlManager {
 					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
 			st = cn.createStatement(); 
 			String FullDescription="";
-			String getTextProperties[]=phone.getTextProperties();
+			for (Map.Entry<String, String> entry:phone.entrySet()){
+				FullDescription+=entry.getKey()+";"+entry.getValue();
+			}
+			
+			/*String getTextProperties[]=phone.getTextProperties();
 			for (int i=0;i<getTextProperties.length;i++)FullDescription+=getTextProperties[i]+";";
 			byte[] checkboxes=phone.getCheckboxes();
-			for (int i=0;i<checkboxes.length;i++)FullDescription+=checkboxes[i]+";";
+			for (int i=0;i<checkboxes.length;i++)FullDescription+=checkboxes[i]+";";*/
+			
 			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDescription) " +
-					"VALUES ('"+phone.getTextProperties()[1]+"', '"+phone.getDescription()+"', '"+phone.getTextProperties()[2]+"', '"+phone.getTextProperties()[3]+"','"+FullDescription+"')");
+					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+"', '"+("textProperty2")+"', '"+("textProperty3")+"','"+FullDescription+"')");
 			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
-					"VALUES (LAST_INSERT_ID(),'"+phone.getTextProperties()[0]+"')");
+					"VALUES (LAST_INSERT_ID(),'"+("textProperty0")+"')");
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());
