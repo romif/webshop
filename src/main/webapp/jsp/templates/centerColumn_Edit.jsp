@@ -25,38 +25,38 @@
 							<table width="100%" cellspacing="0" cellpadding="0" border="0">
 								<tbody>  
 									<tr><td><div>Фото</div></td><td><input name="F1" size="20" type="file" /></td></tr>
-								    <tr><td><div>Производитель</div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Название</div></td><td><input type="text" name="textProperty" value="input"></td></tr>
+								    <tr><td><div>Производитель</div></td><td><input type="text" name="textProperty0" value="input"></td></tr>
+									<tr><td><div>Название</div></td><td><input type="text" name="textProperty1" value="input"></td></tr>
 									<tr><td><div>Краткое описание</div></td><td><textarea cols="20" name="TextArea1" style="height: 85px">input</textarea></td></tr>
-									<tr><td><div>Цена, долл</div></td><td><input type="text" name="textProperty" value="0"></td></tr>
-									<tr><td><div>Цена, руб</div></td><td><input type="text" name="textProperty" value="0"></td></tr>
+									<tr><td><div>Цена, долл</div></td><td><input type="text" name="textProperty2" value="0"></td></tr>
+									<tr><td><div>Цена, руб</div></td><td><input type="text" name="textProperty3" value="0"></td></tr>
 									              
 									<tr><td colspan="2">Основные</td></tr>
-									<tr><td><div>Дата выхода на рынок </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Стандарт </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Платформа</div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Операционная система </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Процессор </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Тактовая частота </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Количество ядер </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Графический ускоритель</div></td><td><input type="text" name="textProperty" value="input"></td></tr>
+									<tr><td><div>Дата выхода на рынок </div></td><td><input type="text" name="textProperty4" value="input"></td></tr>
+									<tr><td><div>Стандарт </div></td><td><input type="text" name="textProperty5" value="input"></td></tr>
+									<tr><td><div>Платформа</div></td><td><input type="text" name="textProperty6" value="input"></td></tr>
+									<tr><td><div>Операционная система </div></td><td><input type="text" name="textProperty7" value="input"></td></tr>
+									<tr><td><div>Процессор </div></td><td><input type="text" name="textProperty8" value="input"></td></tr>
+									<tr><td><div>Тактовая частота </div></td><td><input type="text" name="textProperty9" value="input"></td></tr>
+									<tr><td><div>Количество ядер </div></td><td><input type="text" name="textProperty10" value="input"></td></tr>
+									<tr><td><div>Графический ускоритель</div></td><td><input type="text" name="textProperty11" value="input"></td></tr>
 									<tr><td colspan="2">Размеры и вес</td></tr>
-									<tr><td><div>Длина </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Ширина </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Толщина </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
-									<tr><td><div>Вес </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
+									<tr><td><div>Длина </div></td><td><input type="text" name="textProperty12" value="input"></td></tr>
+									<tr><td><div>Ширина </div></td><td><input type="text" name="textProperty13" value="input"></td></tr>
+									<tr><td><div>Толщина </div></td><td><input type="text" name="textProperty14" value="input"></td></tr>
+									<tr><td><div>Вес </div></td><td><input type="text" name="textProperty15" value="input"></td></tr>
 									<tr><td colspan="2">Конструкция</td></tr>
-									<tr><td><div>Конструкция корпуса </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
+									<tr><td><div>Конструкция корпуса </div></td><td><input type="text" name="textProperty16" value="input"></td></tr>
 									<tr><td><div>Встроенная антенна </div></td><td><input name="Checkbox1" type="checkbox" /></td></tr>
 									<tr><td><div>Разъём для внешней антенны </div></td><td><input name="Checkbox2" type="checkbox"/></td></tr>
 									<tr><td><div>Сменные панели </div></td><td><input name="Checkbox3" type="checkbox"/></td></tr>
 									<tr><td><div>Пыле-, влаго-, ударопрочность </div></td><td><input name="Checkbox4" type="checkbox"/></td></tr>
-									<tr><td><div>Материал корпуса </div></td><td><input type="text" name="textProperty" value="input"></td></tr>
+									<tr><td><div>Материал корпуса </div></td><td><input type="text" name="textProperty17" value="input"></td></tr>
 									<tr><td><div>Акселерометр </div></td><td><input name="Checkbox5" type="checkbox"/></td></tr>
 									<tr><td><div>Гироскоп </div></td><td><input name="Checkbox6" type="checkbox"/></td></tr>
 									<tr><td><div>Датчик приближения </div></td><td><input name="Checkbox7" type="checkbox"/></td></tr>
 									<tr><td><div>Датчик освещенности </div></td><td><input name="Checkbox8" type="checkbox"/></td></tr>
-									<tr><td><div>Варианты цвета корпуса </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
+									<tr><td><div>Варианты цвета корпуса </div></td><td><input type="text" name="textProperty18" value="input"/></td></tr>
 									<tr><td><div>Сенсорная клавиатура </div></td><td><input name="Checkbox9" type="checkbox"/></td></tr>
 									<tr><td><div>QWERTY-клавиатура </div></td><td><input name="Checkbox10" type="checkbox"/></td></tr>
 									<tr><td><div>Поддержка двух SIM-карт </div></td><td><input name="Checkbox11" type="checkbox"/></td></tr>
@@ -70,20 +70,20 @@
 									<tr><td colspan="2">Короткие сообщения</td></tr>
 									<tr><td><div>MMS </div></td><td><input name="Checkbox18" type="checkbox"/></td></tr>
 									<tr><td colspan="2">Экран</td></tr>
-									<tr><td><div>Технология экрана </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Тип экрана </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Разрешение экрана </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Размер экрана </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
+									<tr><td><div>Технология экрана </div></td><td><input type="text" name="textProperty19" value="input"/></td></tr>
+									<tr><td><div>Тип экрана </div></td><td><input type="text" name="textProperty20" value="input"/></td></tr>
+									<tr><td><div>Разрешение экрана </div></td><td><input type="text" name="textProperty21" value="input"/></td></tr>
+									<tr><td><div>Размер экрана </div></td><td><input type="text" name="textProperty22" value="input"/></td></tr>
 									<tr><td><div>Сенсорный экран </div></td><td><input name="Checkbox19" type="checkbox"/></td></tr>
 									<tr><td colspan="2">Работа с изображением</td></tr>
 									<tr><td><div>Встроенная камера </div></td><td><input name="Checkbox20" type="checkbox"/></td></tr>
 									<tr><td><div>Дополнительная камера </div></td><td><input name="Checkbox21" type="checkbox"/></td></tr>
-									<tr><td><div>Количество активных пикселей </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Максимальное разрешение снимка </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Цифровой zoom </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
+									<tr><td><div>Количество активных пикселей </div></td><td><input type="text" name="textProperty23" value="input"/></td></tr>
+									<tr><td><div>Максимальное разрешение снимка </div></td><td><input type="text" name="textProperty24" value="input"/></td></tr>
+									<tr><td><div>Цифровой zoom </div></td><td><input type="text" name="textProperty25" value="input"/></td></tr>
 									<tr><td><div>Запись видео </div></td><td><input name="Checkbox22" type="checkbox"/></td></tr>
-									<tr><td><div>Максимальное разрешение видео </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Макс. кол-во кадров в секунду </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
+									<tr><td><div>Максимальное разрешение видео </div></td><td><input type="text" name="textProperty26" value="input"/></td></tr>
+									<tr><td><div>Макс. кол-во кадров в секунду </div></td><td><input type="text" name="textProperty27" value="input"/></td></tr>
 									<tr><td><div>Встроенный проектор</div></td><td><input name="Checkbox23" type="checkbox"/></td></tr>
 									<tr><td><div>ТВ-тюнер</div></td><td><input name="Checkbox24" type="checkbox"/></td></tr>
 									<tr><td colspan="2">Объектив</td></tr>
@@ -100,8 +100,8 @@
 									<tr><td><div>FM-приёмник </div></td><td><input name="Checkbox33" type="checkbox"/></td></tr>
 									<tr><td><div>FM-трансмиттер </div></td><td><input name="Checkbox34" type="checkbox"/></td></tr>
 									<tr><td colspan="2">Память</td></tr>
-									<tr><td><div>Объем оперативной памяти </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Объем энергонезависимой памяти </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
+									<tr><td><div>Объем оперативной памяти </div></td><td><input type="text" name="textProperty28" value="input"/></td></tr>
+									<tr><td><div>Объем энергонезависимой памяти </div></td><td><input type="text" name="textProperty29" value="input"/></td></tr>
 									<tr><td><div>Поддержка карт памяти </div></td><td><input name="Checkbox35" type="checkbox"/></td></tr>
 									<tr><td colspan="2">Навигация</td></tr>
 									<tr><td><div>GPS </div></td><td><input name="Checkbox36" type="checkbox"/></td></tr>
@@ -109,7 +109,7 @@
 									<tr><td colspan="2">Функции вызова и персонализация</td></tr>
 									<tr><td><div>Светодиодный индикатор </div></td><td><input name="Checkbox38" type="checkbox"/></td></tr>
 									<tr><td><div>Вибровызов </div></td><td><input name="Checkbox39" type="checkbox"/></td></tr>
-									<tr><td><div>Тип мелодии </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
+									<tr><td><div>Тип мелодии </div></td><td><input type="text" name="textProperty30" value="input"/></td></tr>
 									<tr><td><div>MP3-звонок </div></td><td><input name="Checkbox40" type="checkbox"/></td></tr>
 									<tr><td><div>Стереозвонок </div></td><td><input name="Checkbox41" type="checkbox"/></td></tr>
 									<tr><td><div>Поддержка Java </div></td><td><input name="Checkbox42" type="checkbox"/></td></tr>
@@ -138,14 +138,14 @@
 									<tr><td><div>USB </div></td><td><input name="Checkbox63" type="checkbox"/></td></tr>
 									<tr><td><div>USB On-The-Go </div></td><td><input name="Checkbox64" type="checkbox"/></td></tr>
 									<tr><td><div>Разъем для подключения к PC </div></td><td><input name="Checkbox65" type="checkbox"/></td></tr>
-									<tr><td><div>Тип разъёма для подключения к PC </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
+									<tr><td><div>Тип разъёма для подключения к PC </div></td><td><input type="text" name="textProperty31" value="input"/></td></tr>
 									<tr><td><div>HDMI-выход </div></td><td><input name="Checkbox66" type="checkbox"/></td></tr>
 									<tr><td><div>TV-выход </div></td><td><input name="Checkbox67" type="checkbox"/></td></tr>
 									<tr><td colspan="2">Аккумулятор</td></tr>
-									<tr><td><div>Тип аккумулятора </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Емкость аккумулятора </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Время разговора </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
-									<tr><td><div>Время ожидания </div></td><td><input type="text" name="textProperty" value="input"/></td></tr>
+									<tr><td><div>Тип аккумулятора </div></td><td><input type="text" name="textProperty32" value="input"/></td></tr>
+									<tr><td><div>Емкость аккумулятора </div></td><td><input type="text" name="textProperty33" value="input"/></td></tr>
+									<tr><td><div>Время разговора </div></td><td><input type="text" name="textProperty34" value="input"/></td></tr>
+									<tr><td><div>Время ожидания </div></td><td><input type="text" name="textProperty35" value="input"/></td></tr>
 									<tr><td><div>Cолнечная батарея </div></td><td></td></tr>           
 								
 								</tbody>

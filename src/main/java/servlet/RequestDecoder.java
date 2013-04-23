@@ -6,8 +6,10 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import java.util.Map.Entry;
 import java.util.Random;
@@ -219,6 +221,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 		
 		
 		if (ServletFileUpload.isMultipartContent(request)){
+			Map<String,String> requestParameters=new HashMap<String,String>();
 			
 				
 				//ServletFileUpload.isMultipartContent(request);
@@ -228,12 +231,11 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				File storageDir = new File(uploadStorage);
 				if (!storageDir.isDirectory()) storageDir.mkdir();
 				ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
-				System.out.println(upload.getHeaderEncoding());
 				try {
-					List items = upload.parseRequest(request);
-					Iterator iterator = items.iterator();
+					List<FileItem> items = upload.parseRequest(request);
+					Iterator<FileItem> iterator = items.iterator();
 					while (iterator.hasNext()) {
-						FileItem fileItem = (FileItem) iterator.next();
+						FileItem fileItem = iterator.next();
 						if ( !fileItem.isFormField() ) {
 							if ( fileItem.getSize() > 0 ) {
 								String fileName = new File(fileItem.getName()).getName();
@@ -253,11 +255,14 @@ public class RequestDecoder<MultipartRequestWrapper> {
 									System.out.println("File must have correct extension."); 
 									break;
 								}
-								} else {
-									System.out.println("Select some file for the uplading.");
-									break;
-								}
+							} else {
+								System.out.println("Select some file for the uplading.");
+								break;
+							}
 						}
+						else {
+							requestParameters.put(fileItem.getFieldName(), fileItem.getString());	
+						}	
 					}
 				} catch (FileUploadException e) {
 					System.out.println(e);
