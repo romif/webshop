@@ -286,7 +286,7 @@ public final class SqlManager {
 		Connection cn = null;
 		Statement st = null; 
 		ResultSet rs = null; 
-		int id=0;
+		int id=-1;
 		try {
 			Class.forName(MainServlet.DBConfig[0]); 
 			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 

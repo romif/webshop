@@ -174,8 +174,6 @@ public class RequestDecoder<MultipartRequestWrapper> {
 						FileItem fileItem = iterator.next();
 						if ( !fileItem.isFormField() ) {
 							String fileName = new File(fileItem.getName()).getName();
-							int pintPosition = fileName.lastIndexOf("."); 
-							String mimeType = fileName.substring(pintPosition, fileName.length());
 							String filePath = uploadStorage + File.separator + fileName; 
 							File uploadedFile = new File(filePath); 
 							fileItem.write(uploadedFile); 
