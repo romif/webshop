@@ -339,7 +339,7 @@ public final class SqlManager {
 			st = cn.createStatement(); 
 			st1 = cn.createStatement();
 			rs = st.executeQuery("SELECT PhoneID FROM Phone_IDs "
-					+"WHERE PhoneMan='"+manufacture+"'");
+					+"WHERE PhoneMan='"+manufacture+"'"); 
 			while (rs.next()){
 				rs1=st1.executeQuery("SELECT * FROM Phones "
 						+"WHERE PhoneID='"+rs.getInt("PhoneID")+"'");
