@@ -301,9 +301,9 @@ public final class SqlManager {
 					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+
 					"', '"+Integer.parseInt(phone.get("firstPrice"))+"', '"+Integer.parseInt(phone.get("secondPrice"))+"','"+FullDescription+"')");
 			rs = st.executeQuery("SELECT LAST_INSERT_ID()");
-			id=rs.getInt(0);
+			if (rs.next())id=rs.getInt(0);
 			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
-					"VALUES ("+id+",'"+("textProperty0")+"')");
+					"VALUES ("+id+",'"+phone.get("textProperty0")+"')");
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());
