@@ -157,7 +157,7 @@
 			<p>&nbsp;</p>
 			<!-- <input name="Button1" type="submit" value="Создать" />-->
 			<input type="submit" class="hiddenc" id="regBut" value="Добавить">
-			<a href="${pageContext.request.contextPath}/index?mode=edit#" onclick="document.getElementById('regBut').click();return false" title="Добавить телефон">Добавить</a>
+			<a href="${pageContext.request.contextPath}/index?mode=edit#" onclick="if (true) {document.getElementById('regBut').click();};return false" title="Добавить телефон">Добавить</a>
 								
 			
 			<p class="reviLinks"></p>
