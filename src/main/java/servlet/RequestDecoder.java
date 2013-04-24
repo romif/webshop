@@ -173,28 +173,12 @@ public class RequestDecoder<MultipartRequestWrapper> {
 					while (iterator.hasNext()) {
 						FileItem fileItem = iterator.next();
 						if ( !fileItem.isFormField() ) {
-							if ( fileItem.getSize() > 0 ) {
-								String fileName = new File(fileItem.getName()).getName();
-								int pintPosition = fileName.lastIndexOf("."); 
-								String mimeType = fileName.substring(pintPosition, fileName.length());
-								if (mimeType.equals(".jpeg") || 
-										mimeType.equals(".gif") || 
-										mimeType.equals(".png") || 
-										mimeType.equals(".jpg")) {
-									String filePath = uploadStorage + File.separator + fileName; 
-									File uploadedFile = new File(filePath); 
-									fileItem.write(uploadedFile); 
-									//request.setAttribute("successMessage", successMsg);  
-									//request.setAttribute("imgDir", STORAGE_DIR);  
-									//request.setAttribute("imgName", fileName);  
-								} else {
-									System.out.println("File must have correct extension."); 
-									break;
-								}
-							} else {
-								System.out.println("Select some file for the uplading.");
-								break;
-							}
+							String fileName = new File(fileItem.getName()).getName();
+							int pintPosition = fileName.lastIndexOf("."); 
+							String mimeType = fileName.substring(pintPosition, fileName.length());
+							String filePath = uploadStorage + File.separator + fileName; 
+							File uploadedFile = new File(filePath); 
+							fileItem.write(uploadedFile); 
 						}
 						else {
 							phone.put(fileItem.getFieldName(), fileItem.getString());	

@@ -282,11 +282,11 @@ public final class SqlManager {
 		return bool;
 	}
 	
-	public static boolean AddPhone(Phone phone){
+	public static int AddPhone(Phone phone){
 		Connection cn = null;
 		Statement st = null; 
 		ResultSet rs = null; 
-		boolean bool=false;
+		int id=0;
 		try {
 			Class.forName(MainServlet.DBConfig[0]); 
 			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
@@ -300,8 +300,10 @@ public final class SqlManager {
 			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDescription) " +
 					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+
 					"', '"+Integer.parseInt(phone.get("firstPrice"))+"', '"+Integer.parseInt(phone.get("secondPrice"))+"','"+FullDescription+"')");
+			rs = st.executeQuery("SELECT LAST_INSERT_ID()");
+			id=rs.getInt(0);
 			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
-					"VALUES (LAST_INSERT_ID(),'"+("textProperty0")+"')");
+					"VALUES ("+id+",'"+("textProperty0")+"')");
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());
@@ -322,7 +324,7 @@ public final class SqlManager {
 	            System.out.println(ex.toString());
 	        }
 		} 
-		return bool;
+		return id;
 	}
 	
 	public static List<Phone> GetPhones(String manufacture){
