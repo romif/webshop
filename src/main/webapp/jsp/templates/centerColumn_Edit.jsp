@@ -155,7 +155,11 @@
 				</tbody>
 			</table>
 			<p>&nbsp;</p>
-			<input name="Button1" type="submit" value="Создать" />
+			<!-- <input name="Button1" type="submit" value="Создать" />-->
+			<input type="submit" class="hiddenc" id="regBut" value="Регистрация">
+			<a href="${pageContext.request.contextPath}/index?mode=reg#" onclick="if (phoneEdit()) document.getElementById('regBut').click();return false" title="Зарегистрироваться на сайте">Зарегистрироваться</a>
+								
+			
 			<p class="reviLinks"></p>
 			
 		</div>

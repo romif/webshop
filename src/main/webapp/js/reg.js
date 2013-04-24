@@ -123,6 +123,79 @@ function shopReg(errors) {
 	return true;
 }
 
+function phoneEdit() {
+
+	/*var firstPrice = $('#textProperty2').val();
+	var secondPrice = $('#textProperty3').val();
+	var errorArr = []; //массив ошибок
+
+	
+	/*emailTest = "^[_\\.0-9a-z-]+@([0-9a-z][0-9a-z_-]+\\.)+[a-z]{2,4}$";
+	passTest = "^.{4,}";
+
+	var regex_email = new RegExp(emailTest, 'i');
+	var regex_pass = new RegExp(passTest);
+	
+	
+		if (email2=='') {
+			errorArr.push(['reg_email', '1']);
+		} else if (regex_email.test(email2) == false) {
+			errorArr.push(['reg_email', '2']);
+		}
+		if (pass == '') {
+			errorArr.push(['reg_password', '1']);
+		} else if (regex_pass.test(pass) == false) {
+			errorArr.push(['reg_password', '2']);
+		}
+		if (pass2=='') {
+			errorArr.push(['reg_password2', '1']);
+		} else if (pass != pass2) {
+			errorArr.push(['reg_password2', '2']);
+		}
+
+	
+	if (errorArr.length != 0) {
+		for (var j=0;j<summ; j++) {
+			var idName = $('.regParam').eq(j).attr('id');
+			for (var i=0;i<errorArr.length; i++) {
+				var id = errorArr[i][0];
+				if (id==idName) {
+					param = i;		
+				}
+			}
+			if (param!='no') {
+				errorNomer = errorArr[param][1];
+				id = errorArr[param][0];
+				if (errorNomer == 3) {
+					$('#'+id+'_error').html(errors[id][0]);
+				} else if (errorNomer == 1) {
+					$('#'+id+'_error').html('Заполните поле');
+				} else {
+					$('#'+id+'_error').html('Исправьте данные в поле');
+				}			
+				
+				$('#'+id+'_error').show();
+				$('#'+id).addClass('borderError');
+				param = 'no';
+			} else {
+				$('#'+idName).removeClass('borderError');
+				$('#'+idName+'_error').hide();
+			}
+		}
+		alert('К сожалению, сообщение не может быть отправлено.\nПожалуйста, исправьте неточности в заполнении формы.');
+		return false;
+	} else {
+		for (var j=0;j<summ; j++) {
+			var idName = $('.regParam').eq(j).attr('id');
+			$('#'+idName).removeClass('borderError');
+			$('#'+idName+'_error').hide();
+			if(errors == 'success') 
+				$('#'+idName).val('');
+		}
+	}*/
+	return true;
+}
+
 var newPassSubmit = function() {
 	if (!newPassCheck())return false;
 	document.getElementById('preload').style.display='inline';
