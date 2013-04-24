@@ -24,12 +24,20 @@
 						<td width="100%" valign="top">
 							<table width="100%" cellspacing="0" cellpadding="0" border="0">
 								<tbody>  
-									<tr><td><div>Фото</div></td><td><input name="F1" size="20" type="file" /></td></tr>
+									<tr><td><div>Фото</div></td><td><input name="F1" size="20" type="file" required = "required" accept ="image/*"/></td></tr>
 								    <tr><td><div>Производитель</div></td><td><input type="text" name="textProperty0" value="input"></td></tr>
 									<tr><td><div>Название</div></td><td><input type="text" name="textProperty1" value="input"></td></tr>
 									<tr><td><div>Краткое описание</div></td><td><textarea cols="20" name="TextArea1" style="height: 85px">input</textarea></td></tr>
-									<tr><td><div>Цена, долл</div></td><td><input type="text" name="textProperty2" value="0"></td></tr>
-									<tr><td><div>Цена, руб</div></td><td><input type="text" name="textProperty3" value="0"></td></tr>
+									<tr>
+										<td><div>Цена, долл</div></td>
+										<td><input class="editParam" id="firstPrice" type="text" name="firstPrice" value="0">
+										<div class="error" id="firstPrice_error"></div></td>
+									</tr>
+									<tr>
+										<td><div>Цена, руб</div></td>
+										<td><input class="editParam" id="secondPrice" type="text" name="secondPrice" value="0">
+										<div class="error" id="secondPrice_error"></div></td>
+									</tr>
 									              
 									<tr><td colspan="2">Основные</td></tr>
 									<tr><td><div>Дата выхода на рынок </div></td><td><input type="text" name="textProperty4" value="input"></td></tr>

@@ -125,47 +125,41 @@ function shopReg(errors) {
 
 function phoneEdit() {
 
-	/*var firstPrice = $('#textProperty2').val();
-	var secondPrice = $('#textProperty3').val();
+	var firstPrice = $('#firstPrice').val();
+	var secondPrice = $('#secondPrice').val();
 	var errorArr = []; //массив ошибок
+	var summ = $('.editParam').size();
 
-	
-	/*emailTest = "^[_\\.0-9a-z-]+@([0-9a-z][0-9a-z_-]+\\.)+[a-z]{2,4}$";
-	passTest = "^.{4,}";
+	priceTest="[^0-9]";
 
-	var regex_email = new RegExp(emailTest, 'i');
-	var regex_pass = new RegExp(passTest);
-	
-	
-		if (email2=='') {
-			errorArr.push(['reg_email', '1']);
-		} else if (regex_email.test(email2) == false) {
-			errorArr.push(['reg_email', '2']);
-		}
-		if (pass == '') {
-			errorArr.push(['reg_password', '1']);
-		} else if (regex_pass.test(pass) == false) {
-			errorArr.push(['reg_password', '2']);
-		}
-		if (pass2=='') {
-			errorArr.push(['reg_password2', '1']);
-		} else if (pass != pass2) {
-			errorArr.push(['reg_password2', '2']);
-		}
-
+	var regex_price = new RegExp(priceTest);
+	if (firstPrice=='') {
+		errorArr.push(['firstPrice', '1']);
+	} else if (regex_price.test(firstPrice) == true) {
+		errorArr.push(['firstPrice', '2']);
+	}
+	if (secondPrice == '') {
+		errorArr.push(['secondPrice', '1']);
+	} else if (regex_price.test(secondPrice) == true) {
+		errorArr.push(['secondPrice', '2']);
+	}
 	
 	if (errorArr.length != 0) {
 		for (var j=0;j<summ; j++) {
-			var idName = $('.regParam').eq(j).attr('id');
+			var priceError=-1;
+			var idName = $('.editParam').eq(j).attr('id');
 			for (var i=0;i<errorArr.length; i++) {
 				var id = errorArr[i][0];
 				if (id==idName) {
-					param = i;		
+					priceError = i;		
+				}else{
+					$('#'+idName).removeClass('borderError');
+					$('#'+idName+'_error').hide();
 				}
 			}
-			if (param!='no') {
-				errorNomer = errorArr[param][1];
-				id = errorArr[param][0];
+			if (priceError!=-1) {
+				errorNomer = errorArr[priceError][1];
+				id = errorArr[priceError][0];
 				if (errorNomer == 3) {
 					$('#'+id+'_error').html(errors[id][0]);
 				} else if (errorNomer == 1) {
@@ -176,23 +170,17 @@ function phoneEdit() {
 				
 				$('#'+id+'_error').show();
 				$('#'+id).addClass('borderError');
-				param = 'no';
-			} else {
-				$('#'+idName).removeClass('borderError');
-				$('#'+idName+'_error').hide();
-			}
+			} 
 		}
-		alert('К сожалению, сообщение не может быть отправлено.\nПожалуйста, исправьте неточности в заполнении формы.');
+		alert('К сожалению, описание не может быть добавлено.\nПожалуйста, исправьте неточности в заполнении формы.');
 		return false;
 	} else {
 		for (var j=0;j<summ; j++) {
-			var idName = $('.regParam').eq(j).attr('id');
+			var idName = $('.editParam').eq(j).attr('id');
 			$('#'+idName).removeClass('borderError');
 			$('#'+idName+'_error').hide();
-			if(errors == 'success') 
-				$('#'+idName).val('');
 		}
-	}*/
+	}
 	return true;
 }
 

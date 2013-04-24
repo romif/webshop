@@ -299,7 +299,7 @@ public final class SqlManager {
 			
 			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDescription) " +
 					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+
-					"', '"+Integer.parseInt(phone.get("textProperty2"))+"', '"+Integer.parseInt(phone.get("textProperty3"))+"','"+FullDescription+"')");
+					"', '"+Integer.parseInt(phone.get("firstPrice"))+"', '"+Integer.parseInt(phone.get("secondPrice"))+"','"+FullDescription+"')");
 			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
 					"VALUES (LAST_INSERT_ID(),'"+("textProperty0")+"')");
 		}

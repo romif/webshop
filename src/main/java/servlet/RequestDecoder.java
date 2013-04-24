@@ -150,6 +150,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 			}
 			else if (request.getParameter("mode").equals("Apple")){
 				page="/jsp/Apple.jsp";
+				page="/jsp/Edit.jsp";
 			}
 		}
 		
