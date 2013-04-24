@@ -156,8 +156,8 @@
 			</table>
 			<p>&nbsp;</p>
 			<!-- <input name="Button1" type="submit" value="Создать" />-->
-			<input type="submit" class="hiddenc" id="regBut" value="Регистрация">
-			<a href="${pageContext.request.contextPath}/index?mode=reg#" onclick="if (phoneEdit()) document.getElementById('regBut').click();return false" title="Зарегистрироваться на сайте">Зарегистрироваться</a>
+			<input type="submit" class="hiddenc" id="regBut" value="Добавить">
+			<a href="${pageContext.request.contextPath}/index?mode=edit#" onclick="if (phoneEdit()) document.getElementById('regBut').click();return false" title="Добавить телефон">Добавить</a>
 								
 			
 			<p class="reviLinks"></p>
