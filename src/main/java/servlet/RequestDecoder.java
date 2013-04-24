@@ -150,7 +150,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 			}
 			else if (request.getParameter("mode").equals("Apple")){
 				page="/jsp/Apple.jsp";
-				page="/jsp/Edit.jsp";
+				//page="/jsp/Edit.jsp";
 			}
 		}
 		
@@ -180,7 +180,6 @@ public class RequestDecoder<MultipartRequestWrapper> {
 							phone.put(fileItem.getFieldName(), fileItem.getString());	
 						}	
 					}
-					
 					String fileName = new File(item.getName()).getName();
 					int pintPosition = fileName.lastIndexOf(".");  
 					String mimeType = fileName.substring(pintPosition, fileName.length());

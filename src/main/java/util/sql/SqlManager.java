@@ -339,39 +339,17 @@ public final class SqlManager {
 			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
 					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
 			st = cn.createStatement(); 
-			st1 = cn.createStatement();
-			rs = st.executeQuery("SELECT PhoneID FROM Phone_IDs "
-					+"WHERE PhoneMan='"+manufacture+"'"); 
+			rs = st.executeQuery("SELECT * FROM Phone_IDs,Phones "
+					+"WHERE (Phone_IDs.PhoneMan='"+manufacture+"')AND(Phone_IDs.PhoneID=Phones.PhoneID)"); 
 			while (rs.next()){
-				rs1=st1.executeQuery("SELECT * FROM Phones "
-						+"WHERE PhoneID='"+rs.getInt("PhoneID")+"'");
 				Phone phone=new Phone();
-				String[] FullDiscription;
-				if (rs1.next()) {
-					FullDiscription=rs1.getString("FullDescription").split(";");
-					String[] textProperties=new String[36];
-					String[] checkboxes_temp=new String[67];
-					byte[] checkboxes=new byte[67];
-					System.arraycopy(FullDiscription, 0, textProperties, 0, 36);
-					System.arraycopy(FullDiscription, 36, checkboxes_temp, 0, 67);
-					for (int i=0;i<checkboxes_temp.length;i++)
-						checkboxes[i]=Byte.parseByte(checkboxes_temp[i]);
-					phone.setCheckboxes(checkboxes);
-					phone.setTextProperties(textProperties);
-					phone.setDescription(rs1.getString("Description"));
-					phones.add(phone);
+				String[] FullDiscription=rs.getString("FullDescription").split(";");
+				for (int i=0;i<FullDiscription.length-1;i+=2){
+					phone.put(FullDiscription[i], FullDiscription[i+1]);
 				}
+				phone.setId(rs.getInt("PhoneID"));
+				phones.add(phone);
 			}
-			
-			/*String FullDiscription="";
-			String getTextProperties[]=phone.getTextProperties();
-			for (int i=0;i<getTextProperties.length;i++)FullDiscription+=getTextProperties[i]+";";
-			byte[] checkboxes=phone.getCheckboxes();
-			for (int i=0;i<checkboxes.length;i++)FullDiscription+=checkboxes[i]+";";
-			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDiscription) " +
-					"VALUES ('"+phone.getTextProperties()[1]+"', '"+phone.getDescription()+"', '"+phone.getTextProperties()[2]+"', '"+phone.getTextProperties()[3]+"','"+FullDiscription+"')");
-			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
-					"VALUES (LAST_INSERT_ID(),'"+phone.getTextProperties()[0]+"')");*/
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());
@@ -396,7 +374,7 @@ public final class SqlManager {
 	
 	public static void main(String[] args){
 		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
-		System.out.print(Math.ceil((double)1/2));
+		System.out.print(SqlManager.GetPhones("Apple"));
 
 	}
 

@@ -9,6 +9,16 @@ public class Phone extends HashMap<String,String>{
 	String[] textProperties;
 	byte[] checkboxes;
 	String description;
+	int id;
+	
+	public void setId(int id){
+		this.id=id;
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
 	
 	public void setTextProperties(String[] textProperties){
 		this.textProperties=textProperties;

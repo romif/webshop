@@ -71,23 +71,23 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 
 	<div class="leftItem">
 		<div class="itemBlockSmall">
-			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>"><%=((Phone)phones.get(i*2)).getTextProperties()[1]%></a></h3>
+			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2)).get("textProperty1")%>"><%=((Phone)phones.get(i*2)).get("textProperty1")%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>" href="/24/1001/">
-						<img alt="<%=((Phone)phones.get(i*2)).getTextProperties()[1]%>" src="http://tomcat7-romif.rhcloud.com/picture">
+					<a title="<%=((Phone)phones.get(i*2)).get("textProperty1")%>" href="/24/1001/">
+						<img alt="<%=((Phone)phones.get(i*2)).get("textProperty1")%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2)).getId()%>">
 					</a>
 				</div>
-				<div class="desc"><%=((Phone)phones.get(i*2)).getDescription()%><br><br>
+				<div class="desc"><%=((Phone)phones.get(i*2)).get("TextArea1")%><br><br>
 				</div>
 				<div class="itemPrice">
 					<table class="priceTable" cellpadding="0" cellspacing="0">
 						<tbody>
 							<tr>
 								<td>
-									<span class="firstPrice"><%=((Phone)phones.get(i*2)).getTextProperties()[2]%>&nbsp;$</span>
+									<span class="firstPrice"><%=((Phone)phones.get(i*2)).get("firstPrice")%>&nbsp;$</span>
 									<span class="divider"><img src="/pics/blank.gif" alt=""></span>
-									<span class="secondPrice"><%=((Phone)phones.get(i*2)).getTextProperties()[3]%>&nbsp;руб.</span>
+									<span class="secondPrice"><%=((Phone)phones.get(i*2)).get("secondPrice")%>&nbsp;руб.</span>
 								</td>
 								<td>
 									<div class="buttons">
@@ -105,23 +105,23 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 	<%if (i*2<phones.size()-1) {%>
 	<div class="rightItem">
 		<div class="itemBlockSmall">
-			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%>"><%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%></a></h3>
+			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2+1)).get("textProperty1")%>"><%=((Phone)phones.get(i*2+1)).get("textProperty1")%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%>" href="/24/1001/">
-						<img alt="<%=((Phone)phones.get(i*2+1)).getTextProperties()[1]%>" src="/pics/items/Apple%20iPhone%204%208Gb_icon.jpg">
+					<a title="<%=((Phone)phones.get(i*2+1)).get("textProperty1")%>" href="/24/1001/">
+						<img alt="<%=((Phone)phones.get(i*2+1)).get("textProperty1")%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2)).getId()%>">
 					</a>
 				</div>
-				<div class="desc"><%=((Phone)phones.get(i*2+1)).getDescription()%><br><br>
+				<div class="desc"><%=((Phone)phones.get(i*2+1)).get("TextArea1")%><br><br>
 				</div>
 				<div class="itemPrice">
 					<table class="priceTable" cellpadding="0" cellspacing="0">
 						<tbody>
 							<tr>
 								<td>
-									<span class="firstPrice"><%=((Phone)phones.get(i*2+1)).getTextProperties()[2]%>&nbsp;$</span>
+									<span class="firstPrice"><%=((Phone)phones.get(i*2+1)).get("firstPrice")%>&nbsp;$</span>
 									<span class="divider"><img src="/pics/blank.gif" alt=""></span>
-									<span class="secondPrice"><%=((Phone)phones.get(i*2+1)).getTextProperties()[3]%>&nbsp;руб.</span>
+									<span class="secondPrice"><%=((Phone)phones.get(i*2+1)).get("secondPrice")%>&nbsp;руб.</span>
 								</td>
 								<td>
 									<div class="buttons">
@@ -139,6 +139,7 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 </div>
 
 <%} %>
+
 <!-- <div class="itemRows">
 <div class="leftItem"><div class="itemBlockSmall">
 <h3><a href="/24/1000/" title="Apple iPhone 4S 32Gb">Apple iPhone 4S 32Gb</a></h3>
