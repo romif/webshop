@@ -297,13 +297,9 @@ public final class SqlManager {
 				FullDescription+=entry.getKey()+";"+entry.getValue()+";";
 			}
 			
-			/*String getTextProperties[]=phone.getTextProperties();
-			for (int i=0;i<getTextProperties.length;i++)FullDescription+=getTextProperties[i]+";";
-			byte[] checkboxes=phone.getCheckboxes();
-			for (int i=0;i<checkboxes.length;i++)FullDescription+=checkboxes[i]+";";*/
-			
 			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDescription) " +
-					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+"', '"+phone.get("textProperty2")+"', '"+phone.get("textProperty3")+"','"+FullDescription+"')");
+					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+
+					"', '"+Integer.parseInt(phone.get("textProperty2"))+"', '"+Integer.parseInt(phone.get("textProperty3"))+"','"+FullDescription+"')");
 			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
 					"VALUES (LAST_INSERT_ID(),'"+("textProperty0")+"')");
 		}
@@ -313,6 +309,9 @@ public final class SqlManager {
 		catch (ClassNotFoundException ex) {            
             System.out.println(ex.toString());
         } 
+		catch (NumberFormatException ex){
+			System.out.println(ex.toString());
+		}
 		finally {
 			try{
 				if (rs != null) rs.close(); 
