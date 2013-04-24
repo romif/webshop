@@ -170,29 +170,29 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				try {
 					List<FileItem> items = upload.parseRequest(request);
 					Iterator<FileItem> iterator = items.iterator();
+					FileItem item=null;
 					while (iterator.hasNext()) {
 						FileItem fileItem = iterator.next();
 						if ( !fileItem.isFormField() ) {
-							String fileName = new File(fileItem.getName()).getName();
-							String filePath = uploadStorage + File.separator + fileName; 
-							File uploadedFile = new File(filePath); 
-							fileItem.write(uploadedFile); 
+							item=fileItem;
 						}
 						else {
 							phone.put(fileItem.getFieldName(), fileItem.getString());	
 						}	
 					}
+					
+					String fileName = new File(item.getName()).getName();
+					int pintPosition = fileName.lastIndexOf(".");  
+					String mimeType = fileName.substring(pintPosition, fileName.length());
+					int id=SqlManager.AddPhone(phone);
+					String filePath = uploadStorage + File.separator + id+mimeType;
+					File uploadedFile = new File(filePath); 
+					item.write(uploadedFile);
 				} catch (FileUploadException e) {
 					System.out.println(e);
 				} catch (Exception e) {
 					System.out.println(e);
 				}
-				
-				SqlManager.AddPhone(phone);
-				
-				
-				
-				
 
 				page="/jsp/Index.jsp";
 			 //page="/jsp/Edit.jsp";
