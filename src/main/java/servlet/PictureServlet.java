@@ -3,6 +3,7 @@ package servlet;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,6 +27,15 @@ public class PictureServlet extends HttpServlet {
 		  String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
 		  String filePath = uploadStorage + File.separator+request.getParameter("pic")+".jpg";
 		  File picture = new File(filePath); 
+		  File pictures=new File(uploadStorage);
+		  System.out.println(
+		  pictures.listFiles(new FilenameFilter(){
+			public boolean accept(File directory, String fileName) {
+				if (fileName.contains("30"))
+				return true;
+				return false;
+			}  
+		  })[0].getName());
 		  InputStream is =new BufferedInputStream(new FileInputStream(picture));
 	  
 	  //InputStream is=request.getServletContext().getResourceAsStream("/pics/logo.gif");

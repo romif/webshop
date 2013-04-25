@@ -156,45 +156,41 @@ public class RequestDecoder<MultipartRequestWrapper> {
 		
 		
 		if (ServletFileUpload.isMultipartContent(request)){
-			Map<String,String> requestParameters=new HashMap<String,String>();
 			Phone phone=new Phone();
-			
-				
-				//ServletFileUpload.isMultipartContent(request);
-				DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-				fileItemFactory.setRepository(new File(System.getenv("OPENSHIFT_TMP_DIR")));
-				String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
-				File storageDir = new File(uploadStorage);
-				if (!storageDir.isDirectory()) storageDir.mkdir();
-				ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
-				try {
-					List<FileItem> items = upload.parseRequest(request);
-					Iterator<FileItem> iterator = items.iterator();
-					FileItem item=null;
-					while (iterator.hasNext()) {
-						FileItem fileItem = iterator.next();
-						if ( !fileItem.isFormField() ) {
-							item=fileItem;
-						}
-						else {
-							phone.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));	
-						}	
+			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+			fileItemFactory.setRepository(new File(System.getenv("OPENSHIFT_TMP_DIR")));
+			String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
+			File storageDir = new File(uploadStorage);
+			if (!storageDir.isDirectory()) storageDir.mkdir();
+			ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
+			try {
+				List<FileItem> items = upload.parseRequest(request);
+				Iterator<FileItem> iterator = items.iterator();
+				FileItem item=null;
+				while (iterator.hasNext()) {
+					FileItem fileItem = iterator.next();
+					if ( !fileItem.isFormField() ) {
+						item=fileItem;
 					}
-					String fileName = new File(item.getName()).getName();
-					int pintPosition = fileName.lastIndexOf(".");  
-					String mimeType = fileName.substring(pintPosition, fileName.length());
-					int id=SqlManager.AddPhone(phone);
-					String filePath = uploadStorage + File.separator + id+mimeType;
-					File uploadedFile = new File(filePath); 
-					item.write(uploadedFile);
-				} catch (FileUploadException e) {
-					System.out.println(e);
-				} catch (Exception e) {
-					System.out.println(e);
+					else {
+						phone.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));	
+					}	
 				}
+				String fileName = new File(item.getName()).getName();
+				int pintPosition = fileName.lastIndexOf(".");  
+				String mimeType = fileName.substring(pintPosition, fileName.length());
+				int id=SqlManager.AddPhone(phone);
+				String filePath = uploadStorage + File.separator + id+mimeType;
+				File uploadedFile = new File(filePath); 
+				item.write(uploadedFile);
+			} catch (FileUploadException e) {
+				System.out.println(e);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 
-				page="/jsp/Index.jsp";
-			 //page="/jsp/Edit.jsp";
+			page="/jsp/Index.jsp";
+
 		}
 		
 		
