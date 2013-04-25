@@ -25,25 +25,23 @@ public class PictureServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  if (request.getParameter("pic")!=null){
 		  String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
-		  String filePath = uploadStorage + File.separator+request.getParameter("pic")+".jpg";
-		  File picture = new File(filePath); 
-		  File pictures=new File(uploadStorage);
-		  System.out.println(
-		  pictures.listFiles(new FilenameFilter(){
-			public boolean accept(File directory, String fileName) {
-				int pintPosition = fileName.lastIndexOf(".");
-				if ((pintPosition>0)&&(fileName.substring(0, pintPosition).equals("30")))
-				return true; else return false;
-			}  
-		  })[0].getName());
-		  InputStream is =new BufferedInputStream(new FileInputStream(picture));
-	  
-	  //InputStream is=request.getServletContext().getResourceAsStream("/pics/logo.gif");
-	  OutputStream os=response.getOutputStream();
-	  int i;
-	  while ((i=is.read())!=-1)os.write(i);
-	  is.close();
-	  os.close();
+		  final String pictureId = request.getParameter("pic");
+		  File[] pictures=new File(uploadStorage).listFiles(new FilenameFilter(){
+			  public boolean accept(File directory, String fileName) {
+				  int pintPosition = fileName.lastIndexOf(".");
+				  if ((pintPosition>0)&&(fileName.substring(0, pintPosition).equals(pictureId)))
+					  return true; 
+				  else return false;
+			  }  
+		  });
+		  if ((pictures!=null)&&(pictures.length!=0)){
+			  InputStream is=new BufferedInputStream(new FileInputStream(pictures[0]));
+			  OutputStream os=response.getOutputStream();
+			  int i;
+			  while ((i=is.read())!=-1)os.write(i);
+			  is.close();
+			  os.close();
+		  }
 	  }
   }
  
