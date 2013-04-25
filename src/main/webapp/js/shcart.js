@@ -20,8 +20,8 @@ var tmSh = null;
 function CreateShMess()
 {
 	removeShMess();
-	var message = "Товар добавлен в корзину.";
-	var message2 = "Выбирайте следующий товар или ";
+	var message = "РўРѕРІР°СЂ РґРѕР±Р°РІР»РµРЅ РІ РєРѕСЂР·РёРЅСѓ.";
+	var message2 = "Р’С‹Р±РёСЂР°Р№С‚Рµ СЃР»РµРґСѓСЋС‰РёР№ С‚РѕРІР°СЂ РёР»Рё ";
 	var text = document.createTextNode(message);
 	var text2 = document.createTextNode(message2);
 
@@ -37,7 +37,7 @@ function CreateShMess()
 	elem.appendChild(text2);
 
 //
-//  document.write('<a href="#" onclick="auto_hide();return false;"><img src="/pics/cr.gif" title="Закрыть" alt="Закрыть" width=20 height=22 border=0></a>');
+//  document.write('<a href="#" onclick="auto_hide();return false;"><img src="/pics/cr.gif" title="Р—Р°РєСЂС‹С‚СЊ" alt="Р—Р°РєСЂС‹С‚СЊ" width=20 height=22 border=0></a>');
 
 
 
@@ -46,7 +46,7 @@ function CreateShMess()
 	elem.appendChild(brelem);
 
 	var elemlink = document.createElement("a");
-	message = "переходите к оформлению заказа.";
+	message = "РїРµСЂРµС…РѕРґРёС‚Рµ Рє РѕС„РѕСЂРјР»РµРЅРёСЋ Р·Р°РєР°Р·Р°.";
 	var textlink = document.createTextNode(message);
 	elemlink.appendChild(textlink);
 	elemlink.setAttribute('href', '/shcart/?step=2&nstep=2&url=/');

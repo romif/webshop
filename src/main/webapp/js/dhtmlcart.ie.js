@@ -1,6 +1,6 @@
-// Авторы: Буравлев А.С. / Матвеев И.В. 
-// Код реализующий функции "плавающего" окна
-// код для MSIE4 и выше
+// РђРІС‚РѕСЂС‹: Р‘СѓСЂР°РІР»РµРІ Рђ.РЎ. / РњР°С‚РІРµРµРІ Р.Р’. 
+// РљРѕРґ СЂРµР°Р»РёР·СѓСЋС‰РёР№ С„СѓРЅРєС†РёРё "РїР»Р°РІР°СЋС‰РµРіРѕ" РѕРєРЅР°
+// РєРѕРґ РґР»СЏ MSIE4 Рё РІС‹С€Рµ
 
 DHTMLcart.checkonscroll=function()
 {
@@ -36,7 +36,7 @@ DHTMLcart.checkonscroll=function()
     }
 }
 
-// мышь над заголовком объекта
+// РјС‹С€СЊ РЅР°Рґ Р·Р°РіРѕР»РѕРІРєРѕРј РѕР±СЉРµРєС‚Р°
 function DHTMLcartOnMouseOver()
 {
     var obj                 = this.DHTMLcart;
@@ -48,7 +48,7 @@ function DHTMLcartOnMouseOver()
     return false;
 }
 
-// мышь съехала с заголовка объекта
+// РјС‹С€СЊ СЃСЉРµС…Р°Р»Р° СЃ Р·Р°РіРѕР»РѕРІРєР° РѕР±СЉРµРєС‚Р°
 function DHTMLcartOnMouseOut()
 {
     var obj                 = this.DHTMLcart;
@@ -120,7 +120,7 @@ function DHTMLcartDrag(e)
     return true;
 }
 
-// Функция, сохраняющая статические координаты объекта
+// Р¤СѓРЅРєС†РёСЏ, СЃРѕС…СЂР°РЅСЏСЋС‰Р°СЏ СЃС‚Р°С‚РёС‡РµСЃРєРёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РѕР±СЉРµРєС‚Р°
 function DHTMLcartHoldPosition(objname)
 {
     var diffX, diffY, targetX, targetY, curHorShift, curVertShift, curX, curY, obj;
@@ -178,22 +178,22 @@ function DHTMLcartHoldPosition(objname)
 	}
 }
 
-// Параметры по умолчанию
-DHTMLcart.id           = "DHTMLcartObj"; // идентификатор объекта
-DHTMLcart.visible      = false;           // видимость
-DHTMLcart.left         = 0;              // x-координата левого верхнего угла
-DHTMLcart.top          = 0;              // y-координата левого верхнего угла
-DHTMLcart.width        = 100;             // ширина
-DHTMLcart.height       = 100;             // высота
-DHTMLcart.headerHeight = 15;             // высота заголовка
+// РџР°СЂР°РјРµС‚СЂС‹ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+DHTMLcart.id           = "DHTMLcartObj"; // РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РѕР±СЉРµРєС‚Р°
+DHTMLcart.visible      = false;           // РІРёРґРёРјРѕСЃС‚СЊ
+DHTMLcart.left         = 0;              // x-РєРѕРѕСЂРґРёРЅР°С‚Р° Р»РµРІРѕРіРѕ РІРµСЂС…РЅРµРіРѕ СѓРіР»Р°
+DHTMLcart.top          = 0;              // y-РєРѕРѕСЂРґРёРЅР°С‚Р° Р»РµРІРѕРіРѕ РІРµСЂС…РЅРµРіРѕ СѓРіР»Р°
+DHTMLcart.width        = 100;             // С€РёСЂРёРЅР°
+DHTMLcart.height       = 100;             // РІС‹СЃРѕС‚Р°
+DHTMLcart.headerHeight = 15;             // РІС‹СЃРѕС‚Р° Р·Р°РіРѕР»РѕРІРєР°
 DHTMLcart.headerHTML   = "None";
-DHTMLcart.src          = "/shcart/?step=0";    // документ отображаемый в элементе
+DHTMLcart.src          = "/shcart/?step=0";    // РґРѕРєСѓРјРµРЅС‚ РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹Р№ РІ СЌР»РµРјРµРЅС‚Рµ
 DHTMLcart.scroll       = false;
 DHTMLcart.scrolling    = "no";
 DHTMLcart.addmsieparam = "";
 DHTMLcart.addmsiestyle = "";
   
-// Установка координаты Х
+// РЈСЃС‚Р°РЅРѕРІРєР° РєРѕРѕСЂРґРёРЅР°С‚С‹ РҐ
 function DHTMLcartSetLeft(left)
 {
 	left = parseInt(left);
@@ -203,7 +203,7 @@ function DHTMLcartSetLeft(left)
 	this.holdFunc = setTimeout("DHTMLcartHoldPosition('"+this.id+"')", 1);
 };
 
-// Установка координаты Y
+// РЈСЃС‚Р°РЅРѕРІРєР° РєРѕРѕСЂРґРёРЅР°С‚С‹ Y
 function DHTMLcartSetTop(top)
 {
 	top = parseInt(top);
@@ -213,7 +213,7 @@ function DHTMLcartSetTop(top)
 	this.holdFunc = setTimeout("DHTMLcartHoldPosition('"+this.id+"')", 1);
 };
 
-// Установка ширины
+// РЈСЃС‚Р°РЅРѕРІРєР° С€РёСЂРёРЅС‹
 function DHTMLcartSetWidth(width)
 {
 	width = parseInt(width);
@@ -223,7 +223,7 @@ function DHTMLcartSetWidth(width)
 	this.holdFunc = setTimeout("DHTMLcartHoldPosition('"+this.id+"')", 1);
 };
 
-// Установка высоты
+// РЈСЃС‚Р°РЅРѕРІРєР° РІС‹СЃРѕС‚С‹
 function DHTMLcartSetHeight(height)
 {
 	height = parseInt(height);
@@ -233,7 +233,7 @@ function DHTMLcartSetHeight(height)
 	this.holdFunc = setTimeout("DHTMLcartHoldPosition('"+this.id+"')", 1);
 };
 
-// Замена документа, содержащегося в DHTMLcart
+// Р—Р°РјРµРЅР° РґРѕРєСѓРјРµРЅС‚Р°, СЃРѕРґРµСЂР¶Р°С‰РµРіРѕСЃСЏ РІ DHTMLcart
 function DHTMLcartSetSrc(src)
 {
     if(this.src != src)
@@ -247,7 +247,7 @@ function DHTMLcartSetSrc(src)
     return true;
 };
 
-// Изменение видимости
+// РР·РјРµРЅРµРЅРёРµ РІРёРґРёРјРѕСЃС‚Рё
 function DHTMLcartSetVisibility(vis)
 {
     if(vis)
@@ -264,7 +264,7 @@ function DHTMLcartSetVisibility(vis)
     }
 };
 
-//конструктор
+//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 function DHTMLcart(definition)
 {
     var HTMLstr;
