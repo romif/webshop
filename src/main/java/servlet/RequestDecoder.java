@@ -177,7 +177,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 							item=fileItem;
 						}
 						else {
-							phone.put(fileItem.getFieldName(), fileItem.getString());	
+							phone.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));	
 						}	
 					}
 					String fileName = new File(item.getName()).getName();

@@ -109,7 +109,7 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 			<div class="itemBlockCont">
 				<div class="iconItem">
 					<a title="<%=((Phone)phones.get(i*2+1)).get("textProperty1")%>" href="/24/1001/">
-						<img alt="<%=((Phone)phones.get(i*2+1)).get("textProperty1")%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2)).getId()%>">
+						<img alt="<%=((Phone)phones.get(i*2+1)).get("textProperty1")%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2+1)).getId()%>">
 					</a>
 				</div>
 				<div class="desc"><%=((Phone)phones.get(i*2+1)).get("TextArea1")%><br><br>
