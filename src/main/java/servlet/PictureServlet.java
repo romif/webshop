@@ -31,9 +31,9 @@ public class PictureServlet extends HttpServlet {
 		  System.out.println(
 		  pictures.listFiles(new FilenameFilter(){
 			public boolean accept(File directory, String fileName) {
-				if (fileName.contains("30"))
-				return true;
-				return false;
+				int pintPosition = fileName.lastIndexOf(".");
+				if ((pintPosition>0)&&(fileName.substring(0, pintPosition).equals("30")))
+				return true; else return false;
 			}  
 		  })[0].getName());
 		  InputStream is =new BufferedInputStream(new FileInputStream(picture));
