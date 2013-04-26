@@ -6,7 +6,7 @@
 	
 	<body onLoad="javascript:document.getElementById('preload').style.display='none'" >
 		<div id="main">
-		<div id="preload"><img src="${pageContext.request.contextPath}/pics/ajax-loader.gif"/></div>
+			<div id="preload"><img src="${pageContext.request.contextPath}/pics/ajax-loader.gif"/></div>
 			<div id="header">
 				<template:get name='header'/>
 			</div>

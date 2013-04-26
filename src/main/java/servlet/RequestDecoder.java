@@ -2,15 +2,11 @@ package servlet;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import java.util.Map.Entry;
 import java.util.Random;
 
@@ -23,6 +19,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import util.GoogleMail;
 import util.MD5;
@@ -146,11 +143,45 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				page="/jsp/Index.jsp";
 			}
 			else if (request.getParameter("mode").equals("edit")){
-				 page="/jsp/Edit.jsp";
+				if (request.getParameter("manufacture")!=null){
+					JSONObject array=new JSONObject();
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					if (MainServlet.loggedUsers.get(request.getSession().getId())!=null){
+						Map<Integer,String> map=
+								SqlManager.GetTitles(request.getParameter("manufacture"));
+						for (Entry entry:map.entrySet()){
+							array.put(entry.getKey(),entry.getValue());
+						}
+					}
+					else array.put(0,"error");
+					out.print(array);
+					out.flush();
+					out.close();
+					return null;
+				}
+				if (request.getParameter("phoneId")!=null){
+					JSONObject array=new JSONObject();
+					if (MainServlet.loggedUsers.get(request.getSession().getId())!=null){
+						Phone phone=
+								SqlManager.GetPhone(Integer.parseInt(request.getParameter("phoneId")));
+						array.putAll(phone);
+					}
+					else array.put(0,"error");
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print(array);
+					out.flush();
+					out.close();
+					return null;
+				}
+				if (MainServlet.loggedUsers.get(request.getSession().getId())!=null)
+					page="/jsp/Edit.jsp";
+				else page="/jsp/Index.jsp";
 			}
 			else if (request.getParameter("mode").equals("Apple")){
 				page="/jsp/Apple.jsp";
-				//page="/jsp/Edit.jsp";
+				page="/jsp/Edit.jsp";
 			}
 		}
 		
@@ -173,7 +204,8 @@ public class RequestDecoder<MultipartRequestWrapper> {
 						item=fileItem;
 					}
 					else {
-						phone.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));	
+						if (!fileItem.getFieldName().equals("mode"))
+							phone.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));	
 					}	
 				}
 				String fileName = new File(item.getName()).getName();

@@ -66,7 +66,8 @@ function loadAjaxContent (content, place) {
 
 /* Авторизация пользователя через блок входа */
 function shopLogin() {
-	document.getElementById('preload').style.display='inline';
+	
+	//document.getElementById('preload').style.display='inline';
 	$('<div id="loading"></div>').appendTo($('.newLine'));
 	$.post('/index', {
 		mode : $('#log_mode').val(),

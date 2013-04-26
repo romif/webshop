@@ -4,6 +4,7 @@
 <%@ page import="util.*"%>
 <%@ page import="util.sql.*"%>
 
+
 <ul id="sectionsTree">
 	<li class="firstSectionTree">
 		<a href="/" alt="Главная">Главная</a>&nbsp;»&nbsp;
@@ -17,14 +18,59 @@
 		<h3 class="itemPage">Phone Editor</h3>
 		<div style="clear:both;"></div>
 		
+		<h3>Выберите действие:</h3>
+		<table><tbody>
+			<tr>
+				<td><div>Добавить новый телефон </div></td>
+				<td><input name="Radio1" type="radio" align="right" 
+				onclick="javascript:document.getElementById('selectPhone').style.visibility='hidden';javascript:document.getElementById('editTable').style.visibility='visible';"/></td>
+			</tr>
+			<tr>
+				<td><div>Редактировать телефон </div></td>
+				<td><input name="Radio1" type="radio" 
+				onclick="javascript:document.getElementById('selectPhone').style.visibility='visible';javascript:document.getElementById('editTable').style.visibility='hidden';"/></td>
+			</tr>
+		</tbody></table>
+		
+		<table id="selectPhone"  style="visibility:hidden"><tbody>
+			<tr>
+				<td>
+					<select name="Select1"  onchange="javascript:getTitles(this.options[this.selectedIndex].value);">
+						<option style="display:none"></option>
+						<option>Apple</option>
+						<option>Fly</option>
+					</select>
+				</td>
+				<td>
+					<select id="phonesTitles" name="Select2" disabled="disabled"
+					onchange="javascript:getPhone(this.options[this.selectedIndex].value)">
+						<option style="display:none"></option>
+					</select>
+				</td>
+			</tr>
+		</tbody></table>
+		
+		
 		<div class="descBig">
-			<table width="100%" cellspacing="0" cellpadding="0" border="0">
+			<table id='editTable' style="visibility:hidden" width="100%" cellspacing="0" cellpadding="0" border="0" >
 				<tbody>
 					<tr>
 						<td width="100%" valign="top">
 							<table width="100%" cellspacing="0" cellpadding="0" border="0">
 								<tbody>  
-									<tr><td><div>Фото</div></td><td><input name="F1" size="20" type="file" required = "required" accept ="image/*"/></td></tr>
+								
+									
+									
+									<tr> 
+										<td><div>Фото</div></td>
+										<td id='picture'>
+											<table><tbody>
+											<tr>
+												<input name="F1" size="20" type="file" required = "required" accept ="image/*"/>
+											</tr>
+											</tbody></table>
+										</td>
+									</tr>
 								    <tr><td><div>Производитель</div></td><td><input type="text" name="textProperty0" value="input"></td></tr>
 									<tr><td><div>Название</div></td><td><input type="text" name="textProperty1" value="input"></td></tr>
 									<tr><td><div>Краткое описание</div></td><td><textarea cols="20" name="TextArea1" style="height: 85px">input</textarea></td></tr>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,11 +18,16 @@ import util.Phone;
 import util.User;
 
 public final class SqlManager {
-	/*private static SqlManager instance=null;
-	public static SqlManager getInstance(){
-		if (instance==null) instance=new SqlManager();
-		return instance;
-	}*/
+	
+	private final static String driver="org.gjt.mm.mysql.Driver";
+	private final static String url = String.format("jdbc:mysql://%s:%s/",
+			System.getenv("OPENSHIFT_MYSQL_DB_HOST"),
+			System.getenv("OPENSHIFT_MYSQL_DB_PORT"));
+	private final static String userName=System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
+	private final static String password=System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
+	private final static String DBName=System.getenv("OPENSHIFT_GEAR_NAME")+
+			"?useUnicode=true&characterEncoding=UTF-8";
+
 	
 	private SqlManager(){};
 	
@@ -31,9 +37,8 @@ public final class SqlManager {
 		ResultSet rs = null; 
 		boolean bool=false;
 		try {
-			Class.forName(MainServlet.DBConfig[0]); 
-			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
-					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT * FROM users_pass "
 					+"WHERE user_name='"+login+"'");
@@ -72,9 +77,8 @@ public final class SqlManager {
 		ResultSet rs1 = null; 
 		boolean bool=false;
 		try {
-			Class.forName(MainServlet.DBConfig[0]); 
-			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
-					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT userid FROM users_pass "
 					+"WHERE user_name='"+user.getLogin()+"'");
@@ -123,9 +127,8 @@ public final class SqlManager {
 		ResultSet rs = null; 
 		User user=null;
 		try {
-			Class.forName(MainServlet.DBConfig[0]); 
-			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
-					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT * FROM users_pass "
 					+"WHERE user_name='"+login+"'");
@@ -173,9 +176,8 @@ public final class SqlManager {
 		User user=null;
 		String login=MainServlet.loggedUsers.get(user_id).getLogin();
 		try {
-			Class.forName(MainServlet.DBConfig[0]); 
-			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
-					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password);  
 			st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT users_pass.user_name, users_info.name, users_info.surname,users_info.patronymic," +
 					" users_info.tel, users_info.e_mail " +
@@ -216,9 +218,8 @@ public final class SqlManager {
 		ResultSet rs = null; 
 		boolean bool=false;
 		try {
-			Class.forName(MainServlet.DBConfig[0]); 
-			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
-					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT * FROM users_pass "
 					+"WHERE user_name='"+login+"'");
@@ -251,9 +252,8 @@ public final class SqlManager {
 		ResultSet rs = null; 
 		boolean bool=false;
 		try {
-			Class.forName(MainServlet.DBConfig[0]); 
-			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
-					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT * FROM users_pass "
 					+"WHERE user_name='"+login+"'");
@@ -288,9 +288,8 @@ public final class SqlManager {
 		ResultSet rs = null; 
 		int id=-1;
 		try {
-			Class.forName(MainServlet.DBConfig[0]); 
-			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
-					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			st = cn.createStatement(); 
 			String FullDescription="";
 			for (Map.Entry<String, String> entry:phone.entrySet()){
@@ -330,14 +329,11 @@ public final class SqlManager {
 	public static List<Phone> GetPhones(String manufacture){
 		Connection cn = null;
 		Statement st = null; 
-		Statement st1 = null; 
 		ResultSet rs = null; 
-		ResultSet rs1 = null; 
 		List<Phone> phones=new ArrayList<Phone>();
 		try {
-			Class.forName(MainServlet.DBConfig[0]); 
-			cn = DriverManager.getConnection(MainServlet.DBConfig[1]+MainServlet.DBConfig[4], 
-					MainServlet.DBConfig[2], MainServlet.DBConfig[3]); 
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password);  
 			st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT * FROM Phone_IDs,Phones "
 					+"WHERE (Phone_IDs.PhoneMan='"+manufacture+"')AND(Phone_IDs.PhoneID=Phones.PhoneID)"); 
@@ -360,9 +356,7 @@ public final class SqlManager {
 		finally {
 			try{
 				if (rs != null) rs.close(); 
-				if (rs1 != null) rs1.close(); 
 				if (st != null) st.close(); 
-				if (st1 != null) st1.close(); 
 				if (cn != null) cn.close(); 
 			}
 			catch (SQLException ex) {            
@@ -372,9 +366,87 @@ public final class SqlManager {
 		return phones;
 	}
 	
+	private ResultSet SQLQuery(String query){
+		return null;
+	}
+	
+	public static Map<Integer,String> GetTitles(String manufacture){
+		Connection cn = null;
+		Statement st = null; 
+		ResultSet rs = null; 
+		Map<Integer,String> map=new HashMap<Integer,String>();
+		try {
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
+			st = cn.createStatement(); 
+			rs = st.executeQuery("SELECT Phones.PhoneID,Phones.Title FROM Phone_IDs,Phones "
+					+"WHERE (Phone_IDs.PhoneMan='"+manufacture+"')" +
+							"AND(Phone_IDs.PhoneID=Phones.PhoneID)"); 
+			while (rs.next()){
+				map.put(rs.getInt("Phones.PhoneID"), rs.getString("Phones.Title"));
+			}
+		}
+		catch (SQLException ex) {            
+            System.out.println(ex.toString());
+        } 
+		catch (ClassNotFoundException ex) {            
+            System.out.println(ex.toString());
+        } 
+		finally {
+			try{
+				if (rs != null) rs.close(); 
+				if (st != null) st.close(); 
+				if (cn != null) cn.close(); 
+			}
+			catch (SQLException ex) {            
+	            System.out.println(ex.toString());
+	        }
+		} 
+		return map;
+	}
+	
+	public static Phone GetPhone(int phoneId){
+		Connection cn = null;
+		Statement st = null; 
+		ResultSet rs = null; 
+		Phone phone=new Phone();
+		try {
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
+			st = cn.createStatement(); 
+			rs = st.executeQuery("SELECT PhoneID,FullDescription FROM Phones "
+					+"WHERE PhoneID='"+phoneId+"'"); 
+			if (rs.next()){
+				String[] FullDiscription=rs.getString("FullDescription").split(";");
+				for (int i=0;i<FullDiscription.length-1;i+=2){
+					phone.put(FullDiscription[i], FullDiscription[i+1]);
+				}
+				phone.setId(rs.getInt("PhoneID"));
+			}
+		}
+		catch (SQLException ex) {            
+            System.out.println(ex.toString());
+        } 
+		catch (ClassNotFoundException ex) {            
+            System.out.println(ex.toString());
+        } 
+		finally {
+			try{
+				if (rs != null) rs.close(); 
+				if (st != null) st.close(); 
+				if (cn != null) cn.close(); 
+			}
+			catch (SQLException ex) {            
+	            System.out.println(ex.toString());
+	        }
+		} 
+		return phone;
+	}
+	
+	
 	public static void main(String[] args){
 		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
-		System.out.print(SqlManager.GetPhones("Apple"));
+		System.out.print(SqlManager.GetPhone(31));
 
 	}
 

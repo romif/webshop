@@ -1,19 +1,19 @@
 function find_form(id) {	
 	var find_form	=	$('#f'+id);
 	
-	var main_course	=	find_form.find('#main_course').val(); 	//курс основной валюты
-	var course		=	find_form.find('#course').val();		//курс первой валюты
+	var main_course	=	find_form.find('#main_course').val(); 	//РєСѓСЂСЃ РѕСЃРЅРѕРІРЅРѕР№ РІР°Р»СЋС‚С‹
+	var course		=	find_form.find('#course').val();		//РєСѓСЂСЃ РїРµСЂРІРѕР№ РІР°Р»СЋС‚С‹
 	
-	var error 		=	[]; 									//сообщения об ошибках
+	var error 		=	[]; 									//СЃРѕРѕР±С‰РµРЅРёСЏ РѕР± РѕС€РёР±РєР°С…
 	
-	//Переводим в оснавную валюту
+	//РџРµСЂРµРІРѕРґРёРј РІ РѕСЃРЅР°РІРЅСѓСЋ РІР°Р»СЋС‚Сѓ
 	var checkBefore = find_form.find('#price_before_new').val();
 	var checkAfter = find_form.find('#price_after_new').val();
-	//проверка на число
+	//РїСЂРѕРІРµСЂРєР° РЅР° С‡РёСЃР»Рѕ
 	if ((!checkBefore.match(/^[0-9\,\.\(\)]*$/))||(!checkAfter.match(/^[0-9\,\.\(\)]*$/))) {
 		error.push(0);
 	}
-	//проверка на "," и замена
+	//РїСЂРѕРІРµСЂРєР° РЅР° "," Рё Р·Р°РјРµРЅР°
 	if (checkBefore.indexOf(',')!=-1) {
 		checkBefore = checkBefore.replace(",",".");
 		find_form.find('#price_before_new').val(checkBefore);
@@ -22,16 +22,16 @@ function find_form(id) {
 		checkAfter=checkAfter.replace(",",".");
 		find_form.find('#price_after_new').val(checkAfter);
 	}
-	//поля из базы
+	//РїРѕР»СЏ РёР· Р±Р°Р·С‹
 	for (var i=0;i<find_form.find('.minNumber').length;i++) {
-		//проверка полей из базы на ',' и замена
+		//РїСЂРѕРІРµСЂРєР° РїРѕР»РµР№ РёР· Р±Р°Р·С‹ РЅР° ',' Рё Р·Р°РјРµРЅР°
 		if (find_form.find('.minNumber')[i].value.indexOf(',')!=-1) {
 			find_form.find('.minNumber')[i].value = find_form.find('.minNumber')[i].value.replace(",",".");			
 		}
 		if (find_form.find('.maxNumber')[i].value.indexOf(',')!=-1) {
 			find_form.find('.maxNumber')[i].value = find_form.find('.maxNumber')[i].value.replace(",",".");
 		}
-		//проверка полей из базы на число
+		//РїСЂРѕРІРµСЂРєР° РїРѕР»РµР№ РёР· Р±Р°Р·С‹ РЅР° С‡РёСЃР»Рѕ
 		if (!find_form.find('.maxNumber')[i].value.match(/^[0-9\,\.\(\)]*$/)||!find_form.find('.minNumber')[i].value.match(/^[0-9\,\.\(\)]*$/)) {
 			error.push(i+2);
 		}
@@ -55,14 +55,14 @@ function find_form(id) {
 		$('#f'+id).submit();	
 	} else {
 	
-		//выводим ошибки
+		//РІС‹РІРѕРґРёРј РѕС€РёР±РєРё
 		if (typeof(console)=='object') {
 			
 			console.group ("find error");
-			console.log ('Неправильно заполнены поля поиска.');
+			console.log ('РќРµРїСЂР°РІРёР»СЊРЅРѕ Р·Р°РїРѕР»РЅРµРЅС‹ РїРѕР»СЏ РїРѕРёСЃРєР°.');
 			console.groupEnd();			
 		}
-		alert('Неправильно заполнены поля поиска.');
+		alert('РќРµРїСЂР°РІРёР»СЊРЅРѕ Р·Р°РїРѕР»РЅРµРЅС‹ РїРѕР»СЏ РїРѕРёСЃРєР°.');
 	}	
 	return false;
 }
@@ -103,3 +103,64 @@ function CheckFind()
 		return false;
 	return true;
 }
+
+
+function getTitles(phoneMan) {
+	var select = document.getElementById('phonesTitles');
+	document.getElementById('editTable').style.visibility='hidden';
+	select.options.length = 0;
+	select.options[select.options.length] = new Option();
+	select.options[0].style.display='none';
+	document.getElementById('preload').style.display='block';
+	var d = {
+			'mode'			: 'edit',
+			'manufacture'		: phoneMan	
+		};
+	$.getJSON('/index', d, function(data) {
+		$.each(data, function(key, val) {
+			if ((key==0)&&(val=='error')) {
+				document.location = '/index';
+				return false;
+			}
+			select.options[select.options.length] = new Option(val, key);
+		  });
+		select.disabled=false;
+		document.getElementById('preload').style.display='none';
+
+    });
+	return false;		
+}
+
+function getPhone(phoneId) {
+	document.getElementById('preload').style.display='block';
+	var d = {
+			'mode'			: 'edit',
+			'phoneId'		: phoneId	
+		};
+	$.getJSON('/index', d, function(data) {
+		$.each(data, function(key, val) {
+			if ((key==0)&&(val=='error')) {
+				document.location = '/index';
+				return false;
+			}
+			document.getElementsByName(key)[0].value=val;
+		  });
+
+		document.getElementById('preload').style.display='none';
+		document.getElementById('editTable').style.visibility='visible';
+		var img = document.createElement('img');
+		img.src = 'http://tomcat7-romif.rhcloud.com/picture?pic='+phoneId;
+		document.getElementById('picture').appendChild(img);
+		//document.getElementById('picture').innerHTML = "<img src='http://tomcat7-romif.rhcloud.com/picture?pic="+phoneId+"/>";
+		
+
+    });
+	return false;		
+}
+
+
+
+
+
+
+

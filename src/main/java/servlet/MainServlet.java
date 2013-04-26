@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 
 import org.jdom.JDOMException;
 
-import util.DBConfigurator;
 import util.User;
 
 
@@ -58,7 +57,6 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (DBConfig==null)	DBConfig=DBConfigurator.getConfig();
 
 		HttpSession session=request.getSession();
 		String user_id=(String)session.getAttribute("user_id");

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="Windows-1251"%>
 
 <h3>Авторизация</h3>
-		<form name="login" id="loginF" onsubmit="shopLogin(); return false">
+		<form name="login" id="loginF" 
+		onsubmit="javascript:document.getElementById('preload').style.display='block';shopLogin(); return false">
 			<input type="hidden" name="mode" id="log_mode" value="login">
 			<input type="hidden" name="type" id="log_type" value="email_password">
 			<p class="posRelative">
