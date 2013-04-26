@@ -82,7 +82,7 @@ function shopLogin() {
 	document.getElementById('preload').style.display='none';
 	
 	var row = document.getElementById('topMenuRow');
-	var cell=row.insertCell();
+	var cell=row.insertCell(-1);
 	cell.innerHTML="<a href='/index?mode=edit' alt='Редактор товаров'>Редактор</a>";
 	
 }
