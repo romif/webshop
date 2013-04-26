@@ -9,14 +9,15 @@ public class Phone extends HashMap<String,String>{
 	String[] textProperties;
 	byte[] checkboxes;
 	String description;
-	int id;
+	Integer id;
 	
 	public void setId(int id){
 		this.id=id;
 	}
 	
-	public int getId(){
-		return id;
+	public Integer getId(){
+		if (id==0)return null;
+		else return id;
 	}
 	
 	

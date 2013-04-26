@@ -188,6 +188,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 		
 		if (ServletFileUpload.isMultipartContent(request)){
 			Phone phone=new Phone();
+			int phoneId=0;
 			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 			fileItemFactory.setRepository(new File(System.getenv("OPENSHIFT_TMP_DIR")));
 			String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
@@ -204,14 +205,23 @@ public class RequestDecoder<MultipartRequestWrapper> {
 						item=fileItem;
 					}
 					else {
-						if (!fileItem.getFieldName().equals("mode"))
-							phone.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));	
+						if (fileItem.getFieldName().equals("phoneId"))
+							phone.setId(Integer.parseInt(fileItem.getString()));
+						else
+							if (!fileItem.getFieldName().equals("mode"))
+								phone.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));	
 					}	
 				}
 				String fileName = new File(item.getName()).getName();
 				int pintPosition = fileName.lastIndexOf(".");  
 				String mimeType = fileName.substring(pintPosition, fileName.length());
-				int id=SqlManager.AddPhone(phone);
+				
+				if (phoneId==0){
+					int id=SqlManager.AddPhone(phone);		
+				}
+				else{
+					SqlManager.UpdatePhone(phone)
+				}
 				String filePath = uploadStorage + File.separator + id+mimeType;
 				File uploadedFile = new File(filePath); 
 				item.write(uploadedFile);
