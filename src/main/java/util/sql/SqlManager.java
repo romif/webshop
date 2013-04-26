@@ -366,9 +366,6 @@ public final class SqlManager {
 		return phones;
 	}
 	
-	private ResultSet SQLQuery(String query){
-		return null;
-	}
 	
 	public static Map<Integer,String> GetTitles(String manufacture){
 		Connection cn = null;
@@ -443,6 +440,45 @@ public final class SqlManager {
 		return phone; 
 	}
 	
+	public static void UpdatePhone(Phone phone){
+		Connection cn = null;
+		Statement st = null; 
+		ResultSet rs = null; 
+		Map<Integer,String> map=new HashMap<Integer,String>();
+		try {
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
+			st = cn.createStatement(); 
+			String FullDescription="";
+			for (Map.Entry<String, String> entry:phone.entrySet()){
+				FullDescription+=entry.getKey()+";"+entry.getValue()+";";
+			}
+			
+			st.executeUpdate("UPDATE Phones " +
+					"SET Title='"+phone.get("textProperty1")+"', " +
+						"Description='"+phone.get("TextArea1")+"', " +
+						"FirstPrice='"+Integer.parseInt(phone.get("firstPrice"))+"', " +
+						"SecondPrice='"+Integer.parseInt(phone.get("secondPrice"))+"', " +
+						"FullDescription='"+FullDescription+"' "+
+						"WHERE PhoneID='"+phone.getId()+"'");
+		}
+		catch (SQLException ex) {            
+            System.out.println(ex.toString());
+        } 
+		catch (ClassNotFoundException ex) {            
+            System.out.println(ex.toString());
+        } 
+		finally {
+			try{
+				if (rs != null) rs.close(); 
+				if (st != null) st.close(); 
+				if (cn != null) cn.close(); 
+			}
+			catch (SQLException ex) {            
+	            System.out.println(ex.toString());
+	        }
+		} 
+	}
 	
 	public static void main(String[] args){
 		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));

@@ -212,19 +212,25 @@ public class RequestDecoder<MultipartRequestWrapper> {
 								phone.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));	
 					}	
 				}
-				String fileName = new File(item.getName()).getName();
-				int pintPosition = fileName.lastIndexOf(".");  
-				String mimeType = fileName.substring(pintPosition, fileName.length());
 				
-				if (phoneId==0){
-					int id=SqlManager.AddPhone(phone);		
+				
+				if (phone.getId()==null){
+					int id=SqlManager.AddPhone(phone);	
+					phone.setId(id);
 				}
 				else{
-					SqlManager.UpdatePhone(phone)
+					SqlManager.UpdatePhone(phone);
 				}
-				String filePath = uploadStorage + File.separator + id+mimeType;
-				File uploadedFile = new File(filePath); 
-				item.write(uploadedFile);
+				if (item!=null){
+					String fileName = new File(item.getName()).getName();
+					int pintPosition = fileName.lastIndexOf(".");  
+					String mimeType = fileName.substring(pintPosition, fileName.length());
+					String filePath = uploadStorage + File.separator + phone.getId()+mimeType;
+					File uploadedFile = new File(filePath); 
+					item.write(uploadedFile);
+				}
+				
+				
 			} catch (FileUploadException e) {
 				System.out.println(e);
 			} catch (Exception e) {
