@@ -80,6 +80,11 @@ function shopLogin() {
 		}
 	)
 	document.getElementById('preload').style.display='none';
+	
+	var row = document.getElementById('topMenuRow');
+	var cell=row.insertCell();
+	cell.innerHTML="<a href='/index?mode=edit' alt='Редактор товаров'>Редактор</a>";
+	
 }
 
 /* функции показывающие label для полей ввода в форме авторизации */

@@ -62,7 +62,8 @@
 										<td><div>Фото</div></td>
 										<td >
 											<div id='picture'></div>
-											<input name="F1" size="20" type="file" required = "required" accept ="image/*" value='fff'>qqqq</input>
+											<div>Изменить фото:</div>
+											<input name="F1" size="20" type="file" required = "required" accept ="image/*"></input>
 										</td>
 									</tr>
 								    <tr><td><div>Производитель</div></td><td><input type="text" name="textProperty0" value="input"></td></tr>

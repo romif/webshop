@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="Windows-1251"%>
 <%@ page import="servlet.*"%>
-<table><tbody><tr>
+<table><tbody><tr id="topMenuRow">
 <td><a href="${pageContext.request.contextPath}/index" class=main alt="Главная">Главная</a></td>
 <td><a href="${pageContext.request.contextPath}/index" alt="Корзина">Корзина</a></td>
 <td><a href="${pageContext.request.contextPath}/index" alt="О магазине">О магазине</a></td>
