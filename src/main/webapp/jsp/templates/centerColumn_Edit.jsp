@@ -52,7 +52,7 @@
 		
 		
 		<div class="descBig">
-			<table id='editTable' style="visibility:hidden" width="100%" cellspacing="0" cellpadding="0" border="0" >
+			<table id='editTable' style="visibility:visible" width="100%" cellspacing="0" cellpadding="0" border="0" >
 				<tbody>
 					<tr>
 						<td width="100%" valign="top">
@@ -63,9 +63,11 @@
 									
 									<tr> 
 										<td><div>Фото</div></td>
-										<td id='picture'>
+										<td >
 											<table><tbody>
+											<tr id='picture'></tr>
 											<tr>
+												
 												<input name="F1" size="20" type="file" required = "required" accept ="image/*"/>
 											</tr>
 											</tbody></table>
