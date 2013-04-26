@@ -147,10 +147,11 @@ function getPhone(phoneId) {
 		  });
 
 		document.getElementById('preload').style.display='none';
-		document.getElementById('editTable').style.visibility='visible';
+		
 		var img = document.createElement('img');
 		img.src = 'http://tomcat7-romif.rhcloud.com/picture?pic='+phoneId;
 		document.getElementById('picture').appendChild(img);
+		document.getElementById('editTable').style.visibility='visible';
 		//document.getElementById('picture').innerHTML = "<img src='http://tomcat7-romif.rhcloud.com/picture?pic="+phoneId+"/>";
 		
 
