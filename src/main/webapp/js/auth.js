@@ -66,7 +66,7 @@ function loadAjaxContent (content, place) {
 
 /* Авторизация пользователя через блок входа */
 function shopLogin() {
-	
+	document.getElementById('preload').style.display='block';
 	//document.getElementById('preload').style.display='inline';
 	$('<div id="loading"></div>').appendTo($('.newLine'));
 	$.post('/index', {
@@ -77,13 +77,13 @@ function shopLogin() {
 		},
 		function(data) {
 			$('#loginPlace').html(data);
+			document.getElementById('preload').style.display='none';
+			var row = document.getElementById('topMenuRow');
+			var cell=row.insertCell(-1);
+			cell.innerHTML="<a href='/index?mode=edit' alt='Редактор товаров'>Редактор</a>";
 		}
 	)
-	document.getElementById('preload').style.display='none';
 	
-	var row = document.getElementById('topMenuRow');
-	var cell=row.insertCell(-1);
-	cell.innerHTML="<a href='/index?mode=edit' alt='Редактор товаров'>Редактор</a>";
 	
 }
 
