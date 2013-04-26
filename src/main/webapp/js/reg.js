@@ -181,6 +181,15 @@ function phoneEdit() {
 			$('#'+idName+'_error').hide();
 		}
 	}
+	//var qq=document.getElementById('editPhoneRadio');
+	if (document.getElementById('editPhoneRadio').checked){
+	var select = document.createElement("phonesTitles");
+	var phoneId=select.options[select.selectedIndex].value;
+	var element = document.createElement("input");
+	element.setAttribute("type", "hidden");
+	element.setAttribute("name", "phoneId");
+    element.setAttribute("value", phoneId);
+    document.getElementById('phoneEditForm').appendChild(element);}
 	return true;
 }
 

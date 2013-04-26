@@ -11,7 +11,7 @@
 	</li>
 	<li>Phone Editor</li>
 </ul>
-<form name="login" action="index" method="post" enctype="multipart/form-data">
+<form id="phoneEditForm" name="login" action="index" method="post" enctype="multipart/form-data">
 <input type="hidden" name="mode" value="edit"/>
 <div class="itemsRow">
 	<div class="itemBlock">
@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<td><div>Редактировать телефон </div></td>
-				<td><input name="Radio1" type="radio" 
+				<td><input id="editPhoneRadio" name="Radio1" type="radio" 
 				onclick="javascript:document.getElementById('selectPhone').style.visibility='visible';javascript:document.getElementById('editTable').style.visibility='hidden';"/></td>
 			</tr>
 		</tbody></table>
@@ -206,7 +206,9 @@
 			<p>&nbsp;</p>
 			<!-- <input name="Button1" type="submit" value="Создать" />-->
 			<input type="submit" class="hiddenc" id="regBut" value="Добавить">
-			<a href="${pageContext.request.contextPath}/index?mode=edit#" onclick="if (phoneEdit()) {document.getElementById('regBut').click();};return false" title="Добавить телефон">Добавить</a>
+			<a href="${pageContext.request.contextPath}/index?mode=edit#" 
+			onclick="if (phoneEdit()) {document.getElementById('regBut').click();};return false" 
+			title="Добавить телефон">Добавить</a>
 								
 			
 			<p class="reviLinks"></p>
