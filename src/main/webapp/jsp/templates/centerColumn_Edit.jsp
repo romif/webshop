@@ -58,19 +58,11 @@
 						<td width="100%" valign="top">
 							<table width="100%" cellspacing="0" cellpadding="0" border="0">
 								<tbody>  
-								
-									
-									
 									<tr> 
 										<td><div>Фото</div></td>
 										<td >
-											<table><tbody>
-											<tr id='picture'></tr>
-											<tr>
-												
-												<input name="F1" size="20" type="file" required = "required" accept ="image/*"/>
-											</tr>
-											</tbody></table>
+											<div id='picture'></div>
+											<input name="F1" size="20" type="file" required = "required" accept ="image/*" value='fff'>qqqq</input>
 										</td>
 									</tr>
 								    <tr><td><div>Производитель</div></td><td><input type="text" name="textProperty0" value="input"></td></tr>
