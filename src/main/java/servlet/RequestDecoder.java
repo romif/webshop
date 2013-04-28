@@ -190,7 +190,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 			Phone phone=new Phone();
 			int phoneId=0;
 			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
-			fileItemFactory.setRepository(new File(System.getenv("OPENSHIFT_TMP_DIR")));
+			fileItemFactory.setRepository(new File(System.getenv("TMP")));
 			String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
 			File storageDir = new File(uploadStorage);
 			if (!storageDir.isDirectory()) storageDir.mkdir();
