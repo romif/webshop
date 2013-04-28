@@ -11,15 +11,13 @@
 	</li>
 	<li>Phone Editor</li>
 </ul>
-<form id="phoneEditForm" name="login" action="index" method="post" enctype="multipart/form-data">
-<input type="hidden" name="mode" value="edit"/>
-<div class="itemsRow">
-	<div class="itemBlock">
-		<h3 class="itemPage">Phone Editor</h3>
-		<div style="clear:both;"></div>
-		
-		<h3>Выберите действие:</h3>
-		<table><tbody>
+
+<div class="itemBlock">
+<h3 class="itemPage">Phone Editor</h3>
+<h3>Выберите действие:</h3>
+</div>
+
+<table><tbody>
 			<tr>
 				<td><div>Добавить новый телефон </div></td>
 				<td><input name="Radio1" type="radio" align="right" 
@@ -28,10 +26,12 @@
 			<tr>
 				<td><div>Редактировать телефон </div></td>
 				<td><input id="editPhoneRadio" name="Radio1" type="radio" 
-				onclick="javascript:document.getElementById('selectPhone').style.visibility='visible';javascript:document.getElementById('editTable').style.visibility='hidden';"/></td>
+				onclick="javascript:editPhoneRadio();"/></td>
 			</tr>
-		</tbody></table>
+</tbody></table>		
 		
+<form id="phoneSelectionForm" name="phoneSelectionForm" action="index" method="post">
+<input type="hidden" name="mode" value="edit"/>
 		<table id="selectPhone"  style="visibility:hidden"><tbody>
 			<tr>
 				<td>
@@ -48,7 +48,23 @@
 					</select>
 				</td>
 			</tr>
+			<tr>
+				<input type="submit" class="hiddenc" id="regBut" value="Удалить"/>
+				<a href="/index?mode=edit#" 
+				onclick="document.getElementById('regBut').click();return false" 
+				title="Добавить телефон">Удалить</a>
+			</tr>
 		</tbody></table>
+</form>
+
+<form id="phoneEditForm" name="login" action="index" method="post" enctype="multipart/form-data">
+<input type="hidden" name="mode" value="edit"/>
+<div class="itemsRow">
+	<div class="itemBlock">
+		
+		<div style="clear:both;"></div>
+		
+		
 		
 		
 		<div class="descBig">

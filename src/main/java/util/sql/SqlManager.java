@@ -480,6 +480,41 @@ public final class SqlManager {
 		} 
 	}
 	
+	public static boolean DeletePhone(int phoneId){
+		Connection cn = null;
+		Statement st = null; 
+		ResultSet rs = null; 
+		boolean bool=false;
+		try {
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
+			st = cn.createStatement(); 
+			st.executeUpdate("DELETE FROM Phones "
+					+"WHERE PhoneID='"+phoneId+"'"); 
+			st.executeUpdate("DELETE FROM Phone_IDs "
+					+"WHERE PhoneID='"+phoneId+"'"); 
+			bool=true;
+			
+		}
+		catch (SQLException ex) {            
+            System.out.println(ex.toString());
+        } 
+		catch (ClassNotFoundException ex) {            
+            System.out.println(ex.toString());
+        } 
+		finally {
+			try{
+				if (rs != null) rs.close(); 
+				if (st != null) st.close(); 
+				if (cn != null) cn.close(); 
+			}
+			catch (SQLException ex) {            
+	            System.out.println(ex.toString());
+	        }
+		} 
+		return bool; 
+	}
+	
 	public static void main(String[] args){
 		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
 		System.out.print(SqlManager.GetPhone(31));

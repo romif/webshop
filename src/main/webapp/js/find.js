@@ -163,6 +163,24 @@ function getPhone(phoneId) {
 }
 
 
+function editPhoneRadio(){
+	if (document.getElementById('phonesTitles').selectedIndex==0)
+		document.getElementById('editTable').style.visibility='hidden';
+	document.getElementById('selectPhone').style.visibility='visible';
+	return false;
+}
+
+function deletePhone(){
+	var select = document.getElementById("phonesTitles");
+	var phoneId=select.options[select.selectedIndex].value;
+	var element = document.createElement("input");
+	element.setAttribute("type", "hidden");
+	element.setAttribute("name", "deletePhone");
+	element.setAttribute("value", phoneId);
+	document.getElementById('phoneSelectionForm').appendChild(element);
+}
+
+
 
 
 

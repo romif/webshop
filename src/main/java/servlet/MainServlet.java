@@ -38,6 +38,8 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 		try {
 			System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(
 					System.getenv("OPENSHIFT_DATA_DIR") + "Logs")),true));
+			System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream(
+					System.getenv("OPENSHIFT_DATA_DIR") + "Logs")),true));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

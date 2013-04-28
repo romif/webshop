@@ -175,6 +175,13 @@ public class RequestDecoder<MultipartRequestWrapper> {
 					out.close();
 					return null;
 				}
+				if (request.getParameter("deletePhone")!=null){
+					if (MainServlet.loggedUsers.get(request.getSession().getId())!=null){
+						SqlManager.DeletePhone(Integer.parseInt(request.getParameter("deletePhone")));
+					}
+					return "/jsp/Index.jsp";
+				}
+				
 				if (MainServlet.loggedUsers.get(request.getSession().getId())!=null)
 					page="/jsp/Edit.jsp";
 				else page="/jsp/Index.jsp";
@@ -232,9 +239,9 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				
 				
 			} catch (FileUploadException e) {
-				System.out.println(e);
+				e.printStackTrace();
 			} catch (Exception e) {
-				System.out.println(e);
+				e.printStackTrace();
 			}
 
 			page="/jsp/Index.jsp";
