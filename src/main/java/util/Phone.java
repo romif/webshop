@@ -9,7 +9,7 @@ public class Phone extends HashMap<String,String>{
 	String[] textProperties;
 	byte[] checkboxes;
 	String description;
-	Integer id;
+	int id=0;
 	
 	public void setId(int id){
 		this.id=id;

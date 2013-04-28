@@ -30,8 +30,7 @@
 			</tr>
 </tbody></table>		
 		
-<form id="phoneSelectionForm" name="phoneSelectionForm" action="index" method="post">
-<input type="hidden" name="mode" value="edit"/>
+
 		<table id="selectPhone"  style="visibility:hidden"><tbody>
 			<tr>
 				<td>
@@ -49,13 +48,12 @@
 				</td>
 			</tr>
 			<tr>
-				<input type="submit" class="hiddenc" id="regBut" value="Удалить"/>
+				<input type="submit" class="hiddenc" id="delBut" value="Удалить"/>
 				<a href="/index?mode=edit#" 
-				onclick="document.getElementById('regBut').click();return false" 
-				title="Добавить телефон">Удалить</a>
+				onclick="deletePhone();document.getElementById('delBut').click();return false" 
+				title="Удалить телефон">Удалить</a>
 			</tr>
 		</tbody></table>
-</form>
 
 <form id="phoneEditForm" name="login" action="index" method="post" enctype="multipart/form-data">
 <input type="hidden" name="mode" value="edit"/>
