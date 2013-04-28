@@ -150,7 +150,10 @@ function getPhone(phoneId) {
 		
 		var img = document.createElement('img');
 		img.src = 'http://tomcat7-romif.rhcloud.com/picture?pic='+phoneId;
-		document.getElementById('picture').appendChild(img);
+		var picture=document.getElementById('picture');
+		var child=picture.firstChild;
+		if (child!=null) picture.removeChild(child);
+		picture.appendChild(img);
 		document.getElementById('editTable').style.visibility='visible';
 		//document.getElementById('picture').innerHTML = "<img src='http://tomcat7-romif.rhcloud.com/picture?pic="+phoneId+"/>";
 		
