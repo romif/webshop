@@ -171,6 +171,15 @@ function editPhoneRadio(){
 }
 
 function deletePhone(){
+	$.post('/index', {
+		mode : 'edit',
+		deletePhone : phoneId
+		},
+		function(data) {
+			document.location = '/index';
+		});
+	
+	
 	var select = document.getElementById("phonesTitles");
 	var phoneId=select.options[select.selectedIndex].value;
 	var element = document.createElement("input");
