@@ -25,7 +25,6 @@ import util.User;
 public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 	public static Map<String,User> loggedUsers=new HashMap<String,User>();
 	public static Map<String,String> restoreCodes=new HashMap<String,String>();
-	public static String[] DBConfig=null;
 
 
 	/**

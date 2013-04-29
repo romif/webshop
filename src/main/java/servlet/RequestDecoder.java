@@ -143,13 +143,14 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				page="/jsp/Index.jsp";
 			}
 			else if (request.getParameter("mode").equals("edit")){
-				if (request.getParameter("manufacture")!=null){
+				boolean isLogged=MainServlet.loggedUsers.get(request.getSession().getId())!=null;
+				if (request.getParameter("GetTitles")!=null){
 					JSONObject array=new JSONObject();
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
-					if (MainServlet.loggedUsers.get(request.getSession().getId())!=null){
+					if (isLogged){
 						Map<Integer,String> map=
-								SqlManager.GetTitles(request.getParameter("manufacture"));
+								SqlManager.GetTitles(Integer.parseInt(request.getParameter("GetTitles")));
 						for (Entry entry:map.entrySet()){
 							array.put(entry.getKey(),entry.getValue());
 						}
@@ -162,7 +163,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				}
 				if (request.getParameter("phoneId")!=null){
 					JSONObject array=new JSONObject();
-					if (MainServlet.loggedUsers.get(request.getSession().getId())!=null){
+					if (isLogged){
 						Phone phone=
 								SqlManager.GetPhone(Integer.parseInt(request.getParameter("phoneId")));
 						array.putAll(phone);
@@ -175,9 +176,30 @@ public class RequestDecoder<MultipartRequestWrapper> {
 					out.close();
 					return null;
 				}
+				if (request.getParameter("getManuf")!=null){
+					JSONObject array=new JSONObject();
+					if (isLogged){
+						array.putAll(SqlManager.GetPhonesManuf());
+					}
+					else array.put(0,"error");
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print(array);
+					out.flush();
+					out.close();
+					return null;
+				}
 				if (request.getParameter("deletePhone")!=null){
-					if (MainServlet.loggedUsers.get(request.getSession().getId())!=null){
-						SqlManager.DeletePhone(Integer.parseInt(request.getParameter("deletePhone")));
+					if (isLogged){
+						PrintWriter out = response.getWriter();
+						if (SqlManager.DeletePhone(Integer.parseInt(request.getParameter("deletePhone")))){
+							out.print(1);
+						}
+						else out.print(0);
+						out.flush();
+						out.close();
+						return null;
+						
 					}
 					return "/jsp/Index.jsp";
 				}
@@ -195,7 +217,6 @@ public class RequestDecoder<MultipartRequestWrapper> {
 		
 		if (ServletFileUpload.isMultipartContent(request)){
 			Phone phone=new Phone();
-			int phoneId=0;
 			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 			fileItemFactory.setRepository(new File(System.getenv("TMP")));
 			String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures";
@@ -230,11 +251,13 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				}
 				if (item!=null){
 					String fileName = new File(item.getName()).getName();
-					int pintPosition = fileName.lastIndexOf(".");  
-					String mimeType = fileName.substring(pintPosition, fileName.length());
-					String filePath = uploadStorage + File.separator + phone.getId()+mimeType;
-					File uploadedFile = new File(filePath); 
-					item.write(uploadedFile);
+					if (!fileName.isEmpty()){
+						int pintPosition = fileName.lastIndexOf(".");  
+						String mimeType = fileName.substring(pintPosition, fileName.length());
+						String filePath = uploadStorage + File.separator + phone.getId()+mimeType;
+						File uploadedFile = new File(filePath); 
+						item.write(uploadedFile);
+					}
 				}
 				
 				

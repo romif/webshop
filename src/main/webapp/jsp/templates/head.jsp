@@ -15,6 +15,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/compare.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/auth.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/reviews.js" ></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/phoneEditor.js" ></script>
 		
 		<link href="${pageContext.request.contextPath}/css/color.css" rel="stylesheet" type="text/css" />
 		<link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet" type="text/css" />

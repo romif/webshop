@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import servlet.MainServlet;
 import util.MD5;
@@ -367,7 +365,7 @@ public final class SqlManager {
 	}
 	
 	
-	public static Map<Integer,String> GetTitles(String manufacture){
+	public static Map<Integer,String> GetTitles(int ManufId){
 		Connection cn = null;
 		Statement st = null; 
 		ResultSet rs = null; 
@@ -376,11 +374,10 @@ public final class SqlManager {
 			Class.forName(driver); 
 			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			st = cn.createStatement(); 
-			rs = st.executeQuery("SELECT Phones.PhoneID,Phones.Title FROM Phone_IDs,Phones "
-					+"WHERE (Phone_IDs.PhoneMan='"+manufacture+"')" +
-							"AND(Phone_IDs.PhoneID=Phones.PhoneID)"); 
+			rs = st.executeQuery("SELECT PhoneID,Title FROM Phones "
+								+"WHERE (ManufId='"+ManufId+"')"); 
 			while (rs.next()){
-				map.put(rs.getInt("Phones.PhoneID"), rs.getString("Phones.Title"));
+				map.put(rs.getInt("PhoneID"), rs.getString("Title"));
 			}
 		}
 		catch (SQLException ex) {            
@@ -444,7 +441,6 @@ public final class SqlManager {
 		Connection cn = null;
 		Statement st = null; 
 		ResultSet rs = null; 
-		Map<Integer,String> map=new HashMap<Integer,String>();
 		try {
 			Class.forName(driver); 
 			cn = DriverManager.getConnection(url+DBName,userName, password); 
@@ -515,9 +511,43 @@ public final class SqlManager {
 		return bool; 
 	}
 	
+	
+	public static Map<Integer,String> GetPhonesManuf(){
+		Connection cn = null;
+		Statement st = null; 
+		ResultSet rs = null; 
+		Map <Integer,String> map=new HashMap<Integer,String>();
+		try {
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
+			st = cn.createStatement(); 
+			rs = st.executeQuery("SELECT * FROM Manuf_IDs");
+			while (rs.next()){
+				map.put(rs.getInt("ManufId"),rs.getString("Manuf"));
+			}		
+		}
+		catch (SQLException ex) {            
+            System.out.println(ex.toString());
+        } 
+		catch (ClassNotFoundException ex) {            
+            System.out.println(ex.toString());
+        } 
+		finally {
+			try{
+				if (rs != null) rs.close(); 
+				if (st != null) st.close(); 
+				if (cn != null) cn.close(); 
+			}
+			catch (SQLException ex) {            
+	            System.out.println(ex.toString());
+	        }
+		} 
+		return map; 
+	}
+	
 	public static void main(String[] args){
 		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
-		System.out.print(SqlManager.GetPhone(31));
+		System.out.print(SqlManager.GetTitles(2));
 
 	}
 

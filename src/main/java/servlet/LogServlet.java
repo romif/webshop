@@ -26,7 +26,7 @@ public class LogServlet extends HttpServlet {
     response.setContentType("text/html;charset=utf-8");
     PrintWriter out = response.getWriter();
     String st;
-    while ((st=br.readLine())!=null)out.println(new java.util.Date()+" "+st+"<br/>");
+    while ((st=br.readLine())!=null)out.println(st+"<br/>");
     out.close();
     br.close();
   }

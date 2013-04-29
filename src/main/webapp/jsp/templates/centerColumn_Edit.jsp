@@ -9,51 +9,53 @@
 	<li class="firstSectionTree">
 		<a href="/" alt="Главная">Главная</a>&nbsp;»&nbsp;
 	</li>
-	<li>Phone Editor</li>
+	<li>Редактор телефонов</li>
 </ul>
-
-<div class="itemBlock">
-<h3 class="itemPage">Phone Editor</h3>
-<h3>Выберите действие:</h3>
+<br/>
+<div class="itemsRow">
+	<div class="itemBlock">
+		<h3 class="itemPage">Редактор телефонов</h3>
+	</div>
+	<h3>Выберите действие:</h3>
 </div>
 
 <table><tbody>
-			<tr>
-				<td><div>Добавить новый телефон </div></td>
-				<td><input name="Radio1" type="radio" align="right" 
-				onclick="javascript:document.getElementById('selectPhone').style.visibility='hidden';javascript:document.getElementById('editTable').style.visibility='visible';"/></td>
-			</tr>
-			<tr>
-				<td><div>Редактировать телефон </div></td>
-				<td><input id="editPhoneRadio" name="Radio1" type="radio" 
+	<tr>
+		<td><div>Добавить новый телефон </div></td>
+		<td><input name="Radio1" type="radio" align="right" 
+				onclick="javascript:document.getElementById('selectPhone').style.visibility='hidden';javascript:document.getElementById('editTable').style.visibility='visible';document.getElementById('delBut').style.visibility='hidden';"/></td>
+	</tr>
+	<tr>
+		<td><div>Редактировать телефон </div></td>
+		<td><input id="editPhoneRadio" name="editPhoneRadio" type="radio" 
 				onclick="javascript:editPhoneRadio();"/></td>
-			</tr>
+	</tr>
 </tbody></table>		
 		
 
-		<table id="selectPhone"  style="visibility:hidden"><tbody>
-			<tr>
-				<td>
-					<select name="Select1"  onchange="javascript:getTitles(this.options[this.selectedIndex].value);">
-						<option style="display:none"></option>
-						<option>Apple</option>
-						<option>Fly</option>
-					</select>
-				</td>
-				<td>
-					<select id="phonesTitles" name="Select2" disabled="disabled"
-					onchange="javascript:getPhone(this.options[this.selectedIndex].value)">
-						<option style="display:none"></option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<input type="submit" class="hiddenc" id="delBut" value="Удалить"/>
-				<a href="/index?mode=edit#" 
-				onclick="deletePhone();document.getElementById('delBut').click();return false" 
-				title="Удалить телефон">Удалить</a>
-			</tr>
-		</tbody></table>
+<table id="selectPhone"  style="visibility:hidden"><tbody>
+	<tr>
+		<td>
+			<select id="phonesManuf" name="phonesManuf"  onchange="javascript:getTitles(this.options[this.selectedIndex].value);">
+				<option style="display:none"></option>
+			</select>
+		</td>
+		<td>
+			<select id="phonesTitles" name="phonesTitles" disabled="disabled"
+				onchange="javascript:getPhone(this.options[this.selectedIndex].value)">
+				<option style="display:none"></option>
+			</select>
+		</td>
+	</tr>
+</tbody></table>
+
+<br></br>
+<a id='delBut'
+	href="/index?mode=edit#" 
+	onclick="deletePhone();" 
+	title="Удалить телефон"
+	style="visibility:hidden">Удалить</a>
+<br></br>						
 
 <form id="phoneEditForm" name="login" action="index" method="post" enctype="multipart/form-data">
 <input type="hidden" name="mode" value="edit"/>
