@@ -284,6 +284,7 @@ public final class SqlManager {
 		Connection cn = null;
 		Statement st = null; 
 		ResultSet rs = null; 
+		int manufId;
 		int id=-1;
 		try {
 			Class.forName(driver); 
@@ -293,14 +294,23 @@ public final class SqlManager {
 			for (Map.Entry<String, String> entry:phone.entrySet()){
 				FullDescription+=entry.getKey()+";"+entry.getValue()+";";
 			}
+			rs = st.executeQuery("SELECT ManufId FROM Manuf_IDs WHERE (Manuf='"+phone.getManufactor()+"')");
+			if (rs.next()){
+				manufId=rs.getInt("ManufId");
+			}
+			else {
+				rs = st.executeQuery("SELECT LAST_INSERT_ID()");
+				st.executeUpdate("INSERT INTO Manuf_IDs (Manuf) VALUES ('"+phone.getManufactor()+"')");
+				manufId=rs.getInt("LAST_INSERT_ID()");
+			}
 			
-			st.executeUpdate("INSERT INTO Phones (Title, Description, FirstPrice,SecondPrice,FullDescription) " +
-					"VALUES ('"+phone.get("textProperty1")+"', '"+phone.get("TextArea1")+
-					"', '"+Integer.parseInt(phone.get("firstPrice"))+"', '"+Integer.parseInt(phone.get("secondPrice"))+"','"+FullDescription+"')");
+			st.executeUpdate("INSERT INTO Phones (ManufId, Title, Description, FirstPrice,SecondPrice,FullDescription) " +
+					"VALUES ('"+manufId+"', '"+phone.getTitle()+"', '"+phone.getDescription()+
+					"', '"+phone.getFirstPrice()+"', '"+phone.getSecondPrice()+"','"+FullDescription+"')");
+			
 			rs = st.executeQuery("SELECT LAST_INSERT_ID()");
 			if (rs.next())id=rs.getInt("LAST_INSERT_ID()");
-			st.executeUpdate("INSERT INTO Phone_IDs (PhoneID,PhoneMan) " +
-					"VALUES ("+id+",'"+phone.get("textProperty0")+"')");
+
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());

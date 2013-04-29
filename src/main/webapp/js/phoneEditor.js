@@ -29,7 +29,7 @@ function getPhone(phoneId) {
 	document.getElementById('preload').style.display='block';
 	var d = {
 			'mode'			: 'edit',
-			'phoneId'		: phoneId	
+			'getPhone'		: phoneId	
 		};
 	$.getJSON('/index', d, function(data) {
 		$.each(data, function(key, val) {

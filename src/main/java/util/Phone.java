@@ -20,29 +20,34 @@ public class Phone extends HashMap<String,String>{
 		else return id;
 	}
 	
-	
-	public void setTextProperties(String[] textProperties){
-		this.textProperties=textProperties;
-	}
-	
-	public void setCheckboxes(byte[] checkboxes){
-		this.checkboxes=checkboxes;
-	}
-	
-	public void setDescription(String description){
-		this.description=description;
-	}
-	
-	public String[] getTextProperties(){
-		return textProperties;
-	}
-	
-	public byte[] getCheckboxes(){
-		return checkboxes;
-	}
-	
 	public String getDescription(){
-		return description;
+		return this.get("Description");
+	}
+	
+	public String getManufactor(){
+		return this.get("Manufactor");
+	}
+	
+	public String getTitle(){
+		return this.get("Title");
+	}
+	
+	public int getFirstPrice(){
+		try{
+			return Integer.parseInt(this.get("firstPrice"));
+		}
+		catch (NumberFormatException  e){
+			return -1;
+		}	
+	}
+	
+	public int getSecondPrice(){
+		try{
+			return Integer.parseInt(this.get("secondPrice"));
+		}
+		catch (NumberFormatException  e){
+			return -1;
+		}	
 	}
 
 }

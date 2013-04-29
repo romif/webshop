@@ -82,9 +82,9 @@
 											<input name="F1" size="20" type="file" accept ="image/*"></input>
 										</td>
 									</tr>
-								    <tr><td><div>Производитель</div></td><td><input type="text" name="textProperty0" value="input"></td></tr>
-									<tr><td><div>Название</div></td><td><input type="text" name="textProperty1" value="input"></td></tr>
-									<tr><td><div>Краткое описание</div></td><td><textarea cols="20" name="TextArea1" style="height: 85px">input</textarea></td></tr>
+								    <tr><td><div>Производитель</div></td><td><input type="text" name="Manufactor" value="input"></td></tr>
+									<tr><td><div>Название</div></td><td><input type="text" name="Title" value="input"></td></tr>
+									<tr><td><div>Краткое описание</div></td><td><textarea cols="20" name="Description" style="height: 85px">input</textarea></td></tr>
 									<tr>
 										<td><div>Цена, долл</div></td>
 										<td><input class="editParam" id="firstPrice" type="text" name="firstPrice" value="0">

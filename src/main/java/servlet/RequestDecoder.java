@@ -161,11 +161,11 @@ public class RequestDecoder<MultipartRequestWrapper> {
 					out.close();
 					return null;
 				}
-				if (request.getParameter("phoneId")!=null){
+				if (request.getParameter("getPhone")!=null){
 					JSONObject array=new JSONObject();
 					if (isLogged){
 						Phone phone=
-								SqlManager.GetPhone(Integer.parseInt(request.getParameter("phoneId")));
+								SqlManager.GetPhone(Integer.parseInt(request.getParameter("getPhone")));
 						array.putAll(phone);
 					}
 					else array.put(0,"error");
