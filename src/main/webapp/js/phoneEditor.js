@@ -32,14 +32,27 @@ function getPhone(phoneId) {
 			'getPhone'		: phoneId	
 		};
 	$.getJSON('/index', d, function(data) {
+		document.getElementById('editTable').style.visibility='visible';
 		$.each(data, function(key, val) {
 			if ((key==0)&&(val=='error')) {
 				document.location = '/index';
 				return false;
 			}
-			document.getElementsByName(key)[0].value=val;
+			var elem=document.getElementsByName(key);
+			//if (elem.length>0) {
+				if (key=='Description'){
+					 a = document.body.getElementsByTagName('TEXTAREA');
+					 b = document.createElement('TEXTAREA');
+					 b.innerHTML = val;
+					 a[0].value += b.value;
+				}
+				else if (key.substring(0,8)=='Checkbox'){
+					elem[0].checked='checked';
+				}
+				else elem[0].value=val;
+			//}
 		  });
-
+		
 		document.getElementById('preload').style.display='none';
 		
 		var img = document.createElement('img');
@@ -48,7 +61,7 @@ function getPhone(phoneId) {
 		var child=picture.firstChild;
 		if (child!=null) picture.removeChild(child);
 		picture.appendChild(img);
-		document.getElementById('editTable').style.visibility='visible';
+		
 		document.getElementById('delBut').style.visibility='visible';
 		//document.getElementById('picture').innerHTML = "<img src='http://tomcat7-romif.rhcloud.com/picture?pic="+phoneId+"/>";
 		
@@ -109,7 +122,5 @@ function deletePhone(){
 	  }
 
 }
-
-
 
 

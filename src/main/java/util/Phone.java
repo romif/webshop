@@ -6,9 +6,6 @@ public class Phone extends HashMap<String,String>{
 
 	public Phone() {
 	}
-	String[] textProperties;
-	byte[] checkboxes;
-	String description;
 	int id=0;
 	
 	public void setId(int id){

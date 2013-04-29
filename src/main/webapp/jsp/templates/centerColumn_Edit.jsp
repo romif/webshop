@@ -22,12 +22,12 @@
 <table><tbody>
 	<tr>
 		<td><div>Добавить новый телефон </div></td>
-		<td><input name="Radio1" type="radio" align="right" 
+		<td><input name="radio" type="radio" align="right" 
 				onclick="javascript:document.getElementById('selectPhone').style.visibility='hidden';javascript:document.getElementById('editTable').style.visibility='visible';document.getElementById('delBut').style.visibility='hidden';"/></td>
 	</tr>
 	<tr>
 		<td><div>Редактировать телефон </div></td>
-		<td><input id="editPhoneRadio" name="editPhoneRadio" type="radio" 
+		<td><input id="editPhoneRadio" name="radio" type="radio" 
 				onclick="javascript:editPhoneRadio();"/></td>
 	</tr>
 </tbody></table>		
@@ -84,8 +84,9 @@
 									</tr>
 								    <tr><td><div>Производитель</div></td><td><input type="text" name="Manufactor" value="input"></td></tr>
 									<tr><td><div>Название</div></td><td><input type="text" name="Title" value="input"></td></tr>
-									<tr><td><div>Краткое описание</div></td><td><textarea cols="20" name="Description" style="height: 85px">input</textarea></td></tr>
-									<tr>
+									<tr><td><div>Краткое описание</div></td><td><textarea name='Description' cols="20"  style="height: 85px"></textarea>
+
+									<tr>   
 										<td><div>Цена, долл</div></td>
 										<td><input class="editParam" id="firstPrice" type="text" name="firstPrice" value="0">
 										<div class="error" id="firstPrice_error"></div></td>
@@ -112,7 +113,7 @@
 									<tr><td><div>Вес </div></td><td><input type="text" name="textProperty15" value="input"></td></tr>
 									<tr><td colspan="2">Конструкция</td></tr>
 									<tr><td><div>Конструкция корпуса </div></td><td><input type="text" name="textProperty16" value="input"></td></tr>
-									<tr><td><div>Встроенная антенна </div></td><td><input name="Checkbox1" type="checkbox" /></td></tr>
+									<tr><td><div>Встроенная антенна </div></td><td><input name="Checkbox1" type="checkbox"/></td></tr>
 									<tr><td><div>Разъём для внешней антенны </div></td><td><input name="Checkbox2" type="checkbox"/></td></tr>
 									<tr><td><div>Сменные панели </div></td><td><input name="Checkbox3" type="checkbox"/></td></tr>
 									<tr><td><div>Пыле-, влаго-, ударопрочность </div></td><td><input name="Checkbox4" type="checkbox"/></td></tr>

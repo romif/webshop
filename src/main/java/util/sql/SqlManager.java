@@ -343,8 +343,10 @@ public final class SqlManager {
 			Class.forName(driver); 
 			cn = DriverManager.getConnection(url+DBName,userName, password);  
 			st = cn.createStatement(); 
-			rs = st.executeQuery("SELECT * FROM Phone_IDs,Phones "
-					+"WHERE (Phone_IDs.PhoneMan='"+manufacture+"')AND(Phone_IDs.PhoneID=Phones.PhoneID)"); 
+			rs = st.executeQuery("SELECT Phones.PhoneID,Phones.FullDescription " +
+								 "FROM Phones, Manuf_IDs "+
+								 "WHERE (Manuf_IDs.Manuf='"+manufacture+"') " +
+									"AND (Manuf_IDs.ManufId=Phones.ManufId)"); 
 			while (rs.next()){
 				Phone phone=new Phone();
 				String[] FullDiscription=rs.getString("FullDescription").split(";");
@@ -461,10 +463,10 @@ public final class SqlManager {
 			}
 			
 			st.executeUpdate("UPDATE Phones " +
-					"SET Title='"+phone.get("textProperty1")+"', " +
-						"Description='"+phone.get("TextArea1")+"', " +
-						"FirstPrice='"+Integer.parseInt(phone.get("firstPrice"))+"', " +
-						"SecondPrice='"+Integer.parseInt(phone.get("secondPrice"))+"', " +
+					"SET Title='"+phone.getTitle()+"', " +
+						"Description='"+phone.getDescription()+"', " +
+						"FirstPrice='"+phone.getFirstPrice()+"', " +
+						"SecondPrice='"+phone.getSecondPrice()+"', " +
 						"FullDescription='"+FullDescription+"' "+
 						"WHERE PhoneID='"+phone.getId()+"'");
 		}
@@ -557,7 +559,7 @@ public final class SqlManager {
 	
 	public static void main(String[] args){
 		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
-		System.out.print(SqlManager.GetTitles(2));
+		System.out.print(SqlManager.GetTitles(1));
 
 	}
 
