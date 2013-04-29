@@ -143,12 +143,13 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				page="/jsp/Index.jsp";
 			}
 			else if (request.getParameter("mode").equals("edit")){
-				boolean isLogged=MainServlet.loggedUsers.get(request.getSession().getId())!=null;
+				boolean isAdmin=((MainServlet.loggedUsers.get(request.getSession().getId())!=null)&&
+						MainServlet.loggedUsers.get(request.getSession().getId()).getAccess().equals("admin"));
 				if (request.getParameter("GetTitles")!=null){
 					JSONObject array=new JSONObject();
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
-					if (isLogged){
+					if (isAdmin){
 						Map<Integer,String> map=
 								SqlManager.GetTitles(Integer.parseInt(request.getParameter("GetTitles")));
 						for (Entry entry:map.entrySet()){
@@ -163,7 +164,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				}
 				if (request.getParameter("getPhone")!=null){
 					JSONObject array=new JSONObject();
-					if (isLogged){
+					if (isAdmin){
 						Phone phone=
 								SqlManager.GetPhone(Integer.parseInt(request.getParameter("getPhone")));
 						array.putAll(phone);
@@ -178,7 +179,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				}
 				if (request.getParameter("getManuf")!=null){
 					JSONObject array=new JSONObject();
-					if (isLogged){
+					if (isAdmin){
 						array.putAll(SqlManager.GetPhonesManuf());
 					}
 					else array.put(0,"error");
@@ -190,7 +191,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 					return null;
 				}
 				if (request.getParameter("deletePhone")!=null){
-					if (isLogged){
+					if (isAdmin){
 						PrintWriter out = response.getWriter();
 						if (SqlManager.DeletePhone(Integer.parseInt(request.getParameter("deletePhone")))){
 							out.print(1);
@@ -204,8 +205,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 					return "/jsp/Index.jsp";
 				}
 				
-				if (MainServlet.loggedUsers.get(request.getSession().getId())!=null)
-					page="/jsp/Edit.jsp";
+				if (isAdmin) page="/jsp/Edit.jsp";
 				else page="/jsp/Index.jsp";
 			}
 			else if (request.getParameter("mode").equals("Apple")){
