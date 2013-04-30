@@ -251,31 +251,26 @@
 
                     <tr>
                       <td>
-                        <div>Варианты цвета корпуса <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Варианты цвета корпуса»"></div>
+                        <div>Варианты цвета корпуса</div>
                       </td>
 
-                      <td>White, Black&#160;</td>
+                      <td id="textProperty18"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Сенсорная клавиатура <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Сенсорная клавиатура»"></div>
+                        <div>Сенсорная клавиатура</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox9"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>QWERTY-клавиатура <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «QWERTY-клавиатура»"></div>
+                        <div>QWERTY-клавиатура</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> виртуальная&#160;</td>
+                      <td id="Checkbox10"></td>
                     </tr>
 
                     <tr>
