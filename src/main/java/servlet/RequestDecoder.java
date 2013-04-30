@@ -38,6 +38,24 @@ public class RequestDecoder<MultipartRequestWrapper> {
 	
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String page="/jsp/Index.jsp";
+		if (request.getParameter("phone")!=null){
+			return "/jsp/FullInfo.jsp";
+			
+		}
+		
+		if (request.getParameter("getPhone")!=null){
+			JSONObject array=new JSONObject();
+			Phone phone=
+					SqlManager.GetPhone(Integer.parseInt(request.getParameter("getPhone")));
+			array.putAll(phone);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(array);
+			out.flush();
+			out.close();
+			return null;
+		}
+		
 		if (request.getParameter("mode")!=null){
 			if (request.getParameter("mode").equals("reg"))page="/jsp/Registration.jsp";
 			else if (request.getParameter("mode").equals("restore")){
@@ -162,21 +180,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 					out.close();
 					return null;
 				}
-				if (request.getParameter("getPhone")!=null){
-					JSONObject array=new JSONObject();
-					if (isAdmin){
-						Phone phone=
-								SqlManager.GetPhone(Integer.parseInt(request.getParameter("getPhone")));
-						array.putAll(phone);
-					}
-					else array.put(0,"error");
-					response.setContentType("text/html;charset=utf-8");
-					PrintWriter out = response.getWriter();
-					out.print(array);
-					out.flush();
-					out.close();
-					return null;
-				}
+				
 				if (request.getParameter("getManuf")!=null){
 					JSONObject array=new JSONObject();
 					if (isAdmin){

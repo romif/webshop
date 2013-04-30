@@ -4,9 +4,9 @@
 		<template:get name='head'/>
 	</head>
 	
-	<body onLoad="javascript:document.getElementById('preload').style.display='none'" >
+	<body onLoad="hideLoading();" >
 		<div id="main">
-			<div id="preload"><img src="${pageContext.request.contextPath}/pics/ajax-loader.gif"/></div>
+			<div id="preload" style="z-index:999"><img src="${pageContext.request.contextPath}/pics/ajax-loader.gif"/></div>
 			<div id="header">
 				<template:get name='header'/>
 			</div>

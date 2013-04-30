@@ -71,10 +71,10 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 
 	<div class="leftItem">
 		<div class="itemBlockSmall">
-			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2)).getTitle()%>"><%=((Phone)phones.get(i*2)).getTitle()%></a></h3>
+			<h3><a href="/index?phone=<%=((Phone)phones.get(i*2)).getId()%>" title="<%=((Phone)phones.get(i*2)).getTitle()%>"><%=((Phone)phones.get(i*2)).getTitle()%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2)).getTitle()%>" href="/24/1001/">
+					<a title="<%=((Phone)phones.get(i*2)).getTitle()%>" href="/index?phone=<%=((Phone)phones.get(i*2)).getId()%>">
 						<img alt="<%=((Phone)phones.get(i*2)).getTitle()%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2)).getId()%>">
 					</a>
 				</div>
@@ -105,10 +105,11 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 	<%if (i*2<phones.size()-1) {%>
 	<div class="rightItem">
 		<div class="itemBlockSmall">
-			<h3><a href="/24/1001/" title="<%=((Phone)phones.get(i*2+1)).getTitle()%>"><%=((Phone)phones.get(i*2+1)).getTitle()%></a></h3>
+			<h3><a href="/index?phone=<%=((Phone)phones.get(i*2+1)).getId()%>" 
+			title="<%=((Phone)phones.get(i*2+1)).getTitle()%>"><%=((Phone)phones.get(i*2+1)).getTitle()%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2+1)).getTitle()%>" href="/24/1001/">
+					<a title="<%=((Phone)phones.get(i*2+1)).getTitle()%>" href="/index?phone=<%=((Phone)phones.get(i*2+1)).getId()%>">
 						<img alt="<%=((Phone)phones.get(i*2+1)).getTitle()%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2+1)).getId()%>">
 					</a>
 				</div>

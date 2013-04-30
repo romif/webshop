@@ -1,3 +1,26 @@
+var QueryString = function () {
+  // This function is anonymous, is executed immediately and 
+  // the return value is assigned to QueryString!
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    	// If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = pair[1];
+    	// If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]], pair[1] ];
+      query_string[pair[0]] = arr;
+    	// If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(pair[1]);
+    }
+  } 
+    return query_string;
+} ();
+
 function getTitles(ManufId) {
 	var select = document.getElementById('phonesTitles');
 	document.getElementById('editTable').style.visibility='hidden';
@@ -28,7 +51,6 @@ function getTitles(ManufId) {
 function getPhone(phoneId) {
 	document.getElementById('preload').style.display='block';
 	var d = {
-			'mode'			: 'edit',
 			'getPhone'		: phoneId	
 		};
 	$.getJSON('/index', d, function(data) {
@@ -122,5 +144,69 @@ function deletePhone(){
 	  }
 
 }
+
+function fillTable(phoneId){
+	var div=document.createElement('div');
+	div.setAttribute('id','showLoadingPicture');
+	document.getElementById('main').appendChild(div);
+	var d = {
+			'getPhone'		: phoneId	
+		};
+	var checkboxes = new Array(68);
+	$.getJSON('/index', d, function(data) {
+		$.each(data, function(key, val) {
+			if ((key==0)&&(val=='error')) {
+				document.location = '/index';
+				return false;
+			}
+			//var elem=document.getElementById(key);
+			if (key=='Title'){
+				document.getElementById('treeTitle').innerHTML=val;
+				document.getElementById('title').innerHTML=val;
+			}
+			else if (key=='firstPrice'){
+				document.getElementById('firstPrice').innerHTML=val+' $';
+			}
+			else if (key=='secondPrice'){
+				document.getElementById('secondPrice').innerHTML='| '+val+' руб.';
+			}
+			else if (key.substring(0,8)=='Checkbox'){
+				checkboxes[key.substring(8)-1]=1;
+				 //alert(checkboxes[key.substring(8)]);
+				//elem[0].checked='checked';
+			}
+			else {
+				var elem=document.getElementById(key);
+				if (elem!=null)elem.innerHTML=val;
+			}
+		  });
+		for (var i = 1; i < checkboxes.length+1; i++) {
+			var checkbox =document.getElementById('Checkbox'+i);
+			if (checkboxes[i-1]==1){
+			    if (checkbox!=null) {
+			    	checkbox.innerHTML=
+			    		'<img width="12" border="0" height="12" alt="Да" title="Да" src="/pics/ico_yes.gif">';
+			    }
+			}else{
+				if (checkbox!=null) {
+			    	checkbox.innerHTML=
+			    		'<img width="12" border="0" height="12" alt="Нет" title="Нет" src="/pics/ico_no.gif">';
+			    }
+			}
+		    
+		}
+		document.getElementById('itemsRow').style.display = 'block';
+		document.getElementById('main').removeChild(div);
+		hideLoading();
+	});
+}
+
+function hideLoading(){
+	if (document.getElementById('showLoadingPicture')==null)
+		document.getElementById('preload').style.display='none';
+	return false;
+}
+
+
 
 
