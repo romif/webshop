@@ -275,22 +275,18 @@
 
                     <tr>
                       <td>
-                        <div>Поддержка двух SIM-карт <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Поддержка двух SIM-карт»"></div>
+                        <div>Поддержка двух SIM-карт</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox11"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Сканер отпечатков пальцев <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Сканер отпечатков пальцев»"></div>
+                        <div>Сканер отпечатков пальцев</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox12"></td>
                     </tr>
 
                     <tr>
@@ -299,52 +295,42 @@
 
                     <tr>
                       <td>
-                        <div>Номера в памяти телефона <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Номера в памяти телефона»"></div>
+                        <div>Номера в памяти телефона</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox13"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Расширенная телефонная книга <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Расширенная телефонная книга»"></div>
+                        <div>Расширенная телефонная книга</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox14"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Поддержка групп абонентов <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Поддержка групп абонентов»"></div>
+                        <div>Поддержка групп абонентов</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox15"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Календарь <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Календарь»"></div>
+                        <div>Календарь</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox16"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Напоминания <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Напоминания»"></div>
+                        <div>Напоминания</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox17"></td>
                     </tr>
 
                     <tr>
@@ -353,11 +339,10 @@
 
                     <tr>
                       <td>
-                        <div>MMS <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «MMS»"></div>
+                        <div>MMS </div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox17"></td>
                     </tr>
 
                     <tr>
@@ -366,48 +351,42 @@
 
                     <tr>
                       <td>
-                        <div>Технология экрана <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Технология экрана»"></div>
+                        <div>Технология экрана</div>
                       </td>
 
-                      <td>IPS&#160;</td>
+                      <td id="textProperty19"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Тип экрана <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Тип экрана»"></div>
+                        <div>Тип экрана</div>
                       </td>
 
-                      <td>16 млн. цветов&#160;</td>
+                      <td id="textProperty20"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Разрешение экрана <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Разрешение экрана»"></div>
+                        <div>Разрешение экрана</div>
                       </td>
 
-                      <td>640&#160;x&#160;960&#160;(326 ppi)</td>
+                      <td id="textProperty21"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Размер экрана <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Размер экрана»"></div>
+                        <div>Размер экрана</div>
                       </td>
 
-                      <td>3.5&#160;&#39;&#39;&#160;</td>
+                      <td id="textProperty22"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Сенсорный экран <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Сенсорный экран»"></div>
+                        <div>Сенсорный экран</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> емкостный, мультитач&#160;</td>
+                      <td id="Checkbox18"></td>
                     </tr>
 
                     <tr>
@@ -416,22 +395,18 @@
 
                     <tr>
                       <td>
-                        <div>Встроенная камера <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Встроенная камера»"></div>
+                        <div>Встроенная камера</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox19"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Дополнительная камера <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Дополнительная камера»"></div>
+                        <div>Дополнительная камера </div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;(VGA)</td>
+                      <td id="Checkbox20"></td>
                     </tr>
 
                     <tr>
