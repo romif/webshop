@@ -4,7 +4,7 @@
 
 <div id="search">
 	<span>Поиск</span>
-	<form action="http://topmobail.shop.by/find/" method="get" onsubmit="return CheckFind();">
+	<form action="/index" method="get" onsubmit="return CheckFind();">
 		<input name="findtext" maxlength="20" alt="Поиск" type="text" class="find_txt">
 		<button id="button_search" class="png"></button>
 	</form>

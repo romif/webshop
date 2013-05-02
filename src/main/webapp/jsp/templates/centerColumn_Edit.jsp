@@ -211,8 +211,7 @@
 									<tr><td><div>Тип аккумулятора </div></td><td><input type="text" name="textProperty32" value="input"/></td></tr>
 									<tr><td><div>Емкость аккумулятора </div></td><td><input type="text" name="textProperty33" value="input"/></td></tr>
 									<tr><td><div>Время разговора </div></td><td><input type="text" name="textProperty34" value="input"/></td></tr>
-									<tr><td><div>Время ожидания </div></td><td><input type="text" name="textProperty35" value="input"/></td></tr>
-									<tr><td><div>Cолнечная батарея </div></td><td></td></tr>           
+									<tr><td><div>Время ожидания </div></td><td><input type="text" name="textProperty35" value="input"/></td></tr>        
 								
 								</tbody>
 							</table>

@@ -4,7 +4,9 @@
 <%@ page import="util.*"%>
 <%@ page import="util.sql.*"%>
 
-
+<script type="text/javascript">
+document.getElementById('centerColumn').style.display = 'none';
+</script>
 
   <ul id="sectionsTree">
     <li class="firstSectionTree">
@@ -12,24 +14,24 @@
     </li>
 
     <li>
-      <a href="/24/">Apple</a>&#160;»&#160;
+      <a id="Manufactor" href=""></a>&#160;»&#160;
     </li>
 
     <li id="treeTitle"></li>
   </ul>
   
-  <div class="itemsRow" id="itemsRow" style="display:none">
+  <div class="itemsRow" id="itemsRow">
     <div class="itemBlock">
       <h3 id="title" class="itemPage" ></h3>
 
       <div class="wrapper">
         <div id="wrapper-img">
-          <div id="img_item"><img id="item_img" src="http://tomcat7-romif.rhcloud.com/picture?pic=${param.phone}"/></div>
+          <div id="img_item"><img id="item_img" src="http://tomcat7-romif.rhcloud.com/picture?pic=${param.phoneID}"/></div>
         </div>
 
         <div id="vlightbox">
-          <a class="vlightbox" id="ico0" href="http://tomcat7-romif.rhcloud.com/picture?pic=${param.phone}">
-            <img id="img_ico0" src="http://tomcat7-romif.rhcloud.com/picture?pic=${param.phone}">
+          <a class="vlightbox" id="ico0" href="http://tomcat7-romif.rhcloud.com/picture?pic=${param.phoneID}">
+            <img id="img_ico0" src="http://tomcat7-romif.rhcloud.com/picture?pic=${param.phoneID}">
           </a>
         </div>
 
@@ -62,7 +64,7 @@
                     </tr>
 
                     <tr>
-                      <td>
+                      <td width="347">
                         <div>Дата выхода на рынок</div>
                       </td>
 
@@ -342,7 +344,7 @@
                         <div>MMS </div>
                       </td>
 
-                      <td id="Checkbox17"></td>
+                      <td id="Checkbox18"></td>
                     </tr>
 
                     <tr>
@@ -386,7 +388,7 @@
                         <div>Сенсорный экран</div>
                       </td>
 
-                      <td id="Checkbox18"></td>
+                      <td id="Checkbox19"></td>
                     </tr>
 
                     <tr>
@@ -398,7 +400,7 @@
                         <div>Встроенная камера</div>
                       </td>
 
-                      <td id="Checkbox19"></td>
+                      <td id="Checkbox20"></td>
                     </tr>
 
                     <tr>
@@ -406,62 +408,55 @@
                         <div>Дополнительная камера </div>
                       </td>
 
-                      <td id="Checkbox20"></td>
+                      <td id="Checkbox21"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Количество активных пикселей <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Количество активных пикселей»"></div>
+                        <div>Количество активных пикселей</div>
                       </td>
 
-                      <td>5&#160;Мп&#160;</td>
+                      <td id="textProperty23"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Максимальное разрешение снимка <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Максимальное разрешение снимка»"></div>
+                        <div>Максимальное разрешение снимка</div>
                       </td>
 
-                      <td>2592&#160;x&#160;1944&#160;</td>
+                      <td id="textProperty24"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Цифровой zoom <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Цифровой zoom»"></div>
+                        <div>Цифровой zoom</div>
                       </td>
 
-                      <td>5&#160;X&#160;</td>
+                      <td id="textProperty25"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Запись видео <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Запись видео»"></div>
+                        <div>Запись видео</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox22"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Максимальное разрешение видео <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Максимальное разрешение видео»"></div>
+                        <div>Максимальное разрешение видео</div>
                       </td>
 
-                      <td>1280&#160;x&#160;720&#160;(HD)</td>
+                      <td id="textProperty26"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Макс. кол-во кадров в секунду <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Макс. кол-во кадров в секунду»"></div>
+                        <div>Макс. кол-во кадров в секунду</div>
                       </td>
 
-                      <td>30&#160;&#160;</td>
+                      <td id="textProperty27"></td>
                     </tr>
 
                     <tr>
@@ -471,8 +466,7 @@
                         </div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox23">;</td>
                     </tr>
 
                     <tr>
@@ -482,8 +476,7 @@
                         </div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox24"></td>
                     </tr>
 
                     <tr>
@@ -492,22 +485,18 @@
 
                     <tr>
                       <td>
-                        <div>Автоматическая фокусировка <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Автоматическая фокусировка»"></div>
+                        <div>Автоматическая фокусировка</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox25"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Оптическая стабилизация <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Оптическая стабилизация»"></div>
+                        <div>Оптическая стабилизация</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox26">;</td>
                     </tr>
 
                     <tr>
@@ -516,12 +505,10 @@
 
                     <tr>
                       <td>
-                        <div>Встроенная вспышка <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Встроенная вспышка»"></div>
+                        <div>Встроенная вспышка</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> светодиодная&#160;</td>
+                      <td id="Checkbox27"></td>
                     </tr>
 
                     <tr>
@@ -530,72 +517,58 @@
 
                     <tr>
                       <td>
-                        <div>Голосовой набор <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Голосовой набор»"></div>
+                        <div>Голосовой набор</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox28"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Голосовое управление <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Голосовое управление»"></div>
+                        <div>Голосовое управление</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox29"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Громкая связь <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Громкая связь»"></div>
+                        <div>Громкая связь</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox30"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Диктофон / Запись звука <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Диктофон / Запись звука»"></div>
+                        <div>Диктофон / Запись звука</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox31"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Аудио проигрыватель <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Аудио проигрыватель»"></div>
+                        <div>Аудио проигрыватель</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox32"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>FM-приёмник <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «FM-приёмник»"></div>
+                        <div>FM-приёмник</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox33"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>FM-трансмиттер <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «FM-трансмиттер»"></div>
+                        <div>FM-трансмиттер</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox34"></td>
                     </tr>
 
                     <tr>
@@ -604,30 +577,26 @@
 
                     <tr>
                       <td>
-                        <div>Объем оперативной памяти <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Объем оперативной памяти»"></div>
+                        <div>Объем оперативной памяти</div>
                       </td>
 
-                      <td>512&#160;Мб&#160;</td>
+                      <td id="textProperty28"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Объем энергонезависимой памяти <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Объем энергонезависимой памяти»"></div>
+                        <div>Объем энергонезависимой памяти</div>
                       </td>
 
-                      <td>8&#160;Гб&#160;</td>
+                      <td id="textProperty29"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Поддержка карт памяти <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Поддержка карт памяти»"></div>
+                        <div>Поддержка карт памяти</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox35"></td>
                     </tr>
 
                     <tr>
@@ -636,21 +605,18 @@
 
                     <tr>
                       <td>
-                        <div>GPS <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «GPS»"></div>
+                        <div>GPS</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox36"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Geotagging <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Geotagging»"></div>
+                        <div>Geotagging</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox37"></td>
                     </tr>
 
                     <tr>
@@ -659,61 +625,50 @@
 
                     <tr>
                       <td>
-                        <div>Светодиодный индикатор <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Светодиодный индикатор»"></div>
+                        <div>Светодиодный индикатор</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox38"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Вибровызов <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Вибровызов»"></div>
+                        <div>Вибровызов</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox39"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Тип мелодии <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Тип мелодии»"></div>
+                        <div>Тип мелодии</div>
                       </td>
 
-                      <td>полифонический&#160;</td>
+                      <td id="textProperty30"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>MP3-звонок <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «MP3-звонок»"></div>
+                        <div>MP3-звонок</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox40"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Стереозвонок <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Стереозвонок»"></div>
+                        <div>Стереозвонок</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox41"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Поддержка Java <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Поддержка Java»"></div>
+                        <div>Поддержка Java</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox42"></td>
                     </tr>
 
                     <tr>
@@ -722,38 +677,34 @@
 
                     <tr>
                       <td>
-                        <div>GPRS <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «GPRS»"></div>
+                        <div>GPRS</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> сlass 10 (4down + 2up, 5max)&#160;</td>
+                      <td id="Checkbox43"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>EDGE <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «EDGE»"></div>
+                        <div>EDGE</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox44"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>HSDPA <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «HSDPA»"></div>
+                        <div>HSDPA</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox45"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>HSUPA <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «HSUPA»"></div>
+                        <div>HSUPA</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox46"></td>
                     </tr>
 
                     <tr>
@@ -763,8 +714,7 @@
                         </div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox47"></td>
                     </tr>
 
                     <tr>
@@ -774,37 +724,31 @@
                         </div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox48"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>LTE <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «LTE»"></div>
+                        <div>LTE</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox49"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>HTML-браузер <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «HTML-браузер»"></div>
+                        <div>HTML-браузер</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox50"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>E-mail клиент <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «E-mail клиент»"></div>
+                        <div>E-mail клиент</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox51"></td>
                     </tr>
 
                     <tr>
@@ -813,31 +757,26 @@
 
                     <tr>
                       <td>
-                        <div>Bluetooth <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Bluetooth»"></div>
+                        <div>Bluetooth</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> 2.1&#160;(EDR)</td>
+                      <td id="Checkbox52"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Стерео Bluetooth (A2DP) <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Стерео Bluetooth (A2DP)»"></div>
+                        <div>Стерео Bluetooth (A2DP)</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox53"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>AVRCP <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «AVRCP»"></div>
+                        <div>AVRCP</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox54"></td>
                     </tr>
 
                     <tr>
@@ -847,55 +786,47 @@
                         </div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> 3.5мм&#160;</td>
+                      <td id="Checkbox55"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>IrDA <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «IrDA»"></div>
+                        <div>IrDA</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox56"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>UMA <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «UMA»"></div>
+                        <div>UMA</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox57"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Wi-Fi <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «Wi-Fi»"></div>
+                        <div>Wi-Fi</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> 802.11b, 802.11g, 802.11n&#160;(802.11n только 2.4ГГЦ)</td>
+                      <td id="Checkbox58"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Wi-Fi Hotspot <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Wi-Fi Hotspot»"></div>
+                        <div>Wi-Fi Hotspot</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox59"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Wi-Fi Direct <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Wi-Fi Direct»"></div>
+                        <div>Wi-Fi Direct</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox60"></td>
                     </tr>
 
                     <tr>
@@ -905,75 +836,63 @@
                         </div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox61"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>DLNA <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «DLNA»"></div>
+                        <div>DLNA</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox62"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>USB <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt="Что такое «USB»"></div>
+                        <div>USB</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox63"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>USB On-The-Go <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «USB On-The-Go»"></div>
+                        <div>USB On-The-Go</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox64"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Разъем для подключения к PC <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Разъем для подключения к PC»"></div>
+                        <div>Разъем для подключения к PC</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox65"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Тип разъёма для подключения к PC <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Тип разъёма для подключения к PC»"></div>
+                        <div>Тип разъёма для подключения к PC</div>
                       </td>
 
-                      <td>original&#160;</td>
+                      <td id="textProperty31"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>HDMI-выход <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «HDMI-выход»"></div>
+                        <div>HDMI-выход</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
+                      <td id="Checkbox65"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>TV-выход <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «TV-выход»"></div>
+                        <div>TV-выход</div>
                       </td>
 
-                      <td><img width="12" border="0" height="12" alt="Да" title="Да" src=
-                      "http://catalog.onliner.by/pic/ico_yes.gif"> &#160;</td>
+                      <td id="Checkbox66"></td>
                     </tr>
 
                     <tr>
@@ -982,62 +901,36 @@
 
                     <tr>
                       <td>
-                        <div>Тип аккумулятора <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Тип аккумулятора»"></div>
+                        <div>Тип аккумулятора</div>
                       </td>
 
-                      <td>Li-pol&#160;</td>
+                      <td id="textProperty32"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Емкость аккумулятора <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Емкость аккумулятора»"></div>
+                        <div>Емкость аккумулятора</div>
                       </td>
 
-                      <td>1 420&#160;мАч&#160;</td>
+                      <td id="textProperty33"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Время разговора <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Время разговора»"></div>
+                        <div>Время разговора</div>
                       </td>
 
-                      <td>7&#160;часов - 14&#160;часов&#160;</td>
+                      <td id="textProperty34"></td>
                     </tr>
 
                     <tr>
                       <td>
-                        <div>Время ожидания <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Время ожидания»"></div>
+                        <div>Время ожидания</div>
                       </td>
 
-                      <td>300&#160;часов&#160;</td>
+                      <td id="textProperty35"></td>
                     </tr>
 
-                    <tr>
-                      <td>
-                        <div>Cолнечная батарея <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Cолнечная батарея»"></div>
-                      </td>
-
-                      <td><img width="12" border="0" height="12" alt="Нет" title="Нет" src=
-                      "http://catalog.onliner.by/pic/ico_no.gif"> &#160;</td>
-                    </tr>
-
-                    <tr>
-                      <td colspan="2">Комплектация</td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Совместимые чехлы <img border="0" src="http://catalog.onliner.by/pic/ico_que.gif" alt=
-                        "Что такое «Совместимые чехлы»"></div>
-                      </td>
-
-                      <td>подобрать в каталоге&#160;</td>
-                    </tr>
                   </tbody>
                 </table>
               </td>
@@ -1046,7 +939,6 @@
         </table>
 
         <p>&#160;</p>
-
         <p class="reviLinks"></p>
       </div>
     </div>
@@ -1054,5 +946,5 @@
   
   
 <script type="text/javascript">
- fillTable(QueryString.phone);
+ fillTable(QueryString.phoneID);
 </script>

@@ -4,12 +4,12 @@
 <%@ page import="util.sql.SqlManager"%>
 <%@ page import="util.Phone"%>
 <%
-List<Phone> phones=SqlManager.GetPhones("Apple");
+List<Phone> phones=SqlManager.GetPhones(request.getParameter("phone"));
 %>
 
 <ul id="sectionsTree">
 	<li class="firstSectionTree"><a href="/" alt="Главная">Главная</a>&nbsp;»&nbsp;</li>
-	<li>Apple</li>
+	<li><%=request.getParameter("phone")%></li>
 </ul>
 <div style="clear:both;"></div>
 <div style="clear:both;"></div>
@@ -74,7 +74,7 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 			<h3><a href="/index?phone=<%=((Phone)phones.get(i*2)).getId()%>" title="<%=((Phone)phones.get(i*2)).getTitle()%>"><%=((Phone)phones.get(i*2)).getTitle()%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2)).getTitle()%>" href="/index?phone=<%=((Phone)phones.get(i*2)).getId()%>">
+					<a title="<%=((Phone)phones.get(i*2)).getTitle()%>" href="/index?phoneID=<%=((Phone)phones.get(i*2)).getId()%>">
 						<img alt="<%=((Phone)phones.get(i*2)).getTitle()%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2)).getId()%>">
 					</a>
 				</div>
@@ -109,7 +109,7 @@ List<Phone> phones=SqlManager.GetPhones("Apple");
 			title="<%=((Phone)phones.get(i*2+1)).getTitle()%>"><%=((Phone)phones.get(i*2+1)).getTitle()%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2+1)).getTitle()%>" href="/index?phone=<%=((Phone)phones.get(i*2+1)).getId()%>">
+					<a title="<%=((Phone)phones.get(i*2+1)).getTitle()%>" href="/index?phoneID=<%=((Phone)phones.get(i*2+1)).getId()%>">
 						<img alt="<%=((Phone)phones.get(i*2+1)).getTitle()%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2+1)).getId()%>">
 					</a>
 				</div>

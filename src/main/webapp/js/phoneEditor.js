@@ -136,7 +136,7 @@ function deletePhone(){
 			},
 			function(data) {
 				if (data==1)alert('Телефон удален');
-				else alert('Ошибка! Телефоне не существует в базе данных');
+				else alert('Ошибка! Телефон не существует в базе данных');
 				document.getElementById('preload').style.display='none';
 				document.location = '/index';
 			});
@@ -159,7 +159,6 @@ function fillTable(phoneId){
 				document.location = '/index';
 				return false;
 			}
-			//var elem=document.getElementById(key);
 			if (key=='Title'){
 				document.getElementById('treeTitle').innerHTML=val;
 				document.getElementById('title').innerHTML=val;
@@ -169,11 +168,13 @@ function fillTable(phoneId){
 			}
 			else if (key=='secondPrice'){
 				document.getElementById('secondPrice').innerHTML='| '+val+' руб.';
+			}else if (key=='Manufactor'){
+				var elem=document.getElementById('Manufactor');
+				elem.href="/index?mode="+val;
+				elem.innerHTML=val;
 			}
 			else if (key.substring(0,8)=='Checkbox'){
 				checkboxes[key.substring(8)-1]=1;
-				 //alert(checkboxes[key.substring(8)]);
-				//elem[0].checked='checked';
 			}
 			else {
 				var elem=document.getElementById(key);
@@ -195,7 +196,7 @@ function fillTable(phoneId){
 			}
 		    
 		}
-		document.getElementById('itemsRow').style.display = 'block';
+		document.getElementById('centerColumn').style.display = '';
 		document.getElementById('main').removeChild(div);
 		hideLoading();
 	});

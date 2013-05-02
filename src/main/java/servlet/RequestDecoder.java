@@ -38,22 +38,37 @@ public class RequestDecoder<MultipartRequestWrapper> {
 	
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String page="/jsp/Index.jsp";
-		if (request.getParameter("phone")!=null){
-			return "/jsp/FullInfo.jsp";
-			
+		
+		if (request.getParameter("phoneID")!=null){
+			return "/jsp/FullInfo.jsp";	
+		}
+		
+		if (request.getParameter("findtext")!=null){
+			return "/jsp/Find.jsp";	
 		}
 		
 		if (request.getParameter("getPhone")!=null){
 			JSONObject array=new JSONObject();
-			Phone phone=
-					SqlManager.GetPhone(Integer.parseInt(request.getParameter("getPhone")));
-			array.putAll(phone);
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.print(array);
-			out.flush();
-			out.close();
+			try {
+				Phone phone=
+						SqlManager.GetPhone(Integer.parseInt(request.getParameter("getPhone")));
+				array.putAll(phone);
+				
+			} catch (NumberFormatException e){
+				e.printStackTrace();
+				array.put(0, "error");
+			} finally{
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print(array);
+				out.flush();
+				out.close();	
+			}
 			return null;
+		}
+		
+		if (request.getParameter("phone")!=null){
+			return "/jsp/Phone.jsp";
 		}
 		
 		if (request.getParameter("mode")!=null){
@@ -212,10 +227,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				if (isAdmin) page="/jsp/Edit.jsp";
 				else page="/jsp/Index.jsp";
 			}
-			else if (request.getParameter("mode").equals("Apple")){
-				page="/jsp/Apple.jsp";
-				//page="/jsp/Edit.jsp";
-			}
+			
 		}
 		
 		
