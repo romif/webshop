@@ -106,7 +106,7 @@ public class Parser {
 		}
 		
 		
-		for (int i=0;i<2;i++){
+		for (int i=0;i<10;i++){
 			Phone phone=new Phone();
 			phone.put("Manufactor", title.get(i).split(" ")[0]);
 			phone.put("Title", title.get(i));
@@ -114,51 +114,51 @@ public class Parser {
 			phone.put("firstPrice", firstPrice.get(i));
 			phone.put("secondPrice", secondPrice.get(i));
 			
-			
-		try {
-			doc = Jsoup.connect(href.get(i)).get();
-			Elements elements = doc.select(".pline2");
-			Iterator<Element> it=elements.iterator();
-			while (it.hasNext()) {
-				Node node=it.next();
-				//System.out.println(node.childNode(1).childNodeSize());
-				String st="";
-				if (node.childNode(1).childNodeSize()==1)
-					st=((Element) node.childNode(1).childNode(0)).text();
-				else if (node.childNode(1).childNodeSize()==3)
-					st=((Element) node.childNode(1).childNode(2)).html();
-				if (map.containsKey(st)) {
-					name2.add(st);
-					if (node.childNode(3).childNodeSize()>1){
-						if ( node.childNode(3).childNode(0).attr("alt").equals("Да"))
-							phone.put(map.get(st), "on");
+			try {
+				doc = Jsoup.connect(href.get(i)).get();
+				Elements elements = doc.select(".pline2");
+				Iterator<Element> it=elements.iterator();
+				while (it.hasNext()) {
+					Node node=it.next();
+					//System.out.println(node.childNode(1).childNodeSize());
+					String st="";
+					if (node.childNode(1).childNodeSize()==1)
+						st=((Element) node.childNode(1).childNode(0)).text();
+					else if (node.childNode(1).childNodeSize()==3)
+						st=((Element) node.childNode(1).childNode(2)).html();
+					if (map.containsKey(st)) {
+						name2.add(st);
+						if (node.childNode(3).childNodeSize()>1){
+							if ( node.childNode(3).childNode(0).attr("alt").equals("Да"))
+								phone.put(map.get(st), "on");
+						}
+						else phone.put(map.get(st), ((Element) node.childNode(3)).html());
 					}
-					else phone.put(map.get(st), ((Element) node.childNode(3)).html());
 				}
+				
+				int id=SqlManager.AddPhone(phone);
+				String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures"+File.separator;
+				InputStream in = new BufferedInputStream(new URL(img.get(1)).openStream());
+				OutputStream out=new BufferedOutputStream(new FileOutputStream(uploadStorage+id+".jpg"));
+				int j;
+				while ((j=in.read())!=-1)out.write(i);
+				in.close();
+				out.close();
+				
+				System.out.println(i+". Added phone "+title.get(i));
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		phones.add(phone);
+			//phones.add(phone);
+			
+		
 		}
 		
-		int id=SqlManager.AddPhone(phones.get(1));
 		
-		try {
-			String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures"+File.separator;
-			InputStream in = new BufferedInputStream(new URL(img.get(1)).openStream());
-			OutputStream out=new BufferedOutputStream(new FileOutputStream(uploadStorage+id+".jpg"));
-			int i;
-			while ((i=in.read())!=-1)out.write(i);
-			in.close();
-			out.close();
-			
-			
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+
 		
 
 		//System.out.println(img);
