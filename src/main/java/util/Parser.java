@@ -1,6 +1,14 @@
 package util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -86,6 +94,7 @@ public class Parser {
 				
 				st=element.childNode(1).childNode(0).childNode(0).attr("src");
 				st=st.replaceAll("./TopmoBail_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll(" ", "%20");
 				img.add(st);
 				
 				desc.add(((Element) element.childNode(3)).text());
@@ -133,11 +142,27 @@ public class Parser {
 		phones.add(phone);
 		}
 		
-		SqlManager.AddPhone(phones.get(1));
+		int id=SqlManager.AddPhone(phones.get(1));
+		
+		try {
+			String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures"+File.separator;
+			InputStream in = new BufferedInputStream(new URL(img.get(1)).openStream());
+			OutputStream out=new BufferedOutputStream(new FileOutputStream(uploadStorage+id+".jpg"));
+			int i;
+			while ((i=in.read())!=-1)out.write(i);
+			in.close();
+			out.close();
+			
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 
-		System.out.println(img);
-		System.out.println(phones);
+		//System.out.println(img);
+		//System.out.println(phones);
 
 	}
 
