@@ -52,7 +52,9 @@ public class Parser {
 		
 		Document doc=null;
 		try {
-			doc = Jsoup.connect("http://tomcat7-romif.rhcloud.com/index?phoneID=45").get();
+			Connection connection= Jsoup.connect("http://tomcat7-romif.rhcloud.com/index?phoneID=45");
+			connection.timeout(10000);
+			doc = connection.get();
 			Elements elements = doc.select(".descBig tbody");
 			Iterator<Node> it=elements.last().childNodes().iterator();
 			while (it.hasNext()) {
