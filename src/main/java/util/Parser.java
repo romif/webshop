@@ -117,7 +117,10 @@ public class Parser {
 			phone.put("secondPrice", secondPrice.get(i));
 			
 			try {
-				doc = Jsoup.connect(href.get(i)).get();
+				Connection connection= Jsoup.connect(href.get(i));
+				connection.timeout(10000);
+				doc = connection.get();
+				
 				Elements elements = doc.select(".pline2");
 				Iterator<Element> it=elements.iterator();
 				while (it.hasNext()) {
