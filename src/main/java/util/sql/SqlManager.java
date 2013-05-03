@@ -297,10 +297,6 @@ public final class SqlManager {
 			Class.forName(driver); 
 			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			st = cn.createStatement(); 
-			String FullDescription="";
-			for (Map.Entry<String, String> entry:phone.entrySet()){
-				FullDescription+=entry.getKey()+";"+entry.getValue()+";";
-			}
 			rs = st.executeQuery("SELECT ManufId FROM Manuf_IDs WHERE (Manuf='"+phone.getManufactor()+"')");
 			if (rs.next()){
 				manufId=rs.getInt("ManufId");
@@ -310,25 +306,17 @@ public final class SqlManager {
 				st.executeUpdate("INSERT INTO Manuf_IDs (Manuf) VALUES ('"+phone.getManufactor()+"')");
 				manufId=rs.getInt("LAST_INSERT_ID()");
 			}
-			
-			st.executeUpdate("INSERT INTO Phones (ManufId, Title, Description, FirstPrice,SecondPrice,FullDescription) " +
-					"VALUES ('"+manufId+"', '"+phone.getTitle()+"', '"+phone.getDescription()+
-					"', '"+phone.getFirstPrice()+"', '"+phone.getSecondPrice()+"','"+FullDescription+"')");
-			
-			rs = st.executeQuery("SELECT LAST_INSERT_ID()");
-			if (rs.next())id=rs.getInt("LAST_INSERT_ID()");
-			
-			String WRITE_OBJECT_SQL = "UPDATE Phones SET Map=? WHERE (PhoneID = ?)";
-			PreparedStatement pstmt = cn.prepareStatement(WRITE_OBJECT_SQL);
-			
-			pstmt.setObject(1, phone);
-		    pstmt.setLong(2, id);
+			String WRITE_PHONE_SQL ="INSERT INTO Phones (ManufId, Title, Description, FirstPrice,SecondPrice, Map) " +
+									"VALUES (?, ?, ?, ?, ?, ?)";
+			PreparedStatement pstmt = cn.prepareStatement(WRITE_PHONE_SQL);
+			pstmt.setInt(1, manufId);
+			pstmt.setString(2, phone.getTitle());
+			pstmt.setString(3, phone.getDescription());
+			pstmt.setInt(4, phone.getFirstPrice());
+			pstmt.setInt(5, phone.getSecondPrice());
+		    pstmt.setObject(6, phone);
 		    pstmt.executeUpdate();
 		    pstmt.close();
-			
-			
-			
-
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());
