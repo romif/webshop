@@ -44,7 +44,7 @@ public class Parser {
 		
 		Document doc=null;
 		try {
-			doc = Jsoup.connect("/index?phoneID=45").get();
+			doc = Jsoup.connect("http://tomcat7-romif.rhcloud.com/index?phoneID=45").get();
 			Elements elements = doc.select(".descBig tbody");
 			Iterator<Node> it=elements.last().childNodes().iterator();
 			while (it.hasNext()) {
@@ -63,7 +63,7 @@ public class Parser {
 		
 		
 		try {
-			Connection connection=Jsoup.connect("/index?topmobail=");
+			Connection connection=Jsoup.connect("http://tomcat7-romif.rhcloud.com/index?topmobail=");
 			connection.timeout(10000);
 			doc = connection.get();
 			Elements elements = doc.select("#centerColumn .itemBlockCont");
@@ -97,7 +97,7 @@ public class Parser {
 		}
 		
 		
-		for (int i=0;i<1;i++){
+		for (int i=0;i<2;i++){
 			Phone phone=new Phone();
 			phone.put("Manufactor", title.get(i).split(" ")[0]);
 			phone.put("Title", title.get(i));
@@ -133,7 +133,7 @@ public class Parser {
 		phones.add(phone);
 		}
 		
-		//SqlManager.AddPhone(phones.get(0));
+		SqlManager.AddPhone(phones.get(1));
 		
 
 		System.out.println(img);
