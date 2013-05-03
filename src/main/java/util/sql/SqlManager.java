@@ -1,7 +1,12 @@
 package util.sql;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 import servlet.MainServlet;
 import util.MD5;
@@ -310,6 +317,17 @@ public final class SqlManager {
 			
 			rs = st.executeQuery("SELECT LAST_INSERT_ID()");
 			if (rs.next())id=rs.getInt("LAST_INSERT_ID()");
+			
+			String WRITE_OBJECT_SQL = "UPDATE Phones SET Map=? WHERE (PhoneID = ?)";
+			PreparedStatement pstmt = cn.prepareStatement(WRITE_OBJECT_SQL);
+			
+			pstmt.setObject(1, phone);
+		    pstmt.setLong(2, id);
+		    pstmt.executeUpdate();
+		    pstmt.close();
+			
+			
+			
 
 		}
 		catch (SQLException ex) {            
@@ -341,8 +359,23 @@ public final class SqlManager {
 		List<Phone> phones=new ArrayList<Phone>();
 		try {
 			Class.forName(driver); 
-			cn = DriverManager.getConnection(url+DBName,userName, password);  
-			st = cn.createStatement(); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
+			cn.setAutoCommit(false);
+			String READ_OBJECT_SQL = 
+					"SELECT Phones.PhoneID, Phones.Map FROM Phones, Manuf_IDs " +
+					"WHERE ((Manuf_IDs.Manuf=?) AND (Manuf_IDs.ManufId=Phones.ManufId))";
+			PreparedStatement pstmt = cn.prepareStatement(READ_OBJECT_SQL);
+			pstmt.setString(1, manufacture);
+			rs = pstmt.executeQuery();
+			while (rs.next()){
+				Blob blob = (Blob)rs.getBlob("Map");
+				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
+				Phone phone=(Phone)in.readObject();
+				phone.setId(rs.getInt("PhoneID"));
+				phones.add(phone);
+			}
+				
+			/*st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT Phones.PhoneID,Phones.FullDescription " +
 								 "FROM Phones, Manuf_IDs "+
 								 "WHERE (Manuf_IDs.Manuf='"+manufacture+"') " +
@@ -355,14 +388,15 @@ public final class SqlManager {
 				}
 				phone.setId(rs.getInt("PhoneID"));
 				phones.add(phone);
-			}
-		}
-		catch (SQLException ex) {            
+			}*/
+			
+		} catch (SQLException ex) {            
             System.out.println(ex.toString());
-        } 
-		catch (ClassNotFoundException ex) {            
+        } catch (ClassNotFoundException ex) {            
             System.out.println(ex.toString());
-        } 
+        } catch (IOException e) {
+			e.printStackTrace();
+		} 
 		finally {
 			try{
 				if (rs != null) rs.close(); 
@@ -419,7 +453,18 @@ public final class SqlManager {
 		try {
 			Class.forName(driver); 
 			cn = DriverManager.getConnection(url+DBName,userName, password); 
-			st = cn.createStatement(); 
+			
+			cn.setAutoCommit(false);
+			String READ_OBJECT_SQL = "SELECT Map FROM Phones WHERE PhoneID=?";
+			PreparedStatement pstmt = cn.prepareStatement(READ_OBJECT_SQL);
+			pstmt.setInt(1, phoneId);
+			rs = pstmt.executeQuery();
+			if (rs.next()){
+				Blob blob = (Blob)rs.getBlob("Map");
+				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
+				phone=(Phone)in.readObject();
+			}	
+			/*st = cn.createStatement(); 
 			rs = st.executeQuery("SELECT PhoneID,FullDescription FROM Phones "
 					+"WHERE PhoneID='"+phoneId+"'"); 
 			if (rs.next()){
@@ -428,14 +473,16 @@ public final class SqlManager {
 					phone.put(FullDiscription[i], FullDiscription[i+1]);
 				}
 				phone.setId(rs.getInt("PhoneID"));
-			}
+			}*/
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());
         } 
 		catch (ClassNotFoundException ex) {            
             System.out.println(ex.toString());
-        } 
+        } catch (IOException e) {
+			e.printStackTrace();
+		} 
 		finally {
 			try{
 				if (rs != null) rs.close(); 

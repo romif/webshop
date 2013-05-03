@@ -99,7 +99,7 @@ document.getElementById('centerColumn').style.display = 'none';
 
                     <tr>
                       <td>
-                        <div>Процессор</div>
+                        <div>Тип процессора</div>
                       </td>
 
                       <td id="textProperty8"></td>
@@ -113,24 +113,7 @@ document.getElementById('centerColumn').style.display = 'none';
                       <td id="textProperty9"></td>
                     </tr>
 
-                    <tr>
-                      <td>
-                        <div>Количество ядер</div>
-                      </td>
-
-                      <td id="textProperty10"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>
-                          Графический ускоритель
-                        </div>
-                      </td>
-
-                      <td id="textProperty11"></td>
-                    </tr>
-
+                   
                     <tr>
                       <td colspan="2">Размеры и вес</td>
                     </tr>
@@ -225,38 +208,6 @@ document.getElementById('centerColumn').style.display = 'none';
                       </td>
 
                       <td id="Checkbox5"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Гироскоп </div>
-                      </td>
-
-                      <td id="Checkbox6"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Датчик приближения</div>
-                      </td>
-
-                      <td id="Checkbox7"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Датчик освещенности</div>
-                      </td>
-
-                      <td id="Checkbox8"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Варианты цвета корпуса</div>
-                      </td>
-
-                      <td id="textProperty18"></td>
                     </tr>
 
                     <tr>
@@ -429,36 +380,12 @@ document.getElementById('centerColumn').style.display = 'none';
 
                     <tr>
                       <td>
-                        <div>Цифровой zoom</div>
-                      </td>
-
-                      <td id="textProperty25"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
                         <div>Запись видео</div>
                       </td>
 
                       <td id="Checkbox22"></td>
                     </tr>
-
-                    <tr>
-                      <td>
-                        <div>Максимальное разрешение видео</div>
-                      </td>
-
-                      <td id="textProperty26"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Макс. кол-во кадров в секунду</div>
-                      </td>
-
-                      <td id="textProperty27"></td>
-                    </tr>
-
+ 
                     <tr>
                       <td>
                         <div>
@@ -467,16 +394,6 @@ document.getElementById('centerColumn').style.display = 'none';
                       </td>
 
                       <td id="Checkbox23">;</td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>
-                          ТВ-тюнер
-                        </div>
-                      </td>
-
-                      <td id="Checkbox24"></td>
                     </tr>
 
                     <tr>
@@ -493,7 +410,7 @@ document.getElementById('centerColumn').style.display = 'none';
 
                     <tr>
                       <td>
-                        <div>Оптическая стабилизация</div>
+                        <div>Опт. стабилизация изображения</div>
                       </td>
 
                       <td id="Checkbox26">;</td>
@@ -514,23 +431,7 @@ document.getElementById('centerColumn').style.display = 'none';
                     <tr>
                       <td colspan="2">Работа со звуком</td>
                     </tr>
-
-                    <tr>
-                      <td>
-                        <div>Голосовой набор</div>
-                      </td>
-
-                      <td id="Checkbox28"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Голосовое управление</div>
-                      </td>
-
-                      <td id="Checkbox29"></td>
-                    </tr>
-
+                   
                     <tr>
                       <td>
                         <div>Громкая связь</div>
@@ -625,14 +526,6 @@ document.getElementById('centerColumn').style.display = 'none';
 
                     <tr>
                       <td>
-                        <div>Светодиодный индикатор</div>
-                      </td>
-
-                      <td id="Checkbox38"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
                         <div>Вибровызов</div>
                       </td>
 
@@ -656,22 +549,6 @@ document.getElementById('centerColumn').style.display = 'none';
                     </tr>
 
                     <tr>
-                      <td>
-                        <div>Стереозвонок</div>
-                      </td>
-
-                      <td id="Checkbox41"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Поддержка Java</div>
-                      </td>
-
-                      <td id="Checkbox42"></td>
-                    </tr>
-
-                    <tr>
                       <td colspan="2">Интернет</td>
                     </tr>
 
@@ -690,6 +567,28 @@ document.getElementById('centerColumn').style.display = 'none';
 
                       <td id="Checkbox44"></td>
                     </tr>
+                    
+                    
+                    <tr>
+                      <td>
+                        <div>
+                          HSPA+
+                        </div>
+                      </td>
+
+                      <td id="Checkbox48"></td>
+                    </tr>
+                    
+                    
+                    <tr>
+                      <td>
+                        <div>
+                          HSPA
+                        </div>
+                      </td>
+
+                      <td id="Checkbox47"></td>
+                    </tr>
 
                     <tr>
                       <td>
@@ -705,34 +604,6 @@ document.getElementById('centerColumn').style.display = 'none';
                       </td>
 
                       <td id="Checkbox46"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>
-                          HSPA
-                        </div>
-                      </td>
-
-                      <td id="Checkbox47"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>
-                          HSPA+
-                        </div>
-                      </td>
-
-                      <td id="Checkbox48"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>LTE</div>
-                      </td>
-
-                      <td id="Checkbox49"></td>
                     </tr>
 
                     <tr>
@@ -815,22 +686,6 @@ document.getElementById('centerColumn').style.display = 'none';
 
                     <tr>
                       <td>
-                        <div>Wi-Fi Hotspot</div>
-                      </td>
-
-                      <td id="Checkbox59"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>Wi-Fi Direct</div>
-                      </td>
-
-                      <td id="Checkbox60"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
                         <div>
                           WiMAX
                         </div>
@@ -853,14 +708,6 @@ document.getElementById('centerColumn').style.display = 'none';
                       </td>
 
                       <td id="Checkbox63"></td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div>USB On-The-Go</div>
-                      </td>
-
-                      <td id="Checkbox64"></td>
                     </tr>
 
                     <tr>

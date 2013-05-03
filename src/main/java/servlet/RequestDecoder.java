@@ -26,6 +26,7 @@ import util.MD5;
 import util.Phone;
 import util.User;
 import util.sql.SqlManager;
+import util.Parser;
 
 
 public class RequestDecoder<MultipartRequestWrapper> {
@@ -38,6 +39,16 @@ public class RequestDecoder<MultipartRequestWrapper> {
 	
 	public String getPage(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String page="/jsp/Index.jsp";
+		
+		if (request.getParameter("topmobail")!=null){
+			return "/TopmoBail.htm";	
+		}
+		
+		if (request.getParameter("parser")!=null){
+			String[]sts={"ee"};
+			Parser.main(sts);
+			return null;	
+		}
 		
 		if (request.getParameter("phoneID")!=null){
 			return "/jsp/FullInfo.jsp";	
