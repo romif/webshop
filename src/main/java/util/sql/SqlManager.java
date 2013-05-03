@@ -317,6 +317,10 @@ public final class SqlManager {
 		    pstmt.setObject(6, phone);
 		    pstmt.executeUpdate();
 		    pstmt.close();
+		    rs = st.executeQuery("SELECT LAST_INSERT_ID()");
+		    if (rs.next()){
+		    	id=rs.getInt("LAST_INSERT_ID()");
+		    }
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());
