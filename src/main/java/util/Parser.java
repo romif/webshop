@@ -146,11 +146,11 @@ public class Parser {
 				InputStream in = new BufferedInputStream(new URL(img.get(i)).openStream());
 				OutputStream out=new BufferedOutputStream(new FileOutputStream(new File(uploadStorage+id+".jpg")));
 				int j;
-				while ((j=in.read())!=-1)out.write(i);
+				while ((j=in.read())!=-1)out.write(j);
 				in.close();
 				out.close();
 				
-				System.out.println(i+". Added phone "+title.get(i));
+				System.out.println(i+1+". Added phone "+title.get(i));
 				
 				
 			} catch (IOException e) {
