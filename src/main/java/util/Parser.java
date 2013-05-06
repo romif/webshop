@@ -96,6 +96,15 @@ public class Parser {
 				
 				st=element.childNode(1).childNode(0).childNode(0).attr("src");
 				st=st.replaceAll("./TopmoBail_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail1_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail2_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail3_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail4_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail5_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail6_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail7_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail8_files", "http://topmobail.shop.by/pics/items");
+				st=st.replaceAll("./TopmoBail9_files", "http://topmobail.shop.by/pics/items");
 				st=st.replaceAll(" ", "%20");
 				img.add(st);
 				
@@ -215,7 +224,7 @@ public class Parser {
 						}	
 					}	
 				}
-				
+				//int id=10;
 				int id=SqlManager.AddPhone(phone);
 				String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures"+File.separator;
 				InputStream in = new BufferedInputStream(new URL(img.get(i)).openStream());
