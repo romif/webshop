@@ -108,40 +108,58 @@ public class Parser {
 		}
 		
 		
-		for (int i=0;i<10;i++){
+		for (int i=0;i<0;i++){
 			Phone phone=new Phone();
 			phone.put("Manufactor", title.get(i).split(" ")[0]);
 			phone.put("Title", title.get(i));
 			phone.put("Description", desc.get(i));
 			phone.put("firstPrice", firstPrice.get(i));
 			phone.put("secondPrice", secondPrice.get(i));
-			
 			try {
 				Connection connection= Jsoup.connect(href.get(i));
 				connection.timeout(10000);
 				doc = connection.get();
 				
-				Elements elements = doc.select(".pline2");
+				Elements elements = doc.select(".descBig [valign=top] tr");
+				
 				Iterator<Element> it=elements.iterator();
 				while (it.hasNext()) {
-					Node node=it.next();
-					//System.out.println(node.childNode(1).childNodeSize());
+					Element element=it.next();
 					String st="";
+					
+					Elements elements1 =element.getElementsContainingOwnText(name1.get(1));
+					if (!elements1.isEmpty())System.out.println(elements1);
+					/*if (node.childNodeSize()==5){
+						System.out.println(node.childNode(1).childNodeSize());
+						if (node.childNode(1).childNodeSize()>1){
+							System.out.println(node.childNode(1));
+							System.out.println(node.childNode(1).childNode(1));
+							System.out.println(node.childNode(1).childNode(2));
+						}
+						else System.out.println(node.childNode(1).childNode(0));
+						break;
+					}
+						//System.out.println(((Element) node.childNode(1).childNode(2)).text());
+						//st=((Element) node.childNode(1).childNode(1)).text();
+					
+					/*
 					if (node.childNode(1).childNodeSize()==1)
 						st=((Element) node.childNode(1).childNode(0)).text();
 					else if (node.childNode(1).childNodeSize()==3)
-						st=((Element) node.childNode(1).childNode(2)).html();
-					if (map.containsKey(st)) {
+						st=((Element) node.childNode(1).childNode(2)).html();*/
+
+					/*if (map.containsKey(st)) {
 						name2.add(st);
 						if (node.childNode(3).childNodeSize()>1){
 							if ( node.childNode(3).childNode(0).attr("alt").equals("Да"))
 								phone.put(map.get(st), "on");
 						}
-						else phone.put(map.get(st), ((Element) node.childNode(3)).html());
-					}
+						else phone.put(map.get(st), ((Element) node.childNode(3)).text());
+						//System.out.println(((Element) node.childNode(3)).text());
+					}*/
 				}
 				
-				int id=SqlManager.AddPhone(phone);
+				/*int id=SqlManager.AddPhone(phone);
 				String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures"+File.separator;
 				InputStream in = new BufferedInputStream(new URL(img.get(i)).openStream());
 				OutputStream out=new BufferedOutputStream(new FileOutputStream(new File(uploadStorage+id+".jpg")));
@@ -149,8 +167,9 @@ public class Parser {
 				while ((j=in.read())!=-1)out.write(j);
 				in.close();
 				out.close();
+				System.out.println(i+1+". Added phone "+title.get(i));*/
 				
-				System.out.println(i+1+". Added phone "+title.get(i));
+				System.out.println(phone);
 				
 				
 			} catch (IOException e) {
@@ -163,10 +182,59 @@ public class Parser {
 		
 		
 		
+		
+		for (int i=0;i<10;i++){
+			Phone phone=new Phone();
+			phone.put("Manufactor", title.get(i).split(" ")[0]);
+			phone.put("Title", title.get(i));
+			phone.put("Description", desc.get(i));
+			phone.put("firstPrice", firstPrice.get(i));
+			phone.put("secondPrice", secondPrice.get(i));
+			try {
+				Connection connection= Jsoup.connect(href.get(i));
+				connection.timeout(10000);
+				doc = connection.get();
+				Elements elements = doc.select(".descBig [valign=top]");
+				Iterator<Element> it=elements.iterator();
+				while (it.hasNext()) {
+					Element element=it.next();
+					if (element.childNodeSize()==3){
+						for (int j=0;j<name1.size() ;j++){
+							Elements elements1 =element.getElementsContainingText(name1.get(j));
+							Iterator<Element> it1=elements1.iterator();
+							while (it1.hasNext()) {
+								Element element1=it1.next();
+								if (element1.childNodeSize()==5){
+									if (element1.childNode(3).childNodeSize()>1){
+										if ( element1.childNode(3).childNode(0).attr("alt").equals("Да"))
+											phone.put(attr.get(j), "on");
+									}
+									else phone.put(attr.get(j), ((Element) element1.childNode(3)).text());
+								}
+							}
+						}	
+					}	
+				}
+				
+				int id=SqlManager.AddPhone(phone);
+				String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures"+File.separator;
+				InputStream in = new BufferedInputStream(new URL(img.get(i)).openStream());
+				OutputStream out=new BufferedOutputStream(new FileOutputStream(new File(uploadStorage+id+".jpg")));
+				int j;
+				while ((j=in.read())!=-1)out.write(j);
+				in.close();
+				out.close();
+				System.out.println(i+1+". Added phone "+title.get(i));
+				System.out.println(phone);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 
 		
 
-		//System.out.println(img);
+		System.out.println(name1);
 		//System.out.println(phones);
 
 	}
