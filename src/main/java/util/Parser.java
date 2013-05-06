@@ -183,7 +183,7 @@ public class Parser {
 		
 		
 		
-		for (int i=0;i<10;i++){
+		for (int i=0;i<150;i++){
 			Phone phone=new Phone();
 			phone.put("Manufactor", title.get(i).split(" ")[0]);
 			phone.put("Title", title.get(i));
