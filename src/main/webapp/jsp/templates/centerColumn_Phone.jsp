@@ -5,10 +5,33 @@
 <%@ page import="util.Phone"%>
 <%
 List<Phone> phones=SqlManager.GetPhones(request.getParameter("phone"));
+int page_size=20;
+if (request.getParameter("page_size")!=null) {
+	if (request.getParameter("page_size").equals("10"))page_size=10;
+	if (request.getParameter("page_size").equals("20"))page_size=20;
+	if (request.getParameter("page_size").equals("50"))page_size=50;
+}
+int page_id=1;
+if (request.getParameter("page_id")!=null) {
+	try {
+		page_id=Integer.parseInt(request.getParameter("page_id"));
+	}
+	catch (NumberFormatException e){
+		page_id=1;
+	}
+}
+int itemsNumber=Math.min(phones.size(),page_size);
+int begin=0;
+int end=itemsNumber;
+if ((page_id-1)*page_size<phones.size()){
+	begin=(page_id-1)*page_size;
+	end=Math.min(page_id*page_size,phones.size());
+}
+int maxPage=(int)Math.ceil((double)phones.size()/page_size);
 %>
 
 <ul id="sectionsTree">
-	<li class="firstSectionTree"><a href="/" alt="Главная">Главная</a>&nbsp;»&nbsp;</li>
+	<li class="firstSectionTree"><a href="/index" alt="Главная">Главная</a>&nbsp;»&nbsp;</li>
 	<li><%=request.getParameter("phone")%></li>
 </ul>
 <div style="clear:both;"></div>
@@ -46,18 +69,74 @@ List<Phone> phones=SqlManager.GetPhones(request.getParameter("phone"));
 				</tr>
 				<tr>
 					<td>Показано:&nbsp; с 
-						<span class="bold">1</span> &nbsp;по&nbsp; 
-						<span class="bold">8</span>
+						<span class="bold"><%=begin+1%></span> &nbsp;по&nbsp; 
+						<span class="bold"><%=end%></span>
 						<span class="num_pag">отображать по:&nbsp;
 							<select name="page" id="oppg" onchange="_chactionpg()">
-								<option value="?page_size=10&amp;page_id=1">10</option>
-								<option value="?page_size=20&amp;page_id=1" selected="">20</option>
-								<option value="?page_size=50&amp;page_id=1">50</option>
+								<option value="&page_size=10&amp;page_id=1" <%if (page_size==10){%>selected=""<%}%> >10</option>
+								<option value="&page_size=20&amp;page_id=1" <%if (page_size==20){%>selected=""<%}%> >20</option>
+								<option value="&page_size=50&amp;page_id=1" <%if (page_size==50){%>selected=""<%}%> >50</option>
 							</select>
 						</span>
 					</td>
 					<td>
-						<ul class="sortingBlockRight"></ul>
+						<ul class="sortingBlockRight">
+     <%if (page_id==4) {%>
+    <li id="first">
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id-3%>"><%=page_id-3%></a>
+    </li>
+    <%} %>
+    
+     <%if (page_id-4>0) {%>
+    <li id="first">
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=1">1</a>
+    </li>
+    <%} %>
+
+    <%if ((page_id-3>0)&&(page_id-3!=1)) {%>
+    <li>
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id-3%>">...</a>
+    </li>
+    <%} %>
+
+    <%if (page_id-2>0) {%>
+    <li>
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id-2%>"><%=page_id-2%></a>
+    </li>
+    <%} %>
+
+    <%if (page_id-1>0) {%>
+    <li>
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id-1%>"><%=page_id-1%></a>
+    </li>
+    <%} %>
+
+    <li class="razbAct"><span class="razbActText"><%=page_id%></span></li>
+
+    <%if (page_id+1<maxPage) {%>
+    <li>
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id+1%>"><%=page_id+1%></a>
+    </li>
+    <%} %>
+
+    <%if (page_id+2<maxPage) {%>
+    <li>
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id+2%>"><%=page_id+2%></a>
+    </li>
+    <%} %>
+
+    <%if (page_id+3<maxPage) {%>
+    <li>
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id+3%>">...</a>
+    </li>
+    <%} %>
+
+    <%if (page_id<maxPage) {%>
+    <li>
+      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=maxPage%>"><%=maxPage%></a>
+    </li>
+    <%} %>
+  </ul>
 					</td>
 				</tr>
 			</tbody>
@@ -65,29 +144,33 @@ List<Phone> phones=SqlManager.GetPhones(request.getParameter("phone"));
 	</div>
 </div>
 
-<%for (int i=0;i<Math.ceil((double)phones.size()/2);i++){%>
+<% 
+
+
+
+for (int i=begin;i<end;i+=2){%>
 
 <div class="itemRows">
 
 	<div class="leftItem">
 		<div class="itemBlockSmall">
-			<h3><a href="/index?phone=<%=((Phone)phones.get(i*2)).getId()%>" title="<%=((Phone)phones.get(i*2)).getTitle()%>"><%=((Phone)phones.get(i*2)).getTitle()%></a></h3>
+			<h3><a href="/index?phoneID=<%=((Phone)phones.get(i)).getId()%>" title="<%=((Phone)phones.get(i)).getTitle()%>"><%=((Phone)phones.get(i)).getTitle()%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2)).getTitle()%>" href="/index?phoneID=<%=((Phone)phones.get(i*2)).getId()%>">
-						<img alt="<%=((Phone)phones.get(i*2)).getTitle()%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2)).getId()%>">
+					<a title="<%=((Phone)phones.get(i)).getTitle()%>" href="/index?phoneID=<%=((Phone)phones.get(i)).getId()%>">
+						<img alt="<%=((Phone)phones.get(i)).getTitle()%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i)).getId()%>">
 					</a>
 				</div>
-				<div class="desc"><%=((Phone)phones.get(i*2)).getDescription()%><br><br>
+				<div class="desc"><%=((Phone)phones.get(i)).getDescription()%><br><br>
 				</div>
 				<div class="itemPrice">
 					<table class="priceTable" cellpadding="0" cellspacing="0">
 						<tbody>
 							<tr>
 								<td>
-									<span class="firstPrice"><%=((Phone)phones.get(i*2)).getFirstPrice()%>&nbsp;$</span>
+									<span class="firstPrice"><%=((Phone)phones.get(i)).getFirstPrice()%>&nbsp;$</span>
 									<span class="divider"><img src="/pics/blank.gif" alt=""></span>
-									<span class="secondPrice"><%=((Phone)phones.get(i*2)).getSecondPrice()%>&nbsp;руб.</span>
+									<span class="secondPrice"><%=((Phone)phones.get(i)).getSecondPrice()%>&nbsp;руб.</span>
 								</td>
 								<td>
 									<div class="buttons">
@@ -102,27 +185,28 @@ List<Phone> phones=SqlManager.GetPhones(request.getParameter("phone"));
 		</div>	
 	</div>
 	
-	<%if (i*2<phones.size()-1) {%>
+	<%
+	if (i<phones.size()-1) {%>
 	<div class="rightItem">
 		<div class="itemBlockSmall">
-			<h3><a href="/index?phone=<%=((Phone)phones.get(i*2+1)).getId()%>" 
-			title="<%=((Phone)phones.get(i*2+1)).getTitle()%>"><%=((Phone)phones.get(i*2+1)).getTitle()%></a></h3>
+			<h3><a href="/index?phoneID=<%=((Phone)phones.get(i+1)).getId()%>" 
+			title="<%=((Phone)phones.get(i+1)).getTitle()%>"><%=((Phone)phones.get(i+1)).getTitle()%></a></h3>
 			<div class="itemBlockCont">
 				<div class="iconItem">
-					<a title="<%=((Phone)phones.get(i*2+1)).getTitle()%>" href="/index?phoneID=<%=((Phone)phones.get(i*2+1)).getId()%>">
-						<img alt="<%=((Phone)phones.get(i*2+1)).getTitle()%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i*2+1)).getId()%>">
+					<a title="<%=((Phone)phones.get(i+1)).getTitle()%>" href="/index?phoneID=<%=((Phone)phones.get(i+1)).getId()%>">
+						<img alt="<%=((Phone)phones.get(i+1)).getTitle()%>" src="http://tomcat7-romif.rhcloud.com/picture?pic=<%=((Phone)phones.get(i+1)).getId()%>">
 					</a>
 				</div>
-				<div class="desc"><%=((Phone)phones.get(i*2+1)).getDescription()%><br><br>
+				<div class="desc"><%=((Phone)phones.get(i+1)).getDescription()%><br><br>
 				</div>
 				<div class="itemPrice">
 					<table class="priceTable" cellpadding="0" cellspacing="0">
 						<tbody>
 							<tr>
 								<td>
-									<span class="firstPrice"><%=((Phone)phones.get(i*2+1)).getFirstPrice()%>&nbsp;$</span>
+									<span class="firstPrice"><%=((Phone)phones.get(i+1)).getFirstPrice()%>&nbsp;$</span>
 									<span class="divider"><img src="/pics/blank.gif" alt=""></span>
-									<span class="secondPrice"><%=((Phone)phones.get(i*2+1)).getSecondPrice()%>&nbsp;руб.</span>
+									<span class="secondPrice"><%=((Phone)phones.get(i+1)).getSecondPrice()%>&nbsp;руб.</span>
 								</td>
 								<td>
 									<div class="buttons">

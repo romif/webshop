@@ -11,7 +11,7 @@
 			<div class="ms sep1"></div>
 			<div class="mi"><div class="level1"><a href="/index?phone=Nokia" alt="Nokia">Nokia</a></div></div>
 			<div class="ms sep1"></div>
-			<div class="mi"><div class="level1"><a href="/index?phone=Samsung alt="Samsung">Samsung</a></div></div>
+			<div class="mi"><div class="level1"><a href="/index?phone=Samsung" alt="Samsung">Samsung</a></div></div>
 			<div class="ms sep1"></div>
 			<div class="mi"><div class="level1"><a href="/index?phone=Sony" alt="Sony">Sony</a></div></div>
 			<div class="ms sep1"></div>

@@ -354,41 +354,29 @@ public final class SqlManager {
 			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			cn.setAutoCommit(false);
 			String READ_OBJECT_SQL = 
-					"SELECT Phones.PhoneID, Phones.Map FROM Phones, Manuf_IDs " +
+					"SELECT Phones.PhoneID, Phones.Title, Phones.Description, Phones.FirstPrice,Phones.SecondPrice " +
+					"FROM Phones, Manuf_IDs " +
 					"WHERE ((Manuf_IDs.Manuf=?) AND (Manuf_IDs.ManufId=Phones.ManufId))";
 			PreparedStatement pstmt = cn.prepareStatement(READ_OBJECT_SQL);
 			pstmt.setString(1, manufacture);
 			rs = pstmt.executeQuery();
 			while (rs.next()){
-				Blob blob = (Blob)rs.getBlob("Map");
+				/*Blob blob = (Blob)rs.getBlob("Map");
 				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
-				Phone phone=(Phone)in.readObject();
+				Phone phone=(Phone)in.readObject();*/
+				Phone phone=new Phone();
+				phone.put("Title",rs.getString("Title"));
+				phone.put("Description",rs.getString("Description"));
+				phone.put("firstPrice",rs.getString("firstPrice"));
+				phone.put("secondPrice",rs.getString("secondPrice"));
 				phone.setId(rs.getInt("PhoneID"));
 				phones.add(phone);
 			}
-				
-			/*st = cn.createStatement(); 
-			rs = st.executeQuery("SELECT Phones.PhoneID,Phones.FullDescription " +
-								 "FROM Phones, Manuf_IDs "+
-								 "WHERE (Manuf_IDs.Manuf='"+manufacture+"') " +
-									"AND (Manuf_IDs.ManufId=Phones.ManufId)"); 
-			while (rs.next()){
-				Phone phone=new Phone();
-				String[] FullDiscription=rs.getString("FullDescription").split(";");
-				for (int i=0;i<FullDiscription.length-1;i+=2){
-					phone.put(FullDiscription[i], FullDiscription[i+1]);
-				}
-				phone.setId(rs.getInt("PhoneID"));
-				phones.add(phone);
-			}*/
-			
 		} catch (SQLException ex) {            
             System.out.println(ex.toString());
         } catch (ClassNotFoundException ex) {            
             System.out.println(ex.toString());
-        } catch (IOException e) {
-			e.printStackTrace();
-		} 
+        } 
 		finally {
 			try{
 				if (rs != null) rs.close(); 
@@ -456,16 +444,6 @@ public final class SqlManager {
 				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
 				phone=(Phone)in.readObject();
 			}	
-			/*st = cn.createStatement(); 
-			rs = st.executeQuery("SELECT PhoneID,FullDescription FROM Phones "
-					+"WHERE PhoneID='"+phoneId+"'"); 
-			if (rs.next()){
-				String[] FullDiscription=rs.getString("FullDescription").split(";");
-				for (int i=0;i<FullDiscription.length-1;i+=2){
-					phone.put(FullDiscription[i], FullDiscription[i+1]);
-				}
-				phone.setId(rs.getInt("PhoneID"));
-			}*/
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());

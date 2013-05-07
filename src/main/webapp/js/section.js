@@ -6,13 +6,13 @@ $(document).ready (function()
 $(window).load (function()
 		{
 			  if($('#vlightbox').css('display')=='block') {
-					// отображение лупы, если картинка больше заданной в макете
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 					if ($('#img_ico0').width() > 294 ){
 						$("#view_big").addClass("lups");
 						$("#view_big").click(function() {
 						ShowGallery()});
 					}
-						//инициализация плагина галереи
+						//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						  	 window.Lightbox = new jQuery().visualLightbox({
 						        borderSize: 57,
 						        classNames: 'vlightbox',
@@ -28,7 +28,7 @@ $(window).load (function()
 					}
 		});
 
-//Функция показывает в блоке изображение связанное с иконкой 
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 function show_image(url_img, id) {
 	$("#item_img").attr( {src : url_img});
 	$("#view_big").unbind("click");
@@ -45,7 +45,7 @@ function show_image(url_img, id) {
 	$("a." + id).addClass("sel");
 };
 
-// Функция вызывает показ галереи
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 function ShowGallery() {
 	var click_id=$('#view_big').attr('temp_id');
 	$('a#'+click_id).click();
@@ -56,8 +56,10 @@ function _chactionpg()
 	formoptiopn = document.getElementById('oppg');
 	if (formoptiopn.options[formoptiopn.selectedIndex].value)
 	{
-		if (formoptiopn.options[formoptiopn.selectedIndex].value != '')
-			document.location = formoptiopn.options[formoptiopn.selectedIndex].value
+		if (formoptiopn.options[formoptiopn.selectedIndex].value != ''){
+			var phone=window.location.search.substring(1).split("&")[0];
+			document.location = '?'+phone+formoptiopn.options[formoptiopn.selectedIndex].value
+		}
 	}
 }
 
@@ -84,7 +86,7 @@ function chactionpg(elem)
 {
 	document.location.href = elem.options[elem.selectedIndex].value;
 }
-/*проверка формы обратной связи*/
+/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ*/
 function CkeckFeedBack() {
 	var param = 'no';
 	var errorArr = [];
@@ -119,9 +121,9 @@ function CkeckFeedBack() {
 				errorNomer = errorArr[param][1];
 				id = errorArr[param][0];
 				if (errorNomer == 1) {
-					$('#'+id+'_error').html('Заполните поле');
+					$('#'+id+'_error').html('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ');
 				} else {
-					$('#'+id+'_error').html('Исправьте данные в поле');
+					$('#'+id+'_error').html('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ');
 				}
 				$('#'+id+'_error').show();
 				$('#'+id).addClass('borderError');
@@ -131,16 +133,16 @@ function CkeckFeedBack() {
 				$('#'+idName+'_error').hide();
 			}
 		}
-		alert('К сожалению, сообщение не может быть отправлено.\nПожалуйста, исправьте неточности в заполнении формы.');
+		alert('пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.');
 		return false;
 	} else {
 	
 		$.post("/captcha/captcha.php", {captcha: document.getElementById('captcha').value, mode: "check"} , function(data, status){
 			if(data==1){
-				alert('Сообщение успешно отправлено!\nПостараемся ответить Вам как можно скорее.');
+				alert('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.');
 				$("#form1").submit();
 			}else{
-				alert("Число с картинки введено неверно!");
+				alert("пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
 			}
 		});
 	
