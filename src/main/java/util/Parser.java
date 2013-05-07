@@ -229,7 +229,7 @@ public class Parser {
 				String uploadStorage=System.getenv("OPENSHIFT_DATA_DIR")+File.separator+"pictures"+File.separator;
 				InputStream in = new BufferedInputStream(new URL(img.get(i)).openStream());
 				OutputStream out=new BufferedOutputStream(new FileOutputStream(new File(uploadStorage+id+".jpg")));
-				int j;
+				int j=0;
 				while ((j=in.read())!=-1)out.write(j);
 				in.close();
 				out.close();
