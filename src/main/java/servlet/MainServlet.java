@@ -19,13 +19,9 @@ import org.jdom.JDOMException;
 
 import util.User;
 
-
-
-
 public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
-	public static Map<String,User> loggedUsers=new HashMap<String,User>();
-	public static Map<String,String> restoreCodes=new HashMap<String,String>();
-
+	public static Map<String, User> loggedUsers = new HashMap<String, User>();
+	public static Map<String, String> restoreCodes = new HashMap<String, String>();
 
 	/**
 	 * 
@@ -35,41 +31,43 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 	public MainServlet() {
 		super();
 		try {
-			System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(
-					System.getenv("OPENSHIFT_DATA_DIR") + "Logs")),true));
-			System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream(
-					System.getenv("OPENSHIFT_DATA_DIR") + "Logs")),true));
+			System.setOut(new PrintStream(new BufferedOutputStream(
+					new FileOutputStream(System.getenv("OPENSHIFT_DATA_DIR")
+							+ "Logs")), true));
+			System.setErr(new PrintStream(new BufferedOutputStream(
+					new FileOutputStream(System.getenv("OPENSHIFT_DATA_DIR")
+							+ "Logs")), true));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-	}
-	protected void doGet(HttpServletRequest request,HttpServletResponse response)
-	throws ServletException, IOException{
-		processRequest(request, response);
-		}
-	
-	protected void doPost(HttpServletRequest request,HttpServletResponse response)
-	throws ServletException, IOException{
-		processRequest(request, response);
-		}
-	
-	private void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
-		HttpSession session=request.getSession();
-		String user_id=(String)session.getAttribute("user_id");
-		if (user_id==null){
-			user_id=session.getId();
+	}
+
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	private void processRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		if (user_id == null) {
+			user_id = session.getId();
 			session.setAttribute("user_id", user_id);
 		}
 		String page = null;
-		//page="/jsp/Index.jsp";
-		page=RequestDecoder.getInstance().getPage(request, response);
-		if (page!=null){
-			RequestDispatcher dispatcher =getServletContext().getRequestDispatcher(page);
+		// page="/jsp/Index.jsp";
+		page = RequestDecoder.getInstance().getPage(request, response);
+		if (page != null) {
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher(page);
 			dispatcher.forward(request, response);
 		}
 	}

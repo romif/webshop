@@ -46,11 +46,11 @@ function find_form(id) {
 	
 	if (!error.length) {
 		
-		var price_before = find_form.find('#price_before_new').val()!=""?price_before:'';
+		/*var price_before = find_form.find('#price_before_new').val()!=""?price_before:'';
 		find_form.find('#price_before').attr('value',price_before);
 		
 		var price_after = find_form.find('#price_after_new').val()!=""?price_after:'';
-		find_form.find('#price_after').attr('value',price_after);
+		find_form.find('#price_after').attr('value',price_after);*/
 		
 		$('#f'+id).submit();	
 	} else {
@@ -63,6 +63,7 @@ function find_form(id) {
 			console.groupEnd();			
 		}
 		alert('Неправильно заполнены поля поиска.');
+		return false;
 	}	
 	return false;
 }

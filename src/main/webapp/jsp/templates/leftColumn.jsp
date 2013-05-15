@@ -8,7 +8,7 @@
 		<input name="findtext" maxlength="20" alt="Поиск" type="text" class="find_txt">
 		<button id="button_search" class="png"></button>
 	</form>
-	<a href="http://topmobail.shop.by/find/">Расширенный поиск</a>
+	<a href="/index?findtext">Расширенный поиск</a>
 </div>
 
 <div id="leftColCont">

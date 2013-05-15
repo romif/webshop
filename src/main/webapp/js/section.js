@@ -78,8 +78,10 @@ function _chaction()
 	formoptiopn = document.getElementById('optd');
 	if (formoptiopn.options[formoptiopn.selectedIndex].value)
 	{
-		if (formoptiopn.options[formoptiopn.selectedIndex].value != '')
-			document.location = formoptiopn.options[formoptiopn.selectedIndex].value
+		if (formoptiopn.options[formoptiopn.selectedIndex].value != ''){
+			var phone=window.location.search.substring(1).split("&")[0];
+			document.location = '?'+phone+formoptiopn.options[formoptiopn.selectedIndex].value;
+		}
 	}
 }
 function chactionpg(elem)
