@@ -574,9 +574,60 @@ public final class SqlManager {
 		return map; 
 	}
 	
+	
+	public static List<Phone> SearchPhones(String search){
+		Connection cn = null;
+		Statement st = null; 
+		ResultSet rs = null; 
+		List<Phone> phones=new ArrayList<Phone>();
+		System.out.println(search);
+		try {
+			Class.forName(driver); 
+			cn = DriverManager.getConnection(url+DBName,userName, password); 
+			cn.setAutoCommit(false);
+			String READ_OBJECT_SQL = 
+					"SELECT PhoneID, Title, Description, FirstPrice,SecondPrice " +
+					"FROM Phones " +
+					"WHERE (Title LIKE '%"+search+"%') OR (Description LIKE '%"+search+"%')";
+			PreparedStatement pstmt = cn.prepareStatement(READ_OBJECT_SQL);
+			/*pstmt.setString(1, search);
+			pstmt.setString(2, search);*/
+			rs = pstmt.executeQuery();
+			while (rs.next()){
+				/*Blob blob = (Blob)rs.getBlob("Map");
+				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
+				Phone phone=(Phone)in.readObject();*/
+				Phone phone=new Phone();
+				phone.put("Title",rs.getString("Title"));
+				phone.put("Description",rs.getString("Description"));
+				phone.put("firstPrice",rs.getString("firstPrice"));
+				phone.put("secondPrice",rs.getString("secondPrice"));
+				phone.setId(rs.getInt("PhoneID"));
+				phones.add(phone);
+			}		
+		}
+		catch (SQLException ex) {            
+            System.out.println(ex.toString());
+        } 
+		catch (ClassNotFoundException ex) {            
+            System.out.println(ex.toString());
+        } 
+		finally {
+			try{
+				if (rs != null) rs.close(); 
+				if (st != null) st.close(); 
+				if (cn != null) cn.close(); 
+			}
+			catch (SQLException ex) {            
+	            System.out.println(ex.toString());
+	        }
+		} 
+		return phones; 
+	}
+	
 	public static void main(String[] args){
 		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
-		System.out.print(SqlManager.GetTitles(1));
+		System.out.print(SqlManager.SearchPhones("Каждому"));
 
 	}
 

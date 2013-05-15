@@ -1,21 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@ page import="java.util.List"%>
+<%@ page import="java.util.*"%>
 <%@ page import="util.sql.SqlManager"%>
 <%@ page import="util.Phone"%>
 <%@ page import="java.util.Collections"%>
 
 
 <%
+String mainParameter="";
 List<Phone> phones=null;
-if (request.getParameter("phone")!=null)
+if (request.getParameter("phone")!=null){
 	phones=SqlManager.GetPhones(request.getParameter("phone"));
-if (request.getParameter("findtext")!=null){
+	mainParameter="phone="+request.getParameter("phone");
+}
+else if (request.getParameter("findtext")!=null){
+	mainParameter="findtext="+new String(request.getParameter("findtext").getBytes("iso-8859-1"), "UTF-8");
+	if (request.getParameter("price_before_new")!=null)mainParameter+="price_before_new="+request.getParameter("price_before_new");
+	if (request.getParameter("price_after_new")!=null)mainParameter+="price_after_new="+request.getParameter("price_after_new");
 	if (request.getParameter("findtext").equals(""))
-			phones=new ArrayList();
+		phones=new ArrayList();
 	else
-		phones=SqlManager.GetPhones(request.getParameter("findtext")
-});
+		phones=SqlManager.SearchPhones(new String(request.getParameter("findtext").getBytes("iso-8859-1"), "UTF-8"));
+};
 %>
 <div class="sortRazbItems">
 <%
@@ -115,31 +121,31 @@ int maxPage=(int)Math.ceil((double)phones.size()/page_size);
 						<ul class="sortingBlockRight">
      <%if (page_id==4) {%>
     <li id="first">
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id-3%>&sort=<%=sort%>"><%=page_id-3%></a>
+      <a href="?<%=mainParameter%>&page_size=<%=page_size%>&page_id=<%=page_id-3%>&sort=<%=sort%>"><%=page_id-3%></a>
     </li>
     <%} %>
     
      <%if (page_id-4>0) {%>
     <li id="first">
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=1&sort=<%=sort%>">1</a>
+      <a href="?<%=mainParameter%>&page_size=<%=page_size%>&page_id=1&sort=<%=sort%>">1</a>
     </li>
     <%} %>
 
     <%if ((page_id-3>0)&&(page_id-3!=1)) {%>
     <li>
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id-3%>&sort=<%=sort%>">...</a>
+      <a href="?<%=mainParameter%>>&page_size=<%=page_size%>&page_id=<%=page_id-3%>&sort=<%=sort%>">...</a>
     </li>
     <%} %>
 
     <%if (page_id-2>0) {%>
     <li>
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id-2%>&sort=<%=sort%>"><%=page_id-2%></a>
+      <a href="?<%=mainParameter%>&page_size=<%=page_size%>&page_id=<%=page_id-2%>&sort=<%=sort%>"><%=page_id-2%></a>
     </li>
     <%} %>
 
     <%if (page_id-1>0) {%>
     <li>
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id-1%>&sort=<%=sort%>"><%=page_id-1%></a>
+      <a href="?<%=mainParameter%>&page_size=<%=page_size%>&page_id=<%=page_id-1%>&sort=<%=sort%>"><%=page_id-1%></a>
     </li>
     <%} %>
 
@@ -147,25 +153,25 @@ int maxPage=(int)Math.ceil((double)phones.size()/page_size);
 
     <%if (page_id+1<maxPage) {%>
     <li>
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id+1%>&sort=<%=sort%>"><%=page_id+1%></a>
+      <a href="?<%=mainParameter%>&page_size=<%=page_size%>&page_id=<%=page_id+1%>&sort=<%=sort%>"><%=page_id+1%></a>
     </li>
     <%} %>
 
     <%if (page_id+2<maxPage) {%>
     <li>
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id+2%>&sort=<%=sort%>"><%=page_id+2%></a>
+      <a href="?<%=mainParameter%>&page_size=<%=page_size%>&page_id=<%=page_id+2%>&sort=<%=sort%>"><%=page_id+2%></a>
     </li>
     <%} %>
 
     <%if (page_id+3<maxPage) {%>
     <li>
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=page_id+3%>&sort=<%=sort%>">...</a>
+      <a href="?<%=mainParameter%>&page_size=<%=page_size%>&page_id=<%=page_id+3%>&sort=<%=sort%>">...</a>
     </li>
     <%} %>
 
     <%if (page_id<maxPage) {%>
     <li>
-      <a href="?phone=<%=request.getParameter("phone")%>&page_size=<%=page_size%>&page_id=<%=maxPage%>&sort=<%=sort%>"><%=maxPage%></a>
+      <a href="?<%=mainParameter%>&page_size=<%=page_size%>&page_id=<%=maxPage%>&sort=<%=sort%>"><%=maxPage%></a>
     </li>
     <%} %>
   </ul>

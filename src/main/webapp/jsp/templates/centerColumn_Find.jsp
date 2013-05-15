@@ -28,7 +28,8 @@
                 <td class="in">Найти:</td>
 
                 <td class="inpSearch">
-                  <input type="text" name="findtext" id="findtext2" value="">
+                  <input type="text" name="findtext" id="findtext2" 
+                  value="<%=new String(request.getParameter("findtext").getBytes("iso-8859-1"), "UTF-8")%>">
                 </td>
               </tr>
 
@@ -40,11 +41,13 @@
                   <input type="hidden" id="course" value="8650">
                     <label>от
                       <input type="text" id="price_before_new" name="price_before_new" class="fprice" 
-                      maxlength="9" max-size="9" value="">
+                      maxlength="9" max-size="9" 
+                      value="<%if (request.getParameter("price_before_new"!=null) out.print(request.getParameter("price_before_new"));%>">
                      </label>
                      <label>до
                        <input type="text" id="price_after_new" name="price_after_new" class="fprice" 
-                       maxlengthh="9" max-size="9" value="">
+                       maxlengthh="9" max-size="9" 
+                       value="<%if (request.getParameter("price_after_new")!=null)out.print(request.getParameter("price_after_new"));%>">
                      </label>
                    </td>
               </tr>
@@ -78,5 +81,8 @@
       </form>
     </div>
 
+
+<%if ((request.getParameter("findtext")!=null)&&(!request.getParameter("findtext").equals(""))){%>
 <jsp:include page='/jsp/templates/centerColumn_ShowPhones.jsp'/>
+<%}%>
 
