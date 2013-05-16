@@ -2,6 +2,8 @@ package util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import javax.xml.namespace.QName;
@@ -15,6 +17,7 @@ import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
+import org.joda.time.DateTime;
 
 public class Soap {
 
@@ -45,7 +48,8 @@ public class Soap {
 		QName bodyName = new QName("http://www.nbrb.by/","ExRatesDaily");
 		SOAPBodyElement bodyElement = body.addBodyElement(bodyName);
 		SOAPElement symbol = bodyElement.addChildElement("onDate");
-		symbol.addTextNode("2012-07-29T02:50:43.2324");
+		symbol.addTextNode(DateTime.now().toString());
+		
 		
 		SOAPConnection connection = SOAPConnectionFactory.newInstance().createConnection();
 		SOAPMessage response = connection.call(message, "http://www.nbrb.by/Services/ExRates.asmx");
@@ -62,10 +66,12 @@ public class Soap {
 		}
 		
 		//System.out.println(getXmlFromSOAPMessage(message));
-		//System.out.println(getXmlFromSOAPMessage(response));
+		System.out.println(getXmlFromSOAPMessage(response));
 		Iterator it=returnElement.getAllAttributesAsQNames();
 		while (it.hasNext())
 		System.out.print(it.next());
+		
+		//System.out.println(DateTime.now());
 
 	}
 
