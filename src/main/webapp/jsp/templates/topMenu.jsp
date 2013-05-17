@@ -1,20 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="Windows-1251"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ page import="servlet.*"%>
 <table><tbody><tr id="topMenuRow">
-<td><a href="${pageContext.request.contextPath}/index" class=main alt="Главная">Главная</a></td>
-<td><a href="${pageContext.request.contextPath}/index" alt="Корзина">Корзина</a></td>
-<td><a href="${pageContext.request.contextPath}/index" alt="О магазине">О магазине</a></td>
-<td><a href="${pageContext.request.contextPath}/index" alt="Обратная связь">Обратная связь</a></td>
-<td><a href="${pageContext.request.contextPath}/index" alt="Сравнить">Сравнить</a></td>
-<td><a href="${pageContext.request.contextPath}/index" alt="Расширенный поиск">Расширенный поиск</a></td>
-<td><a href="${pageContext.request.contextPath}/index?mode=delivery" class=delivery alt="Доставка и оплата">Доставка и оплата</a></td>
+
+<%String mode="";
+if (request.getParameter("mode")!=null) mode=request.getParameter("mode");
+%>
+
+<td><a href="/index" class=main alt="Р“Р»Р°РІРЅР°СЏ"
+<%if (!request.getParameterNames().hasMoreElements()){%>id="active"<%}%> >Р“Р»Р°РІРЅР°СЏ</a></td>
+
+<td><a href="/index" alt="РљРѕСЂР·РёРЅР°">РљРѕСЂР·РёРЅР°</a></td>
+
+<td><a href="/index" alt="Рћ РјР°РіР°Р·РёРЅРµ">Рћ РјР°РіР°Р·РёРЅРµ</a></td>
+
+<!-- <td><a href="${pageContext.request.contextPath}/index" alt="РћР±СЂР°С‚РЅР°СЏ СЃРІСЏР·СЊ">РћР±СЂР°С‚РЅР°СЏ СЃРІСЏР·СЊ</a></td>
+<td><a href="${pageContext.request.contextPath}/index" alt="РЎСЂР°РІРЅРёС‚СЊ">РЎСЂР°РІРЅРёС‚СЊ</a></td>  -->
+
+<td><a href="/index?findtext" alt="Р Р°СЃС€РёСЂРµРЅРЅС‹Р№ РїРѕРёСЃРє"
+<%if (request.getParameter("findtext")!=null){%>id="active"<%}%> >Р Р°СЃС€РёСЂРµРЅРЅС‹Р№ РїРѕРёСЃРє</a></td>
+
+<td><a href="/index?mode=delivery" class=delivery alt="Р”РѕСЃС‚Р°РІРєР° Рё РѕРїР»Р°С‚Р°"
+<%if (mode.equals("delivery")){%>id="active"<%}%> >
+Р”РѕСЃС‚Р°РІРєР° Рё РѕРїР»Р°С‚Р°</a></td>
+
 <%if ((MainServlet.loggedUsers.containsKey(request.getSession().getId()))&&
 	(MainServlet.loggedUsers.get(request.getSession().getId())).getAccess().equals("admin"))
 {%>
-<td><a href="${pageContext.request.contextPath}/index?mode=edit" alt="Редактор товаров">Редактор</a></td>
+<td><a href="/index?mode=edit" alt="Р РµРґР°РєС‚РѕСЂ С‚РѕРІР°СЂРѕРІ"
+<%if (mode.equals("edit")){%>id="active"<%}%>>Р РµРґР°РєС‚РѕСЂ</a></td>
 <%}%>
 </tr></tbody></table>
 
-<script type="text/javascript">
+<!--  <script type="text/javascript">
 	document.getElementById('topMenu').getElementsByClassName(getQueryParameter('mode'))[0].setAttribute('id', 'active');	
-</script>
+</script>-->

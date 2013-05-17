@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.jdom.JDOMException;
-
+import util.Currency;
 import util.User;
 
 public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 	public static Map<String, User> loggedUsers = new HashMap<String, User>();
 	public static Map<String, String> restoreCodes = new HashMap<String, String>();
+	public static Map<String, Float> Currencies = new HashMap<String, Float>();
 
 	/**
 	 * 
@@ -40,6 +40,8 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		new Thread(new Currency()).start();
+
 
 	}
 

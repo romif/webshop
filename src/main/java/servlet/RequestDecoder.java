@@ -59,6 +59,36 @@ public class RequestDecoder<MultipartRequestWrapper> {
 		if (request.getParameter("findtext") != null) {
 			return "/jsp/Find.jsp";
 		}
+		
+		if (request.getParameter("shcart") != null) {
+			return "/jsp/templates/win_basket.jsp";
+		}
+		
+		if (request.getParameter("isLogged") != null) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			if (MainServlet.loggedUsers.get(request.getSession().getId())!=null)
+				out.print(1);
+			else out.print(0);
+			out.flush();
+			out.close();
+			return null;
+		}
+		
+		if (request.getParameter("addItem") != null) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			User user=MainServlet.loggedUsers.get(request.getSession().getId());
+			if (user!=null){
+				if (user.addItem(request.getParameter("addItem")))
+					out.print(1);
+				else out.print(0);
+			}
+			else out.print(0);
+			out.flush();
+			out.close();
+			return null;
+		}
 
 		if (request.getParameter("getPhone") != null) {
 			JSONObject array = new JSONObject();

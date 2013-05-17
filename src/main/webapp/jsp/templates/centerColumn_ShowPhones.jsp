@@ -15,12 +15,10 @@ if (request.getParameter("phone")!=null){
 }
 else if (request.getParameter("findtext")!=null){
 	mainParameter="findtext="+new String(request.getParameter("findtext").getBytes("iso-8859-1"), "UTF-8");
-	if (request.getParameter("price_before_new")!=null)mainParameter+="price_before_new="+request.getParameter("price_before_new");
-	if (request.getParameter("price_after_new")!=null)mainParameter+="price_after_new="+request.getParameter("price_after_new");
-	if (request.getParameter("findtext").equals(""))
-		phones=new ArrayList();
-	else
-		phones=SqlManager.SearchPhones(new String(request.getParameter("findtext").getBytes("iso-8859-1"), "UTF-8"));
+	if (request.getParameter("price_before_new")!=null)mainParameter+="&price_before_new="+request.getParameter("price_before_new");
+	if (request.getParameter("price_after_new")!=null)mainParameter+="&price_after_new="+request.getParameter("price_after_new");
+	phones=SqlManager.SearchPhones(new String(request.getParameter("findtext").getBytes("iso-8859-1"), "UTF-8"),
+			request.getParameter("price_before_new"),request.getParameter("price_after_new"));
 };
 %>
 <div class="sortRazbItems">
@@ -53,9 +51,10 @@ if (request.getParameter("page_size")!=null) {
 	if (request.getParameter("page_size").equals("50"))page_size=50;
 }
 int page_id=1;
+int maxPage=(int)Math.ceil((double)phones.size()/page_size);
 if (request.getParameter("page_id")!=null) {
 	try {
-		page_id=Integer.parseInt(request.getParameter("page_id"));
+		page_id=Math.min(Integer.parseInt(request.getParameter("page_id")),maxPage);
 	}
 	catch (NumberFormatException e){
 		page_id=1;
@@ -68,7 +67,7 @@ if ((page_id-1)*page_size<phones.size()){
 	begin=(page_id-1)*page_size;
 	end=Math.min(page_id*page_size,phones.size());
 }
-int maxPage=(int)Math.ceil((double)phones.size()/page_size);
+
 %>
 	<div class="findButton">
 		<table cellspacing="0" cellpadding="0" width="100%" id="navig_line">
@@ -81,23 +80,23 @@ int maxPage=(int)Math.ceil((double)phones.size()/page_size);
 						<div class="sort">
 							<span>Сортировка:&nbsp;</span>
 							<select name="sort" class="sortsel" id="optd" onchange="_chaction()">
-							<option value="&page_id=<%=page_id%>&page_size=<%=page_size%>"
+							<option value=""
 							<%if (sort.equals("")){%>selected=""<%}%> >
 								Без сортировки
 							</option>
-							<option value="&sort=price&page_id=<%=page_id%>&page_size=<%=page_size%>" 
+							<option value="price" 
 							<%if (sort.equals("price")){%>selected=""<%}%> >
 								Начать с дешевых
 							</option>
-							<option value="&sort=price_desc&page_id=<%=page_id%>&page_size=<%=page_size%>"
+							<option value="price_desc"
 							<%if (sort.equals("price_desc")){%>selected=""<%}%> >
 								Начать с дорогих
 							</option>
-							<option value="&sort=name&page_id=<%=page_id%>&page_size=<%=page_size%>"
+							<option value="name"
 							<%if (sort.equals("name")){%>selected=""<%}%> >
 								Название А-Я
 							</option>
-							<option value="&sort=name_desc&page_id=<%=page_id%>&page_size=<%=page_size%>"
+							<option value="name_desc"
 							<%if (sort.equals("name_desc")){%>selected=""<%}%> >
 								Название Я-А
 							</option>
@@ -111,9 +110,9 @@ int maxPage=(int)Math.ceil((double)phones.size()/page_size);
 						<span class="bold"><%=end%></span>
 						<span class="num_pag">отображать по:&nbsp;
 							<select name="page" id="oppg" onchange="_chactionpg()">
-								<option value="&page_size=10&amp;page_id=1&sort=<%=sort%>" <%if (page_size==10){%>selected=""<%}%> >10</option>
-								<option value="&page_size=20&amp;page_id=1&sort=<%=sort%>" <%if (page_size==20){%>selected=""<%}%> >20</option>
-								<option value="&page_size=50&amp;page_id=1&sort=<%=sort%>" <%if (page_size==50){%>selected=""<%}%> >50</option>
+								<option value="10" <%if (page_size==10){%>selected=""<%}%> >10</option>
+								<option value="20" <%if (page_size==20){%>selected=""<%}%> >20</option>
+								<option value="50" <%if (page_size==50){%>selected=""<%}%> >50</option>
 							</select>
 						</span>
 					</td>
@@ -245,7 +244,7 @@ int maxPage=(int)Math.ceil((double)phones.size()/page_size);
 								</td>
 								<td>
 									<div class="buttons">
-										<a class="buyButton" title="Купить" href="javascript:add_item(<%=((Phone)phones.get(i)).getId()%>)"><img src="/pics/blank.gif" alt=""></a>
+										<a class="buyButton" title="Купить" href="javascript:add_item(<%=((Phone)phones.get(i+1)).getId()%>)"><img src="/pics/blank.gif" alt=""></a>
 									</div>
 								</td>
 							</tr>

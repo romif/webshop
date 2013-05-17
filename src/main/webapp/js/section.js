@@ -57,8 +57,24 @@ function _chactionpg()
 	if (formoptiopn.options[formoptiopn.selectedIndex].value)
 	{
 		if (formoptiopn.options[formoptiopn.selectedIndex].value != ''){
-			var phone=window.location.search.substring(1).split("&")[0];
-			document.location = '?'+phone+formoptiopn.options[formoptiopn.selectedIndex].value
+			var url=window.location.search.substring(1).split("&");
+			var bool=true;
+			for (i=0;i<url.length;i++){
+				if (url[i].split("=")[0]=='page_size'){
+					url[i]='page_size='+formoptiopn.options[formoptiopn.selectedIndex].value;
+					bool=false;
+				}
+				if (url[i].split("=")[0]=='page_id'){
+					url[i]='page_id=1';
+				}
+			}
+			var url1='?';
+			for (i=0;i<url.length;i++){
+				url1+=url[i];
+				if (i<url.length-1)url1+='&';
+			}
+			if (bool)url1+='&page_size='+formoptiopn.options[formoptiopn.selectedIndex].value;
+			document.location = url1;
 		}
 	}
 }
@@ -79,8 +95,23 @@ function _chaction()
 	if (formoptiopn.options[formoptiopn.selectedIndex].value)
 	{
 		if (formoptiopn.options[formoptiopn.selectedIndex].value != ''){
-			var phone=window.location.search.substring(1).split("&")[0];
-			document.location = '?'+phone+formoptiopn.options[formoptiopn.selectedIndex].value;
+			var url=window.location.search.substring(1).split("&");
+			var bool=true;
+			for (i=0;i<url.length;i++){
+				if (url[i].split("=")[0]=='sort'){
+					url[i]='sort='+formoptiopn.options[formoptiopn.selectedIndex].value;
+					bool=false;
+					break;
+				}
+			}
+			var url1='?';
+			for (i=0;i<url.length;i++){
+				url1+=url[i];
+				if (i<url.length-1)url1+='&';
+			}
+			if (bool)url1+='&sort='+formoptiopn.options[formoptiopn.selectedIndex].value;
+			document.location = url1;
+			//document.location = '?'+phone+formoptiopn.options[formoptiopn.selectedIndex].value;
 		}
 	}
 }

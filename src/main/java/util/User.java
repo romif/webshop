@@ -1,5 +1,10 @@
 package util;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import util.sql.SqlManager;
+
 public class User {
 	private String login="";
 	private String access="";
@@ -8,18 +13,19 @@ public class User {
 	private String patronymic="";
 	private String tel="";
 	private String e_mail="";
+	private Map<Integer,Integer> items=new HashMap<Integer,Integer>();
 	
 	public User(){
 	}
 	
-	public User(String login, String name, String surName, String patronymic, String tel, String e_mail){
+	/*public User(String login, String name, String surName, String patronymic, String tel, String e_mail){
 		this.login=login;
 		this.name=name;
 		this.surName=surName;
 		this.patronymic=patronymic;
 		this.tel=tel;
 		this.e_mail=e_mail;
-	}
+	}*/
 	
 	public String getName(){
 		return name;
@@ -78,8 +84,28 @@ public class User {
 		this.access=access;
 	}
 	
-	public boolean equals(Object obj)
-	  {
+	public Map<Integer,Integer> getItems(){
+		return items;
+	}
+	
+	public boolean addItem(String phoneId){
+		try {
+			int id=Integer.parseInt(phoneId);
+			if (SqlManager.GetPhone(id)!=null){
+				if (items.containsKey(phoneId)) {
+					items.put(id, items.get(id)+1);
+				}
+				else items.put(id, 1);
+				return true;
+			}
+			else return false;	
+		}catch (NumberFormatException ex){
+			ex.printStackTrace();
+			return false;
+		}	
+	}
+	
+	public boolean equals(Object obj){
 		if(obj == this) return true;
 		  if(obj == null) return false;
 		  if(!(getClass() == obj.getClass()))return false;

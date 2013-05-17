@@ -443,7 +443,8 @@ public final class SqlManager {
 				Blob blob = (Blob)rs.getBlob("Map");
 				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
 				phone=(Phone)in.readObject();
-			}	
+			}
+			else return null;
 		}
 		catch (SQLException ex) {            
             System.out.println(ex.toString());
@@ -575,12 +576,22 @@ public final class SqlManager {
 	}
 	
 	
-	public static List<Phone> SearchPhones(String search){
+	public static List<Phone> SearchPhones(String search,String price_before, String price_after){
 		Connection cn = null;
 		Statement st = null; 
 		ResultSet rs = null; 
 		List<Phone> phones=new ArrayList<Phone>();
-		System.out.println(search);
+		int beforePrice,afterPrice;
+		try {
+			beforePrice=Integer.parseInt(price_before);
+		} catch (NumberFormatException ex){
+			beforePrice=0;
+		}
+		try {
+			afterPrice=Integer.parseInt(price_after);
+		} catch (NumberFormatException ex){
+			afterPrice=Integer.MAX_VALUE;
+		}
 		try {
 			Class.forName(driver); 
 			cn = DriverManager.getConnection(url+DBName,userName, password); 
@@ -588,15 +599,13 @@ public final class SqlManager {
 			String READ_OBJECT_SQL = 
 					"SELECT PhoneID, Title, Description, FirstPrice,SecondPrice " +
 					"FROM Phones " +
-					"WHERE (Title LIKE '%"+search+"%') OR (Description LIKE '%"+search+"%')";
+					"WHERE ((Title LIKE '%"+search+"%') OR (Description LIKE '%"+search+"%')) " +
+							"AND ((firstPrice>"+beforePrice+")AND(firstPrice<"+afterPrice+"))";
 			PreparedStatement pstmt = cn.prepareStatement(READ_OBJECT_SQL);
 			/*pstmt.setString(1, search);
 			pstmt.setString(2, search);*/
 			rs = pstmt.executeQuery();
 			while (rs.next()){
-				/*Blob blob = (Blob)rs.getBlob("Map");
-				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
-				Phone phone=(Phone)in.readObject();*/
 				Phone phone=new Phone();
 				phone.put("Title",rs.getString("Title"));
 				phone.put("Description",rs.getString("Description"));
@@ -627,7 +636,7 @@ public final class SqlManager {
 	
 	public static void main(String[] args){
 		//System.out.print(SqlManager.UpdatePass("romif@yandex.ru", "wwww"));
-		System.out.print(SqlManager.SearchPhones("Каждому"));
+		//System.out.print(SqlManager.SearchPhones("Каждому"));
 
 	}
 

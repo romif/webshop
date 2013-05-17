@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="Windows-1251"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 
-<h3>Каталог</h3>
+<h3>РљР°С‚Р°Р»РѕРі</h3>
 		<ul>
 			<div class="mi"><div class="level1"><a href="/index?phone=Apple" alt="Apple">Apple</a></div></div>
 			<div class="ms sep1"></div>

@@ -42,7 +42,7 @@
                     <label>от
                       <input type="text" id="price_before_new" name="price_before_new" class="fprice" 
                       maxlength="9" max-size="9" 
-                      value="<%if (request.getParameter("price_before_new"!=null) out.print(request.getParameter("price_before_new"));%>">
+                      value="<%if (request.getParameter("price_before_new")!=null) out.print(request.getParameter("price_before_new"));%>">
                      </label>
                      <label>до
                        <input type="text" id="price_after_new" name="price_after_new" class="fprice" 
@@ -63,26 +63,13 @@
               </tr>
             </tbody>
           </table>
-
-          <!--
-          <table class="fcatalog" cellspacing="0" align="left" style="display:none;">
-            <tbody>
-              <tr>
-                <td class="in">Цена($):</td>
-
-                <td class="inpSearch"><label>от<input type="text" id="price_before" class="fprice" name=
-                "price_before"></label><label>до<input type="text" id="price_after" class="fprice" name=
-                "price_after"></label></td>
-              </tr>
-            </tbody>
-          </table>
-          -->
         </div>
       </form>
     </div>
 
 
-<%if ((request.getParameter("findtext")!=null)&&(!request.getParameter("findtext").equals(""))){%>
+<%if (((request.getParameter("findtext")!=null)&&((!request.getParameter("findtext").equals(""))))||
+	(request.getParameter("price_before_new")!=null)){%>
 <jsp:include page='/jsp/templates/centerColumn_ShowPhones.jsp'/>
 <%}%>
 

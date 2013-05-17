@@ -2,13 +2,46 @@ toMesHide = null;
 tmSh = null;
 function add_item(data_id)
 {
-	var url_1='/shcart/?data_id='+data_id+'&step=0&mode=add';
+	$.post('/index', {
+		isLogged : ''
+		},
+		function(data) {
+			if (data==0)
+				alert('Пожалуйста зарегестрируйтесь или войдите под своим логином.');
+			else 
+				$.post('/index', {
+					addItem : data_id
+					},
+					function(data) {
+						if (data==0)
+							alert('Товар не может быть добавлен');
+						if (data==1){
+							window.top.frames["win_basket"].location = '/index?shcart';
+							alert('Товар добавлен');
+						}
+					}
+				)
+			
+			
+			
+			/*$('#loginPlace').html(data);
+			document.getElementById('preload').style.display='none';
+			var row = document.getElementById('topMenuRow');
+			var cell=row.insertCell(-1);
+			cell.innerHTML="<a href='/index?mode=edit' alt='Редактор товаров'>Редактор</a>";*/
+		}
+	)
+	
+	
+	
+	//var url_1='/shcart/?data_id='+data_id+'&step=0&mode=add';
+	/*var url_1='/index?shcart';
 	window.top.frames["win_basket"].location = url_1;
 
 	/*var url_1='/shcart/?data_id='+data_id+'&step=2&nstep=2&mode=add';
 	document.location=url_1;*/
 
-	CreateShMess();
+	//CreateShMess();
 }
 
 
