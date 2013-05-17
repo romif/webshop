@@ -1,7 +1,9 @@
 package util;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import util.sql.SqlManager;
 
@@ -13,7 +15,7 @@ public class User {
 	private String patronymic="";
 	private String tel="";
 	private String e_mail="";
-	private Map<Integer,Integer> items=new HashMap<Integer,Integer>();
+	private Map<Phone,Integer> items=new HashMap<Phone,Integer>();
 	
 	public User(){
 	}
@@ -84,18 +86,38 @@ public class User {
 		this.access=access;
 	}
 	
-	public Map<Integer,Integer> getItems(){
+	public Map<Phone,Integer> getItems(){
 		return items;
+	}
+	
+	public int getItemsPrice(){
+		int price=0;
+		Iterator<Entry<Phone, Integer>> it=items.entrySet().iterator();
+		while (it.hasNext()){
+			Entry<Phone, Integer> entry=it.next(); 
+			price+=entry.getKey().getPriceUSD()*entry.getValue();
+		}
+		return price;
+	}
+	
+	public int getItemsCount(){
+		int count=0;
+		Iterator<Entry<Phone, Integer>> it=items.entrySet().iterator();
+		while (it.hasNext()){
+			count+=it.next().getValue();
+		}
+		return count;
 	}
 	
 	public boolean addItem(String phoneId){
 		try {
+			Phone phone=null;
 			int id=Integer.parseInt(phoneId);
-			if (SqlManager.GetPhone(id)!=null){
-				if (items.containsKey(phoneId)) {
-					items.put(id, items.get(id)+1);
+			if ((phone=SqlManager.GetPhone(id))!=null){
+				if (items.containsKey(phone)) {
+					items.put(phone, items.get(phone)+1);
 				}
-				else items.put(id, 1);
+				else items.put(phone, 1);
 				return true;
 			}
 			else return false;	
@@ -118,6 +140,14 @@ public class User {
 	  
 	public int hashCode(){
 		return login.hashCode();
+	}
+	
+	public static void main(String[] args){
+		User user=new User();
+		user.addItem("474");user.addItem("474");
+		System.out.print(user.getItems());
+		
+		
 	}
 	
 	

@@ -2,7 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="util.sql.SqlManager"%>
-<%@ page import="util.Phone"%>
+<%@ page import="util.User"%>
+<%@ page import="servlet.MainServlet"%>
+
+<%User user=MainServlet.loggedUsers.get(request.getSession().getId());%>
 
 <html>
 <head>
@@ -40,8 +43,7 @@
   <script type="text/javascript">
 var cur_koef=1;
   var cur_round=1;
-  var local_sum=0
-  +3806000;
+  var local_sum=0 +<%if (user!=null)out.print(user.getItemsPrice());else out.print(0);%>;
 
   local_sum = bugPrice(local_sum);
   if (document.getElementById('currency_id2') !== null) { 
@@ -75,34 +77,36 @@ var cur_koef=1;
   function select_currencym(value_1){
         var val = document.getElementById('currency_id2').value;
         document.getElementById('currency_id').value = val;
-                var local_sum=bugPrice(0+440.00*1);
+                var local_sum=bugPrice(0+<%if (user!=null)out.print(user.getItemsPrice());else out.print(0);%>*1);
 
         switch (value_1) {
                 
                 case '1000196': 
                         {
-                        cur_koef = 8650 / 8650;
+                        cur_koef = 1;
                         cur_round = 1.00;
                         }
                         break;
                 
                 case '1000198': 
                         {
-                        cur_koef = 8650 / 1;
+                        cur_koef = <%=MainServlet.Currencies.get("USD")%>;
                         cur_round = 1.00;
                         }
                         break;
                 
                 case '1000197': 
                         {
-                        cur_koef = 8650 / 12000;
+                        cur_koef = <%=MainServlet.Currencies.get("USD")%> / 
+                        <%=MainServlet.Currencies.get("EUR")%>;
                         cur_round = 1.00;
                         }
                         break;
                 
                 case '1000199': 
                         {
-                        cur_koef = 8650 / 97;
+                        cur_koef = <%=MainServlet.Currencies.get("USD")%> / 
+                        <%=MainServlet.Currencies.get("RUB")%>;
                         cur_round = 1.00;
                         }
                         break;
@@ -122,33 +126,48 @@ var cur_koef=1;
   </script>
 
   <form name="shcart" method="post" action="/shcart/" id="shcart">
-    <p class="wins">Товаров:<span class="znach">1</span></p>
+    <p class="wins">Товаров:<span class="znach">
+    <%if (user!=null)out.print(user.getItemsCount());else out.print(0);%>
+    </span></p>
 
-    <p class="wins">Сумма:<span class="znach" id="pricecont">440</span></p>
+    <p class="wins">Сумма:<span class="znach" id="pricecont"></span></p>
 
-    <p class="wins">валюта: <select class="selval" id="currency_id2" name="currency_id" onchange=
-    "select_currencym(document.getElementById(&#39;currency_id2&#39;).value);">
-      <option class="currency" value="1000196">
-        $
-      </option>
+    <p class="wins">валюта: 
+      <select class="selval" id="currency_id2" name="currency_id" 
+    	      onchange="select_currencym(document.getElementById('currency_id2').value);">
+      	<option class="currency" value="1000196">
+          $
+      	</option>
 
-      <option class="currency" value="1000198">
-        руб.
-      </option>
+      	<option class="currency" value="1000198">
+          руб.
+      	</option>
 
-      <option class="currency" value="1000197">
-        E
-      </option>
+      	<option class="currency" value="1000197">
+      	  E
+      	</option>
 
-      <option class="currency" value="1000199">
-        р.руб.
-      </option>
-    </select><input type="hidden" name="step" value="2"><input type="hidden" name="nstep" value="2"><input type="hidden" id=
-    "currency_id" name="currency_id" value="1000196"></p>
-
-    <p class="wins"><a href="javascript:go_shcart()" class="boform">Оформить заказ</a></p>
-  </form><script type="text/javascript">
-select_currencym(document.getElementById('currency_id2').value);
+      	<option class="currency" value="1000199">
+      	  р.руб.
+      	</option>
+      	
+      </select>
+    
+    <input type="hidden" name="step" value="2">
+      <input type="hidden" name="nstep" value="2">
+    	<input type="hidden" id="currency_id" name="currency_id" value="1000196">
+    </p>
+    
+    <%if ((user!=null)&&(user.getItemsCount()!=0)){ %>
+    <p class="wins">
+      <a href="javascript:go_shcart()" class="boform">Оформить заказ</a>
+    </p>
+    <%}%>
+  </form>
+  
+  <script type="text/javascript">
+  select_currencym(document.getElementById('currency_id2').value);
   </script>
+  
 </body>
 </html>

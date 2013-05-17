@@ -202,9 +202,9 @@ if ((page_id-1)*page_size<phones.size()){
 						<tbody>
 							<tr>
 								<td>
-									<span class="firstPrice"><%=((Phone)phones.get(i)).getFirstPrice()%>&nbsp;$</span>
+									<span class="firstPrice"><%=((Phone)phones.get(i)).getPriceUSD()%>&nbsp;$</span>
 									<span class="divider"><img src="/pics/blank.gif" alt=""></span>
-									<span class="secondPrice"><%=((Phone)phones.get(i)).getSecondPrice()%>&nbsp;руб.</span>
+									<span class="secondPrice"><%=((Phone)phones.get(i)).getPriceBY()%>&nbsp;руб.</span>
 								</td>
 								<td>
 									<div class="buttons">
@@ -238,9 +238,9 @@ if ((page_id-1)*page_size<phones.size()){
 						<tbody>
 							<tr>
 								<td>
-									<span class="firstPrice"><%=((Phone)phones.get(i+1)).getFirstPrice()%>&nbsp;$</span>
+									<span class="firstPrice"><%=((Phone)phones.get(i+1)).getPriceUSD()%>&nbsp;$</span>
 									<span class="divider"><img src="/pics/blank.gif" alt=""></span>
-									<span class="secondPrice"><%=((Phone)phones.get(i+1)).getSecondPrice()%>&nbsp;руб.</span>
+									<span class="secondPrice"><%=((Phone)phones.get(i+1)).getPriceBY()%>&nbsp;руб.</span>
 								</td>
 								<td>
 									<div class="buttons">

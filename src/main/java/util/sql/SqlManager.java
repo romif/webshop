@@ -306,14 +306,14 @@ public final class SqlManager {
 				st.executeUpdate("INSERT INTO Manuf_IDs (Manuf) VALUES ('"+phone.getManufactor()+"')");
 				manufId=rs.getInt("LAST_INSERT_ID()");
 			}
-			String WRITE_PHONE_SQL ="INSERT INTO Phones (ManufId, Title, Description, FirstPrice,SecondPrice, Map) " +
+			String WRITE_PHONE_SQL ="INSERT INTO Phones (ManufId, Title, Description, Price,SecondPrice, Map) " +
 									"VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement pstmt = cn.prepareStatement(WRITE_PHONE_SQL);
 			pstmt.setInt(1, manufId);
 			pstmt.setString(2, phone.getTitle());
 			pstmt.setString(3, phone.getDescription());
-			pstmt.setInt(4, phone.getFirstPrice());
-			pstmt.setInt(5, phone.getSecondPrice());
+			pstmt.setInt(4, phone.getPriceUSD());
+			pstmt.setInt(5, phone.getPriceUSD());
 		    pstmt.setObject(6, phone);
 		    pstmt.executeUpdate();
 		    pstmt.close();
@@ -354,7 +354,7 @@ public final class SqlManager {
 			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			cn.setAutoCommit(false);
 			String READ_OBJECT_SQL = 
-					"SELECT Phones.PhoneID, Phones.Title, Phones.Description, Phones.FirstPrice,Phones.SecondPrice " +
+					"SELECT Phones.PhoneID, Phones.Title, Phones.Description, Phones.Price,Phones.SecondPrice " +
 					"FROM Phones, Manuf_IDs " +
 					"WHERE ((Manuf_IDs.Manuf=?) AND (Manuf_IDs.ManufId=Phones.ManufId))";
 			PreparedStatement pstmt = cn.prepareStatement(READ_OBJECT_SQL);
@@ -367,7 +367,7 @@ public final class SqlManager {
 				Phone phone=new Phone();
 				phone.put("Title",rs.getString("Title"));
 				phone.put("Description",rs.getString("Description"));
-				phone.put("firstPrice",rs.getString("firstPrice"));
+				phone.put("Price",rs.getString("Price"));
 				phone.put("secondPrice",rs.getString("secondPrice"));
 				phone.setId(rs.getInt("PhoneID"));
 				phones.add(phone);
@@ -443,13 +443,12 @@ public final class SqlManager {
 				Blob blob = (Blob)rs.getBlob("Map");
 				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
 				phone=(Phone)in.readObject();
+				phone.put("Price",phone.get("firstPrice"));
 			}
 			else return null;
-		}
-		catch (SQLException ex) {            
+		}catch (SQLException ex) {            
             System.out.println(ex.toString());
-        } 
-		catch (ClassNotFoundException ex) {            
+        }catch (ClassNotFoundException ex) {            
             System.out.println(ex.toString());
         } catch (IOException e) {
 			e.printStackTrace();
@@ -483,8 +482,8 @@ public final class SqlManager {
 			st.executeUpdate("UPDATE Phones " +
 					"SET Title='"+phone.getTitle()+"', " +
 						"Description='"+phone.getDescription()+"', " +
-						"FirstPrice='"+phone.getFirstPrice()+"', " +
-						"SecondPrice='"+phone.getSecondPrice()+"', " +
+						"Price='"+phone.getPriceUSD()+"', " +
+						"SecondPrice='"+phone.getPriceUSD()+"', " +
 						"FullDescription='"+FullDescription+"' "+
 						"WHERE PhoneID='"+phone.getId()+"'");
 		}
@@ -597,10 +596,10 @@ public final class SqlManager {
 			cn = DriverManager.getConnection(url+DBName,userName, password); 
 			cn.setAutoCommit(false);
 			String READ_OBJECT_SQL = 
-					"SELECT PhoneID, Title, Description, FirstPrice,SecondPrice " +
+					"SELECT PhoneID, Title, Description, Price,SecondPrice " +
 					"FROM Phones " +
 					"WHERE ((Title LIKE '%"+search+"%') OR (Description LIKE '%"+search+"%')) " +
-							"AND ((firstPrice>"+beforePrice+")AND(firstPrice<"+afterPrice+"))";
+							"AND ((Price>"+beforePrice+")AND(Price<"+afterPrice+"))";
 			PreparedStatement pstmt = cn.prepareStatement(READ_OBJECT_SQL);
 			/*pstmt.setString(1, search);
 			pstmt.setString(2, search);*/
@@ -609,7 +608,7 @@ public final class SqlManager {
 				Phone phone=new Phone();
 				phone.put("Title",rs.getString("Title"));
 				phone.put("Description",rs.getString("Description"));
-				phone.put("firstPrice",rs.getString("firstPrice"));
+				phone.put("Price",rs.getString("Price"));
 				phone.put("secondPrice",rs.getString("secondPrice"));
 				phone.setId(rs.getInt("PhoneID"));
 				phones.add(phone);

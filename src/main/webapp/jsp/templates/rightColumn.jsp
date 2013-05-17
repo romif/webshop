@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="Windows-1251"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ page import="servlet.*"%>
 
 <div class="content">
 	
 	<div id="shcart">
-		<h3>Корзина</h3>
+		<h3>РљРѕСЂР·РёРЅР°</h3>
 		<div class="shcartFrame">
-			<iframe id="win_basket" name="win_basket" src="./TopmoBail_files/saved_resource(1).htm" class="shcart" scrolling="no" frameborder="0"></iframe>
+			<iframe id="win_basket" name="win_basket" src="/index?shcart" class="shcart" scrolling="no" frameborder="0"></iframe>
 		</div>
 	</div>
 	

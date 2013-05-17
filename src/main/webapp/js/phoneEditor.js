@@ -163,10 +163,10 @@ function fillTable(phoneId){
 				document.getElementById('treeTitle').innerHTML=val;
 				document.getElementById('title').innerHTML=val;
 			}
-			else if (key=='firstPrice'){
+			else if (key=='PriceUSD'){
 				document.getElementById('firstPrice').innerHTML=val+' $';
 			}
-			else if (key=='secondPrice'){
+			else if (key=='PriceBY'){
 				document.getElementById('secondPrice').innerHTML='| '+val+' руб.';
 			}else if (key=='Manufactor'){
 				var elem=document.getElementById('Manufactor');

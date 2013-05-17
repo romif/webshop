@@ -44,7 +44,7 @@ document.getElementById('centerColumn').style.display = 'none';
           </div>
 
           <div class="buttons">
-            <a onclick="javascript:add_item(QueryString.phone)" class="buyButton" title="Купить" href="#"><img src="/pics/blank.gif" alt=""></a>
+            <a onclick="javascript:add_item(QueryString.phoneID)" class="buyButton" title="Купить" href="#"><img src="/pics/blank.gif" alt=""></a>
             <!--  <a href="?print=1" title="Версия для печати" target="_blank">Версия для печати&#160;»</a> -->
           </div>
         </div>

@@ -96,6 +96,8 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				Phone phone = SqlManager.GetPhone(Integer.parseInt(request
 						.getParameter("getPhone")));
 				array.putAll(phone);
+				array.put("PriceUSD", phone.getPriceUSD());
+				array.put("PriceBY", phone.getPriceBY());
 
 			} catch (NumberFormatException e) {
 				e.printStackTrace();

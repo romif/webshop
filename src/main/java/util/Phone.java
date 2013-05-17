@@ -3,7 +3,14 @@ package util;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import servlet.MainServlet;
+
 public class Phone extends HashMap<String,String>{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3571151522084216086L;
 
 	public Phone() {
 	}
@@ -30,18 +37,38 @@ public class Phone extends HashMap<String,String>{
 		return this.get("Title");
 	}
 	
-	public int getFirstPrice(){
+	public int getPriceUSD(){
 		try{
-			return Integer.parseInt(this.get("firstPrice"));
+			return Integer.parseInt(this.get("Price"));
 		}
 		catch (NumberFormatException  e){
 			return -1;
 		}	
 	}
 	
-	public int getSecondPrice(){
+	public int getPriceRUB(){
 		try{
-			return Integer.parseInt(this.get("secondPrice"));
+			return (int) (Integer.parseInt(this.get("Price"))*MainServlet.Currencies.get("USD")/
+					MainServlet.Currencies.get("RUB"));
+		}
+		catch (NumberFormatException  e){
+			return -1;
+		}	
+	}
+	
+	public int getPriceEUR(){
+		try{
+			return (int) (Integer.parseInt(this.get("Price"))*MainServlet.Currencies.get("USD")/
+					MainServlet.Currencies.get("EUR"));
+		}
+		catch (NumberFormatException  e){
+			return -1;
+		}	
+	}
+	
+	public int getPriceBY(){
+		try{
+			return (int) (Integer.parseInt(this.get("Price"))*MainServlet.Currencies.get("USD"));
 		}
 		catch (NumberFormatException  e){
 			return -1;
@@ -51,7 +78,7 @@ public class Phone extends HashMap<String,String>{
 	public enum PhoneComparator implements Comparator<Phone> {
 	    PRICE_SORT {
 	        public int compare(Phone phone1, Phone phone2) {
-	            return Integer.valueOf(phone1.getFirstPrice()).compareTo(phone2.getFirstPrice());
+	            return Integer.valueOf(phone1.getPriceUSD()).compareTo(phone2.getPriceUSD());
 	        }},
 	    NAME_SORT {
 	        public int compare(Phone phone1, Phone phone2) {
@@ -79,6 +106,10 @@ public class Phone extends HashMap<String,String>{
 	            }
 	        };
 	    }
+	}
+	
+	public int hashCode(){
+		return this.getTitle().hashCode();
 	}
 
 }
