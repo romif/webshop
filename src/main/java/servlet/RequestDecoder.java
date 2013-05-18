@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +90,34 @@ public class RequestDecoder<MultipartRequestWrapper> {
 				else out.print(0);
 			}
 			else out.print(0);
+			out.flush();
+			out.close();
+			return null;
+		}
+		
+		if (request.getParameter("updateItems") != null) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			User user=MainServlet.loggedUsers.get(request.getSession().getId());
+			if (user!=null){
+				Enumeration<String> en=request.getParameterNames();
+				String st;
+				while (en.hasMoreElements()){
+					if((st=en.nextElement()).startsWith("phoneId")){
+						try {
+							int id=Integer.parseInt(st.substring(8, st.length()));
+							int number=Integer.parseInt(request.getParameter(st));
+							if (user.updateItem(id, number))out.print(1);
+							else out.print(0);
+						} catch (NumberFormatException ex){
+							out.print(0);
+						}
+					}
+				}
+			}
+			else {
+				out.print(0);
+			}
 			out.flush();
 			out.close();
 			return null;

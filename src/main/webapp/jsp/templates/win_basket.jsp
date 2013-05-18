@@ -71,7 +71,7 @@ var cur_koef=1;
   /* ------------------------------------------------------------------------------- */
 
   function go_shcart(){
-                parent.document.location.href='/shcart/?step=2&nstep=2&currency_id='+document.getElementById('currency_id2').value+'&url='+escape(parent.document.location.href);
+                parent.document.location.href='/index?basket';
   }
 
   function select_currencym(value_1){

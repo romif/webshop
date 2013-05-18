@@ -444,6 +444,7 @@ public final class SqlManager {
 				ObjectInputStream in= new ObjectInputStream(blob.getBinaryStream());
 				phone=(Phone)in.readObject();
 				phone.put("Price",phone.get("firstPrice"));
+				phone.setId(phoneId);
 			}
 			else return null;
 		}catch (SQLException ex) {            

@@ -2,12 +2,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ page import="servlet.*"%>
 <%@ page import="util.*"%>
+<%@ page import="java.util.*"%>
 <%@ page import="util.sql.*"%>
+<%
+User user=MainServlet.loggedUsers.get(request.getSession().getId());
 
+/*user=SqlManager.GetUser("admin", "qqqq");
+user.addItem("474");user.addItem("474");
+user.addItem("477");
+*/
+if (user==null){%> <script type="text/javascript">document.location='/index'</script> <%}%>
+<!--
+
+//-->
+</script>
+
+ <script language="JavaScript" src="/js/basket.js"></script>
 
   <ul id="sectionsTree">
     <li class="firstSectionTree">
-      <a href="/">Главная</a>B۠
+      <a href="/">Главная</a>&#160;»&#160;
     </li>
 
     <li>Корзина</li>
@@ -19,8 +33,10 @@
   
   <div class="additionalContent">
     <form name="shcart" method="get" action="/shcart/" id="shcart">
-      <input type="hidden" name="url" value="/"><input type="hidden" name="step" value="2"><input type="hidden" name="nstep" value=
-      "3"><input type="hidden" name="action" value="submit">
+      <input type="hidden" name="url" value="/">
+      <input type="hidden" name="step" value="2">
+      <input type="hidden" name="nstep" value="3">
+      <input type="hidden" name="action" value="submit">
 
       <div id="shcartCurrency">
         <select size="1" name="currency_id" onchange="select_currency(document.shcart.currency_id.value);">
@@ -46,107 +62,122 @@
       "myframe4del"></iframe>
       
       <script language="JavaScript">
-                                  var koef_2935=1;
-                                
-                                        var koef_2937=1;
-                                
+      
+      <%
+      Set<Phone>set=user.getItems().keySet();
+      Iterator<Phone> it=set.iterator();
+      Phone[] phones=new Phone[set.size()];
+      int i=0;
+      while (it.hasNext()){
+    	  phones[i]=it.next();
+    	  i++;
+      }
+      %>
+      
+      <%for (Phone phone:phones){%>
+    	  var koef_<%=phone.getId()%>=1;  
+      <%}%>
+      
+      function prepare_shcart_step1() {
+    	  del_item ();
+    	  }
+      
+      function shcart_step1() {
+          
+    	  <%for (Phone phone:phones){%>
+          var itemPrice_<%=phone.getId()%> = normalizePrice(Math.round(<%=phone.getPriceUSD()%>*cur_koef / cur_round) * cur_round);
+          document.shcart._t_price_<%=phone.getId()%>.value=itemPrice_<%=phone.getId()%>;
+          
+          itemPrice_summ_<%=phone.getId()%> = normalizePrice(itemPrice_<%=phone.getId()%> * document.shcart.item_<%=phone.getId()%>.value);
+          document.shcart._t_summ_<%=phone.getId()%>.value = itemPrice_summ_<%=phone.getId()%>; 
+          
+          <%}%>
+          
+          check_wait ();
+          
+          
+          del_item ();
+          
+          shcart_summ1=0;
+          <%for (Phone phone:phones){%>
+          shcart_summ1+=itemPrice_summ_<%=phone.getId()%>*koef_<%=phone.getId()%>;
+          <%}%>
 
-                                function prepare_shcart_step1() {
-                                del_item ();
-                                }
-                                                
-                                function shcart_step1() {
-                                        
-                                        
-                                                var itemPrice_2935 = normalizePrice(Math.round(284*cur_koef / cur_round) * cur_round);
-                                                document.shcart._t_price_2935.value=itemPrice_2935;
-                                                
-                                                itemPrice_summ_2935 = normalizePrice(itemPrice_2935 * document.shcart.item_2935.value);
-                                                document.shcart._t_summ_2935.value = itemPrice_summ_2935; 
-                                        
-                                                var itemPrice_2937 = normalizePrice(Math.round(245.00*cur_koef / cur_round) * cur_round);
-                                                document.shcart._t_price_2937.value=itemPrice_2937;
-                                                
-                                                itemPrice_summ_2937 = normalizePrice(itemPrice_2937 * document.shcart.item_2937.value);
-                                                document.shcart._t_summ_2937.value = itemPrice_summ_2937; 
-                                        
-                                        check_wait ();
-                                        
-                                        
-                                        del_item ();
-                                        
-                                        
-                                        shcart_summ1 = normalizePrice(0+itemPrice_summ_2935*koef_2935+itemPrice_summ_2937*koef_2937)
-                                
-                                        
-                                        document.shcart._t_summ_step1.value=shcart_summ1;
-                                        
-                                        return true;
-                                }
-                                
-                                function check_wait () {
-                                        
-                                                if (document.shcart.wait_2935.checked)
-                                                {
-                                                        koef_2935=0;
-                                                }
-                                                else
-                                                {
-                                                        koef_2935=1;
-                                                }
-                                        
-                                                if (document.shcart.wait_2937.checked)
-                                                {
-                                                        koef_2937=0;
-                                                }
-                                                else
-                                                {
-                                                        koef_2937=1;
-                                                }
-                                        
-                                        
-                                        return true;
-                                }
-                                
-                                function del_item () {
-                                        del_url = "";
-                                        
-                                                if (document.shcart.del_2935.checked || document.shcart.item_2935.value == 0){
-                                                        document.getElementById(2935).style.display='none';
-                                                        koef_2935=0;
-                                                        del_url += '&del_2935=on';
-                                                        if (document.shcart.item_2935.value == 0)
-                                                        {
-                                                        document.shcart.del_2935.checked=true;
-                                                        }
-                                                }
-                                        
-                                                if (document.shcart.del_2937.checked || document.shcart.item_2937.value == 0){
-                                                        document.getElementById(2937).style.display='none';
-                                                        koef_2937=0;
-                                                        del_url += '&del_2937=on';
-                                                        if (document.shcart.item_2937.value == 0)
-                                                        {
-                                                        document.shcart.del_2937.checked=true;
-                                                        }
-                                                }
-                                        
+          
+          var d={'updateItems':''};  
+          <%for (Phone phone:phones){%>
+          d.phoneId_<%=phone.getId()%>=document.shcart.item_<%=phone.getId()%>.value;
+          <%}%>
+             	  
+          $.post('/index', d,
+         		 function(data) {
+       					if (data==0) alert('Ошибка! Невозможно пересчитать заказ');
+       			}); 
+          
+          
+          document.shcart._t_summ_step1.value=shcart_summ1;
+          
+          return true;
+          
+      }
+      
+      function check_wait () {
+          
+    	  <%for (Phone phone:phones){%>
+          if (document.shcart.wait_<%=phone.getId()%>.checked)
+          {
+                  koef_<%=phone.getId()%>=0;
+          }
+          else
+          {
+                  koef_<%=phone.getId()%>=1;
+          }
+          
+          <%}%>
+          
+          return true;
+      }
+      
+      function del_item () {
+          del_url = "";
+          
+          		  <%for (Phone phone:phones){%>         
+                  if (document.shcart.del_<%=phone.getId()%>.checked ||
+                		  document.shcart.item_<%=phone.getId()%>.value == 0){
+                        document.getElementById(<%=phone.getId()%>).style.display='none';
+                        koef_<%=phone.getId()%>=0;
+                        del_url += '&del_<%=phone.getId()%>=on';
+                        if (document.shcart.item_<%=phone.getId()%>.value == 0)
+                        {
+                        document.shcart.del_<%=phone.getId()%>.checked=true;
+                        }
+                  }
+                  <%}%>
+                  
+                  
+            	  
+             
+                  
 
-                                        if (del_url != "")
-                                        {
-                                                document.getElementById("myframe4del").src = "/shcart/?step=1&mode=hidden" + del_url;
-                                        }
-                                        
-                                        return true;
-                                }
+
+          if (del_url != "")
+          {
+        	  
+        	  
+                 // document.getElementById("myframe4del").src = "/shcart/?step=1&mode=hidden" + del_url;
+          }
+          
+          return true;
+    }
+                            
       </script>
       
-      <script language="JavaScript" src="/index/js/jquery-1.3.2.js"></script>
+      <script language="JavaScript" src="/js/jquery-1.3.2.js"></script>
       
-      <script language="JavaScript" src="/index/js/spinbox/jquery.spinbox.js"></script>
+      <script language="JavaScript" src="/js/jquery.spinbox.js"></script>
       
       
-      <link rel="stylesheet" type="text/css" href="/index/js/spinbox/jquery.spinbox.css">
+      <link rel="stylesheet" type="text/css" href="/css/jquery.spinbox.css"/>
 
       <table class="tshcartFirst" cellspacing="0" cellpadding="0" width="100%">
         <tbody>
@@ -188,38 +219,33 @@
 
             <td class="hiddenc"></td>
           </tr>
+          
+          
+          <%for (Phone phone:phones){%>
 
-          <tr id="2935">
+          <tr id="<%=phone.getId()%>">
             <td class="itemname">
-              <a href="/1476/">Nokia Lumia 620</a>
+              <a href="/index?phoneID=<%=phone.getId()%>"><%=phone.getTitle()%></a>
             </td>
 
-            <td class="price"><input type="edit" class="price_value" readonly name="_t_price_2935" value="284"></td>
+            <td class="price"><input type="edit" class="price_value" readonly 
+            name="_t_price_<%=phone.getId()%>" value="1"></td>
 
-            <td class="quantyval"><input type="edit" class="quantity_value spinbox-active" name="item_2935" value="1"></td>
+            <td class="quantyval"><input type="edit" class="quantity_value spinbox-active" 
+            name="item_<%=phone.getId()%>" value="<%=user.getItems().get(phone)%>"></td>
 
-            <td class="priceval"><input type="edit" class="price_value" readonly name="_t_summ_2935" value="1"></td>
+            <td class="priceval"><input type="edit" class="price_value" readonly 
+            name="_t_summ_<%=phone.getId()%>" 
+            value="1"></td>
 
-            <td align="center" class="centercol"><input type="checkbox" class="del_checkbox" name="del_2935"></td>
+            <td align="center" class="centercol"><input type="checkbox" class="del_checkbox" 
+            name="del_<%=phone.getId()%>"></td>
 
-            <td align="center" class="hiddenc" id="wait_id_2935"><input type="checkbox" class="del_checkbox" name="wait_2935"></td>
+            <td align="center" class="hiddenc" id="wait_id_<%=phone.getId()%>"><input type="checkbox" class="del_checkbox" name="wait_<%=phone.getId()%>"></td>
           </tr>
-
-          <tr id="2937">
-            <td class="itemname">
-              <a href="/1478/">Samsung Galaxy Ace 2 La FLeur (I8160)</a>
-            </td>
-
-            <td class="price"><input type="edit" class="price_value" readonly name="_t_price_2937" value="245.00"></td>
-
-            <td class="quantyval"><input type="edit" class="quantity_value spinbox-active" name="item_2937" value="1"></td>
-
-            <td class="priceval"><input type="edit" class="price_value" readonly name="_t_summ_2937" value="1"></td>
-
-            <td align="center" class="centercol"><input type="checkbox" class="del_checkbox" name="del_2937"></td>
-
-            <td align="center" class="hiddenc" id="wait_id_2937"><input type="checkbox" class="del_checkbox" name="wait_2937"></td>
-          </tr>
+          
+          <%}%>
+          
 
           <tr>
             <td colspan="3"></td>
@@ -228,9 +254,11 @@
           <tr class="resultsum">
             <td class="s_result_price">Итого:</td>
 
-            <td colspan="4" id="summ_step1" class="shcart_itogo_value"><input size="5" name="_t_summ_step1" value="0" readonly
+            <td colspan="4" id="summ_step1" class="shcart_itogo_value">
+            <input size="5" name="_t_summ_step1" value="0" readonly
             class="price_valueBlue"></td>
           </tr>
+        
         </tbody>
       </table>
       
@@ -254,13 +282,14 @@
 
             <td align="center">
               <input type="submit" class="hiddenc" name="backsh" id="backbut" alt="вернуться в магазин »"
-              onclick="document.location.href='/'; return false;"><a id="back" class="backshopBut" href="/index">
-              <img src="/index/pics/blank.gif" width="123" height="18" alt="Назад в магазин"/></a>
+              onclick="document.location.href='/'; return false;">
+              <a id="back" class="backshopBut" href="/index">
+              <img src="/pics/blank.gif" width="123" height="18" alt="Назад в магазин"/></a>
             </td>
 
             <td>
               <a class="backBut" href="javascript:history.back();">
-              <img src="/index/pics/blank.gif" width="54" height="18" alt="Назад"/></a>
+              <img src="/pics/blank.gif" width="54" height="18" alt="Назад"/></a>
             </td>
 
             <td>
@@ -269,7 +298,7 @@
               class="hiddenc" id="recalcbut">
               <a id="recalc" class="recalcBut" onclick="javascript:document.getElementById('recalcbut').click();return false" 
               href="javascript:click()">
-              <img src="/index/pics/blank.gif" width="97" height="18" alt="Пересчитать"/></a>
+              <img src="/pics/blank.gif" width="97" height="18" alt="Пересчитать"/></a>
             </td>
 
             <td>
@@ -277,7 +306,7 @@
               onclick="nextBtnClick();return false;">
               <a id="next" class="nextBut" onclick="javascript:document.getElementById('nextbut').click();return false;" 
               href="javascript:click()">
-              <img src="/index/pics/blank.gif" width="54" height="18" border="0" alt="Далее"/></a>
+              <img src="/pics/blank.gif" width="54" height="18" border="0" alt="Далее"/></a>
             </td>
 
             <td width="33%"></td>

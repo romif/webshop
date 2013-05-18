@@ -90,6 +90,19 @@ public class User {
 		return items;
 	}
 	
+	public boolean updateItem(int phoneId, int number){
+		Iterator<Phone> it=this.items.keySet().iterator();
+		while (it.hasNext()){
+			Phone phone=it.next();
+			if (phone.getId()==phoneId){
+				this.items.put(phone, number);
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
 	public int getItemsPrice(){
 		int price=0;
 		Iterator<Entry<Phone, Integer>> it=items.entrySet().iterator();
