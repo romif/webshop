@@ -63,6 +63,84 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
       
       <script language="JavaScript">
       
+      function select_currency(value){
+
+
+    		switch (value) {
+    			
+    			
+    			case '1000196':
+    				{
+    				cur_koef = 1;
+                    cur_round = 1.00;
+    				cur_id = value;
+    				cur_suffix = "$";
+    				
+    				
+    				
+    				
+    				}
+    				break;
+    			
+    			
+    			case '1000198': 
+    				{
+    				cur_koef = <%=MainServlet.Currencies.get("USD")%>;
+                    cur_round = 1.00;
+    				cur_id = value;
+    				cur_suffix = "руб.";
+    				
+    				
+    				
+    				
+    				}
+    				break;
+    			
+    			
+    			case '1000197': 
+    				{
+    				cur_koef = <%=MainServlet.Currencies.get("USD")%> / 
+                    <%=MainServlet.Currencies.get("EUR")%>;
+                    cur_round = 1.00;
+    				cur_id = value;
+    				cur_suffix = "E";
+    				
+    				
+    				
+    				
+    				}
+    				break;
+    			
+    			
+    			case '1000199': 
+    				{
+    				cur_koef = <%=MainServlet.Currencies.get("USD")%> / 
+                    <%=MainServlet.Currencies.get("RUB")%>;
+                    cur_round = 1.00;
+    				cur_id = value;
+    				cur_suffix = "р.руб.";
+    				
+    				
+    				
+    				
+    				}
+    				break;
+    			
+    			default : {
+    				trace_log ();
+    			}
+    		}	
+    		
+    		
+    		shcart_step1();
+    		
+    		count_all(0);
+    		
+    		
+    		return (true);
+    	}
+      
+      
       <%
       Set<Phone>set=user.getItems().keySet();
       Iterator<Phone> it=set.iterator();
