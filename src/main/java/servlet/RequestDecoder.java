@@ -60,6 +60,10 @@ public class RequestDecoder<MultipartRequestWrapper> {
 			return "/jsp/Find.jsp";
 		}
 		
+		if (request.getParameter("basket") != null) {
+			return "/jsp/Basket.jsp";
+		}
+		
 		if (request.getParameter("shcart") != null) {
 			return "/jsp/templates/win_basket.jsp";
 		}

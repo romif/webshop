@@ -9,7 +9,7 @@ if (request.getParameter("mode")!=null) mode=request.getParameter("mode");
 <td><a href="/index" class=main alt="Главная"
 <%if (!request.getParameterNames().hasMoreElements()){%>id="active"<%}%> >Главная</a></td>
 
-<td><a href="/index" alt="Корзина">Корзина</a></td>
+<td><a href="/index?basket" alt="Корзина">Корзина</a></td>
 
 <td><a href="/index" alt="О магазине">О магазине</a></td>
 

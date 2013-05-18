@@ -41,6 +41,7 @@
           </option>
         </select>
       </div>
+     
       <iframe id="myframe4del" style="position: absolute; left: -10000px; top: -10000px;" name=
       "myframe4del"></iframe>
       
@@ -140,12 +141,12 @@
                                 }
       </script>
       
-      <script language="JavaScript" src="/lib/js/jquery-1.3.2.js"></script>
+      <script language="JavaScript" src="/index/js/jquery-1.3.2.js"></script>
       
-      <script language="JavaScript" src="/lib/js/spinbox/jquery.spinbox.js"></script>
+      <script language="JavaScript" src="/index/js/spinbox/jquery.spinbox.js"></script>
       
       
-      <link rel="stylesheet" type="text/css" href="/lib/js/spinbox/jquery.spinbox.css">
+      <link rel="stylesheet" type="text/css" href="/index/js/spinbox/jquery.spinbox.css">
 
       <table class="tshcartFirst" cellspacing="0" cellpadding="0" width="100%">
         <tbody>
@@ -253,27 +254,30 @@
 
             <td align="center">
               <input type="submit" class="hiddenc" name="backsh" id="backbut" alt="вернуться в магазин »"
-              onclick="document.location.href=&#39;/&#39;; return false;"><a id="back" class="backshopBut" href="/"><img src=
-              "/pics/blank.gif" width="123" height="18" alt="Назад в магазин"></a>
+              onclick="document.location.href='/'; return false;"><a id="back" class="backshopBut" href="/index">
+              <img src="/index/pics/blank.gif" width="123" height="18" alt="Назад в магазин"/></a>
             </td>
 
             <td>
-              <a class="backBut" href="javascript:history.back();"><img src="/pics/blank.gif" width="54" height="18" alt=
-              "Назад"></a>
+              <a class="backBut" href="javascript:history.back();">
+              <img src="/index/pics/blank.gif" width="54" height="18" alt="Назад"/></a>
             </td>
 
             <td>
-              <input type="submit" name="recalc" alt="пересчитать »" onclick=
-              "select_currency(document.shcart.currency_id.value);return false;" class="hiddenc" id="recalcbut"><a id="recalc"
-              class="recalcBut" onclick="javascript:document.getElementById(&#39;recalcbut&#39;).click();return false" href=
-              "javascript:click()"><img src="/pics/blank.gif" width="97" height="18" alt="Пересчитать"></a>
+              <input type="submit" name="recalc" alt="пересчитать »" 
+              onclick="select_currency(document.shcart.currency_id.value);return false;" 
+              class="hiddenc" id="recalcbut">
+              <a id="recalc" class="recalcBut" onclick="javascript:document.getElementById('recalcbut').click();return false" 
+              href="javascript:click()">
+              <img src="/index/pics/blank.gif" width="97" height="18" alt="Пересчитать"/></a>
             </td>
 
             <td>
-              <input type="submit" class="hiddenc" name="next" alt="далее »" id="nextbut" onclick=
-              "nextBtnClick();return false;"><a id="next" class="nextBut" onclick=
-              "javascript:document.getElementById(&#39;nextbut&#39;).click();return false;" href="javascript:click()"><img src=
-              "/pics/blank.gif" width="54" height="18" border="0" alt="Далее"></a>
+              <input type="submit" class="hiddenc" name="next" alt="далее »" id="nextbut" 
+              onclick="nextBtnClick();return false;">
+              <a id="next" class="nextBut" onclick="javascript:document.getElementById('nextbut').click();return false;" 
+              href="javascript:click()">
+              <img src="/index/pics/blank.gif" width="54" height="18" border="0" alt="Далее"/></a>
             </td>
 
             <td width="33%"></td>
