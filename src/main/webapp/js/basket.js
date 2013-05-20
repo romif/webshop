@@ -90,7 +90,7 @@ function count_all(id){
 
 	if (id==1){
 		prepare_shcart_step1();
-		document.shcart.submit();
+		//document.shcart.submit();
 		return true;
 	} else {
 		return false;

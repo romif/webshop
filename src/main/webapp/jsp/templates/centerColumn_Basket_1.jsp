@@ -7,11 +7,10 @@
 <%
 User user=MainServlet.loggedUsers.get(request.getSession().getId());
 
-/*user=SqlManager.GetUser("admin", "qqqq");
+user=SqlManager.GetUser("admin", "qqqq");
 user.addItem("474");user.addItem("474");
 user.addItem("477");
-*/
-if (user==null){%> <script type="text/javascript">document.location='/index'</script> <%}%>
+%>
 <!--
 
 //-->
@@ -21,7 +20,7 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
 
   <ul id="sectionsTree">
     <li class="firstSectionTree">
-      <a href="/">Главная</a>&#160;»&#160;
+      <a href="/index">Главная</a>&#160;»&#160;
     </li>
 
     <li>Корзина</li>
@@ -32,12 +31,10 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
   </h2>
   
   <div class="additionalContent">
-    <form name="shcart" method="get" action="/shcart/" id="shcart">
-      <input type="hidden" name="url" value="/">
+  <%if (user!=null){%> 
+  
+    <form name="shcart" method="get" action="/index" id="shcart">
       <input type="hidden" name="step" value="2">
-      <input type="hidden" name="nstep" value="3">
-      <input type="hidden" name="action" value="submit">
-
       <div id="shcartCurrency">
         <select size="1" name="currency_id" onchange="select_currency(document.shcart.currency_id.value);">
           <option class="currency" value="1000196">
@@ -164,10 +161,11 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
           
     	  <%for (Phone phone:phones){%>
           var itemPrice_<%=phone.getId()%> = normalizePrice(Math.round(<%=phone.getPriceUSD()%>*cur_koef / cur_round) * cur_round);
-          document.shcart._t_price_<%=phone.getId()%>.value=itemPrice_<%=phone.getId()%>;
+          /*document.shcart._t_price_<%=phone.getId()%>.value=itemPrice_<%=phone.getId()%>;*/
+          document.getElementById('_t_price_<%=phone.getId()%>').innerHTML=itemPrice_<%=phone.getId()%>;
           
-          itemPrice_summ_<%=phone.getId()%> = normalizePrice(itemPrice_<%=phone.getId()%> * document.shcart.item_<%=phone.getId()%>.value);
-          document.shcart._t_summ_<%=phone.getId()%>.value = itemPrice_summ_<%=phone.getId()%>; 
+          itemPrice_summ_<%=phone.getId()%> = normalizePrice(itemPrice_<%=phone.getId()%> * document.getElementById('item_<%=phone.getId()%>').innerHTML);
+          document.getElementById('_t_summ_<%=phone.getId()%>').innerHTML = itemPrice_summ_<%=phone.getId()%>; 
           
           <%}%>
           
@@ -184,7 +182,7 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
           
           var d={'updateItems':''};  
           <%for (Phone phone:phones){%>
-          d.phoneId_<%=phone.getId()%>=document.shcart.item_<%=phone.getId()%>.value;
+          d.phoneId_<%=phone.getId()%>=document.getElementById('item_<%=phone.getId()%>').innerHTML;
           <%}%>
              	  
           $.post('/index', d,
@@ -193,7 +191,8 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
        			}); 
           
           
-          document.shcart._t_summ_step1.value=shcart_summ1;
+          //document.shcart._t_summ_step1.value=shcart_summ1;
+          document.getElementById('_t_summ_step1').innerHTML=shcart_summ1;
           
           return true;
           
@@ -221,11 +220,11 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
           
           		  <%for (Phone phone:phones){%>         
                   if (document.shcart.del_<%=phone.getId()%>.checked ||
-                		  document.shcart.item_<%=phone.getId()%>.value == 0){
+                		  document.getElementById('item_<%=phone.getId()%>').innerHTML == 0){
                         document.getElementById(<%=phone.getId()%>).style.display='none';
                         koef_<%=phone.getId()%>=0;
                         del_url += '&del_<%=phone.getId()%>=on';
-                        if (document.shcart.item_<%=phone.getId()%>.value == 0)
+                        if (document.getElementById('item_<%=phone.getId()%>').innerHTML == 0)
                         {
                         document.shcart.del_<%=phone.getId()%>.checked=true;
                         }
@@ -306,20 +305,26 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
               <a href="/index?phoneID=<%=phone.getId()%>"><%=phone.getTitle()%></a>
             </td>
 
-            <td class="price"><input type="edit" class="price_value" readonly 
-            name="_t_price_<%=phone.getId()%>" value="1"></td>
+            <td class="price">
+            <div class="price_value" id="_t_price_<%=phone.getId()%>"/> 
+            </td>
 
-            <td class="quantyval"><input type="edit" class="quantity_value spinbox-active" 
-            name="item_<%=phone.getId()%>" value="<%=user.getItems().get(phone)%>"></td>
+            <td class="quantyval">
+            <div class="quantity_value spinbox-active" 
+            id="item_<%=phone.getId()%>" ><%=user.getItems().get(phone)%></div>
+            </td>
 
-            <td class="priceval"><input type="edit" class="price_value" readonly 
-            name="_t_summ_<%=phone.getId()%>" 
-            value="1"></td>
+            <td class="priceval">
+            <div class="price_value"  
+            id="_t_summ_<%=phone.getId()%>"/>
+            </td>
 
-            <td align="center" class="centercol"><input type="checkbox" class="del_checkbox" 
+            <td align="center" class="centercol">
+            <input type="checkbox" class="del_checkbox" 
             name="del_<%=phone.getId()%>"></td>
 
-            <td align="center" class="hiddenc" id="wait_id_<%=phone.getId()%>"><input type="checkbox" class="del_checkbox" name="wait_<%=phone.getId()%>"></td>
+            <td align="center" class="hiddenc" id="wait_id_<%=phone.getId()%>">
+            <input type="checkbox" class="del_checkbox" name="wait_<%=phone.getId()%>"></td>
           </tr>
           
           <%}%>
@@ -333,8 +338,7 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
             <td class="s_result_price">Итого:</td>
 
             <td colspan="4" id="summ_step1" class="shcart_itogo_value">
-            <input size="5" name="_t_summ_step1" value="0" readonly
-            class="price_valueBlue"></td>
+            <div id="_t_summ_step1" class="price_valueBlue"/></td>
           </tr>
         
         </tbody>
@@ -347,8 +351,9 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
           <tr>
             <td class="s_result_priceWhite">Итого:</td>
 
-            <td class="priceval"><input type="text" class="price_valueWhite" size="5" value="0" name="_t_summ_main_i" readonly
-            ></td>
+            <td class="priceval">
+            <div class="price_valueWhite" id="_t_summ_main_i"/>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -360,7 +365,7 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
 
             <td align="center">
               <input type="submit" class="hiddenc" name="backsh" id="backbut" alt="вернуться в магазин »"
-              onclick="document.location.href='/'; return false;">
+              onclick="document.location.href='/index'; return false;">
               <a id="back" class="backshopBut" href="/index">
               <img src="/pics/blank.gif" width="123" height="18" alt="Назад в магазин"/></a>
             </td>
@@ -407,4 +412,10 @@ if (user==null){%> <script type="text/javascript">document.location='/index'</sc
         }                                                           
     </script>
     
+    <%}else {%>
+   <div class="noCompare">Извините, Ваша корзина пуста. Предварительно закажите какой-либо товар.</div>
+    <%}%>
+    
   </div>
+  
+   
