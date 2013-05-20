@@ -7,10 +7,9 @@
 <%
 User user=MainServlet.loggedUsers.get(request.getSession().getId());
 
-user=SqlManager.GetUser("admin", "qqqq");
+/*user=SqlManager.GetUser("admin", "qqqq");
 user.addItem("474");user.addItem("474");
-user.addItem("477");
-MainServlet.loggedUsers.put(request.getSession().getId(),user);
+user.addItem("477");*/
 %>
 <!--
 
@@ -28,15 +27,14 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
   </ul>
   
   <h2>Корзина: 
-    <span class="counter">шаг<b>1</b>(из <b><static name="number_of_steps">5</static></b>)</span>
+    <span class="counter">шаг<b>2</b>(из <b><static name="number_of_steps">5</static></b>)</span>
   </h2>
   
   <div class="additionalContent">
-  <%if ((user!=null)&&(!user.getItems().isEmpty())) {%> 
+  <%if ((user!=null)&&(!user.getItems().isEmpty())){%> 
   
     <form name="shcart" method="get" action="/index" id="shcart">
-      <input type="hidden" name="basket">
-      <input type="hidden" name="step" value="2">
+      <input type="hidden" name="step" value="3">
       <div id="shcartCurrency">
         <select size="1" name="currency_id" onchange="select_currency(document.shcart.currency_id.value);">
           <option class="currency" value="1000196">
@@ -74,10 +72,6 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
                     cur_round = 1.00;
     				cur_id = value;
     				cur_suffix = "$";
-    				
-    				
-    				
-    				
     				}
     				break;
     			
@@ -88,10 +82,6 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
                     cur_round = 1.00;
     				cur_id = value;
     				cur_suffix = "руб.";
-    				
-    				
-    				
-    				
     				}
     				break;
     			
@@ -103,10 +93,6 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
                     cur_round = 1.00;
     				cur_id = value;
     				cur_suffix = "E";
-    				
-    				
-    				
-    				
     				}
     				break;
     			
@@ -118,10 +104,6 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
                     cur_round = 1.00;
     				cur_id = value;
     				cur_suffix = "р.руб.";
-    				
-    				
-    				
-    				
     				}
     				break;
     			
@@ -162,95 +144,28 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
       function shcart_step1() {
           
     	  <%for (Phone phone:phones){%>
-          var itemPrice_<%=phone.getId()%> = normalizePrice(Math.round(<%=phone.getPriceUSD()%>*cur_koef / cur_round) * cur_round);
-          /*document.shcart._t_price_<%=phone.getId()%>.value=itemPrice_<%=phone.getId()%>;*/
+          var itemPrice_<%=phone.getId()%> = 
+        	  normalizePrice(Math.round(<%=phone.getPriceUSD()%>*cur_koef / cur_round) * cur_round);
           document.getElementById('_t_price_<%=phone.getId()%>').innerHTML=itemPrice_<%=phone.getId()%>;
           
-          itemPrice_summ_<%=phone.getId()%> = normalizePrice(itemPrice_<%=phone.getId()%> * document.shcart.item_<%=phone.getId()%>.value);
+          itemPrice_summ_<%=phone.getId()%> = 
+        	  normalizePrice(itemPrice_<%=phone.getId()%> * document.shcart.item_<%=phone.getId()%>.value);
           document.getElementById('_t_summ_<%=phone.getId()%>').innerHTML = itemPrice_summ_<%=phone.getId()%>; 
           
           <%}%>
           
-          check_wait ();
           
-          
-          del_item ();
-          
-          shcart_summ1=0;
-          <%for (Phone phone:phones){%>
-          shcart_summ1+=itemPrice_summ_<%=phone.getId()%>*koef_<%=phone.getId()%>;
-          <%}%>
-
-          
-          var d={'updateItems':''};  
-          <%for (Phone phone:phones){%>
-          
-          d.phoneId_<%=phone.getId()%>=document.shcart.item_<%=phone.getId()%>.value;
-
-          <%}%>
-             	  
-          $.post('/index', d,
-         		 function(data) {
-       					if (data==0) alert('Ошибка! Невозможно пересчитать заказ');
-       			}); 
-          
-          
+          var postTarif = 
+        	  normalizePrice(Math.round(<%=Tarifikator.getTarif(user)%>*cur_koef / cur_round) * cur_round);
+          document.shcart._t_bring_1000196.value=postTarif;
           //document.shcart._t_summ_step1.value=shcart_summ1;
           document.getElementById('_t_summ_step1').innerHTML=shcart_summ1;
           
           return true;
           
       }
-      
-      function check_wait () {
-          
-    	  <%for (Phone phone:phones){%>
-          if (document.shcart.wait_<%=phone.getId()%>.checked)
-          {
-                  koef_<%=phone.getId()%>=0;
-          }
-          else
-          {
-                  koef_<%=phone.getId()%>=1;
-          }
-          
-          <%}%>
-          
-          return true;
-      }
-      
-      function del_item () {
-          del_url = "";
-          
-          		  <%for (Phone phone:phones){%>         
-                  if (document.shcart.del_<%=phone.getId()%>.checked ||
-                		  document.shcart.item_<%=phone.getId()%>.value == 0){
-                	  document.shcart.item_<%=phone.getId()%>.value = 0;
-                        document.getElementById(<%=phone.getId()%>).style.display='none';
-                        koef_<%=phone.getId()%>=0;
-                        del_url += '&del_<%=phone.getId()%>=on';
-                        if (document.shcart.item_<%=phone.getId()%>.value == 0)
-                        {
-                        document.shcart.del_<%=phone.getId()%>.checked=true;
-                        }
-                  }
-                  <%}%>
-                  
-                  
-            	  
-             
-                  
 
-
-          if (del_url != "")
-          {
-        	  
-        	  
-                 // document.getElementById("myframe4del").src = "/shcart/?step=1&mode=hidden" + del_url;
-          }
-          
-          return true;
-    }
+      
       
       
       
@@ -273,13 +188,7 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
     	}
                             
       </script>
-      
-      <script language="JavaScript" src="/js/jquery-1.3.2.js"></script>
-      
-      <script language="JavaScript" src="/js/jquery.spinbox.js"></script>
-      
-      
-      <link rel="stylesheet" type="text/css" href="/css/jquery.spinbox.css"/>
+
 
       <table class="tshcartFirst" cellspacing="0" cellpadding="0" width="100%">
         <tbody>
@@ -317,8 +226,6 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
 
             <td class="thead">Сумма</td>
 
-            <td class="thead">Удалить</td>
-
             <td class="hiddenc"></td>
           </tr>
           
@@ -344,12 +251,6 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
             id="_t_summ_<%=phone.getId()%>"/>
             </td>
 
-            <td align="center" class="centercol">
-            <input type="checkbox" class="del_checkbox" 
-            name="del_<%=phone.getId()%>"></td>
-
-            <td align="center" class="hiddenc" id="wait_id_<%=phone.getId()%>">
-            <input type="checkbox" class="del_checkbox" name="wait_<%=phone.getId()%>"></td>
           </tr>
           
           <%}%>
@@ -369,7 +270,58 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
         </tbody>
       </table>
       
-      <script language="JavaScript">$(".quantity_value").spinbox();</script>
+      <table class="tshcart" width="100%" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td colspan="3" class="tovar">
+              <table cellspacing="0" cellpadding="0" width="100%" height="37">
+                <tbody>
+                  <tr>
+                    <td class="shcartHeaderLeft"></td>
+                    <td class="shcartHeaderTitle">Способ доставки</td>
+                    <td class="shcartHeaderRight"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="3" height="5">
+              <div class="shcartBanners">
+                <br>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bringName">Наименование</td>
+
+            <td class="commentThead">Комментарий</td>
+
+            <td class="thead">Цена</td>
+          </tr>
+
+          <tr>
+            <td class="trbcont"><input type="radio" name="bri" class="checkbox" id="bring_r_1000195" onclick=
+            "javascript:shcart_step2(1000195);"><label for="bring_r_1000195">Курьер</label></td>
+
+            <td class="tdesc">Доставка товара курьером</td>
+
+            <td class="priceval"><input type="text" readonly class="price_value" name="_t_bring_1000195" value="0.00"></td>
+          </tr>
+          
+          <tr>
+            <td class="trbcont"><input type="radio" name="bri" class="checkbox" id="bring_r_1000196" onclick=
+            "javascript:shcart_step2(1000196);"><label for="bring_r_1000196">Почта</label></td>
+
+            <td class="tdesc">Доставка товара почтовой посылкой</td>
+
+            <td class="priceval"><input type="text" readonly class="price_value" name="_t_bring_1000196" value=""></td>
+          </tr>
+        </tbody>
+      </table>
+      
 
       <table class="blueSumm" cellpadding="0" cellspacing="0" width="100%">
         <tbody>
@@ -400,14 +352,6 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
               <img src="/pics/blank.gif" width="54" height="18" alt="Назад"/></a>
             </td>
 
-            <td>
-              <input type="submit" name="recalc" alt="пересчитать »" 
-              onclick="select_currency(document.shcart.currency_id.value);return false;" 
-              class="hiddenc" id="recalcbut">
-              <a id="recalc" class="recalcBut" onclick="javascript:document.getElementById('recalcbut').click();return false" 
-              href="javascript:click()">
-              <img src="/pics/blank.gif" width="97" height="18" alt="Пересчитать"/></a>
-            </td>
 
             <td>
               <input type="submit" class="hiddenc" name="next" alt="далее »" id="nextbut" 
@@ -422,20 +366,10 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
         </tbody>
       </table>
     </form>
+    
+    
     <script>select_currency(document.shcart.currency_id.value);</script>
     
-    <script language="JavaScript">
-        var pay_message = document.getElementById('paymsg');
-            if(pay_message){
-            document.getElementById('paymsg').style.display=submitepay_visible;
-            }
-    </script>
-    
-    <script>
-    if (typeof show_payments !== 'undefined' & document.getElementById('payments')!=null) {
-        document.getElementById('payments').style.display = show_payments;
-        }                                                           
-    </script>
     
     <%}else {%>
    <div class="noCompare">Извините, Ваша корзина пуста. Предварительно закажите какой-либо товар.</div>

@@ -79,23 +79,7 @@ function trace_log () {
 
 
 
-function count_all(id){
-	main_summ1=Number(shcart_summ1)+Number(shcart_summ2)+Number(shcart_summ3);
 
-	//if (!document.shcart._t_summ_main_i) {return false;}
-
-	
-	document.shcart._t_summ_main_i.value=main_summ1;
-	
-
-	if (id==1){
-		prepare_shcart_step1();
-		//document.shcart.submit();
-		return true;
-	} else {
-		return false;
-	}
-}
 
 var check=0;//Переменная означающая требуется ли выполнять проверку функцией check_form()
 

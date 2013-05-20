@@ -95,7 +95,8 @@ public class User {
 		while (it.hasNext()){
 			Phone phone=it.next();
 			if (phone.getId()==phoneId){
-				this.items.put(phone, number);
+				if (number==0)this.items.remove(phone);
+				else this.items.put(phone, number);
 				return true;
 			}
 		}

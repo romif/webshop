@@ -8,6 +8,16 @@
 	<template:put name='topMenu' content='/jsp/templates/topMenu.jsp' />
 	<template:put name='leftColumn' content='/jsp/templates/leftColumn.jsp' />
 	<template:put name='rightColumn' content='/jsp/templates/rightColumn.jsp' />
-	<template:put name='centerColumn' content='/jsp/templates/centerColumn_Basket_1.jsp' />
+	
+	<%
+	String basket_page="/jsp/templates/centerColumn_Basket_1.jsp";
+	if (request.getParameter("step")!=null)
+		if (request.getParameter("step").equals("2"))
+			basket_page="/jsp/templates/centerColumn_Basket_2.jsp";
+		else if (request.getParameter("step").equals("3"))
+			basket_page="/jsp/templates/centerColumn_Basket_3.jsp";
+	%>
+	
+	<template:put name='centerColumn' content='<%=basket_page%>' />
 	<template:put name='footer' content='/jsp/templates/footer.jsp' />
  </template:insert>
