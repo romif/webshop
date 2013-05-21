@@ -2,7 +2,10 @@ package servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -23,6 +26,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import util.EmailBuilder;
 import util.GoogleMail;
 import util.MD5;
 import util.Phone;
@@ -42,6 +46,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 	public String getPage(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String page = "/jsp/Index.jsp";
+		System.out.println(request.getSession().getId());
 
 		if (request.getParameter("topmobail") != null) {
 			return "/TopmoBail9.htm";
@@ -87,6 +92,35 @@ public class RequestDecoder<MultipartRequestWrapper> {
 			if (user!=null){
 				if (user.addItem(request.getParameter("addItem")))
 					out.print(1);
+				else out.print(0);
+			}
+			else out.print(0);
+			out.flush();
+			out.close();
+			return null;
+		}
+		
+		if (request.getParameter("placeOrder") != null) {
+			
+			
+			
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			User user=MainServlet.loggedUsers.get(request.getSession().getId());
+			if (user!=null){
+				if (request.getParameter("delivery")!=null){
+					String message =EmailBuilder.OrderBuilder(request.getSession().getId());
+					try {
+						GoogleMail.Send("romif.romif", "rjyjdfkj", "romif@yandex.ru",
+								"Заказ", message);
+					} catch (MessagingException e) {
+						e.printStackTrace();
+						out.print(0);
+					}
+					
+					out.print(1);
+				}
+					
 				else out.print(0);
 			}
 			else out.print(0);
@@ -174,7 +208,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 							+ "\n http://tomcat7-romif.rhcloud.com/index?mode=restore&code="
 							+ code;
 
-					System.out.println("begin " + request.getSession().getId());
+					//System.out.println("begin " + request.getSession().getId());
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
 					if (SqlManager.IsUserExist(login)) {
@@ -189,7 +223,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 						out.print(0);
 					out.flush();
 					out.close();
-					System.out.println("end " + request.getSession().getId());
+					//System.out.println("end " + request.getSession().getId());
 					return null;
 				}
 
@@ -412,5 +446,6 @@ public class RequestDecoder<MultipartRequestWrapper> {
 		return page;
 
 	}
+	
 
 }

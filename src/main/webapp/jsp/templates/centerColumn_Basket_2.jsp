@@ -34,6 +34,7 @@ user.addItem("477");*/
   <%if ((user!=null)&&(!user.getItems().isEmpty())){%> 
   
     <form name="shcart" method="get" action="/index" id="shcart">
+      <input type="hidden" name="basket">
       <input type="hidden" name="step" value="3">
       <div id="shcartCurrency">
         <select size="1" name="currency_id" onchange="select_currency(document.shcart.currency_id.value);">
@@ -46,7 +47,7 @@ user.addItem("477");*/
           </option>
 
           <option class="currency" value="1000197">
-            E
+            €
           </option>
 
           <option class="currency" value="1000199">
@@ -59,6 +60,7 @@ user.addItem("477");*/
       "myframe4del"></iframe>
       
       <script language="JavaScript">
+      var delivery=1000195;
       
       function select_currency(value){
 
@@ -92,7 +94,7 @@ user.addItem("477");*/
                     <%=MainServlet.Currencies.get("EUR")%>;
                     cur_round = 1.00;
     				cur_id = value;
-    				cur_suffix = "E";
+    				cur_suffix = "€";
     				}
     				break;
     			
@@ -108,8 +110,11 @@ user.addItem("477");*/
     				break;
     			
     			default : {
-    				trace_log ();
-    			}
+    				cur_koef = 1;
+                    cur_round = 1.00;
+    				cur_id = value;
+    				cur_suffix = "$";
+    				}
     		}	
     		
     		
@@ -137,9 +142,7 @@ user.addItem("477");*/
     	  var koef_<%=phone.getId()%>=1;  
       <%}%>
       
-      function prepare_shcart_step1() {
-    	  del_item ();
-    	  }
+
       
       function shcart_step1() {
           
@@ -155,31 +158,65 @@ user.addItem("477");*/
           <%}%>
           
           
-          var postTarif = 
-        	  normalizePrice(Math.round(<%=Tarifikator.getTarif(user)%>*cur_koef / cur_round) * cur_round);
-          document.shcart._t_bring_1000196.value=postTarif;
-          //document.shcart._t_summ_step1.value=shcart_summ1;
-          document.getElementById('_t_summ_step1').innerHTML=shcart_summ1;
           
+          //document.shcart._t_summ_step1.value=shcart_summ1;
+          
+          shcart_summ1=0;
+          <%for (Phone phone:phones){%>
+          shcart_summ1+=itemPrice_summ_<%=phone.getId()%>*koef_<%=phone.getId()%>;
+          <%}%>
+          
+          document.getElementById('_t_summ_step1').innerHTML=shcart_summ1;
+          count_delivery(delivery);
           return true;
           
       }
 
-      
+      function count_delivery(id){
+    	  var postTarif = 
+        	  normalizePrice(Math.round(<%=Tarifikator.getTarif(user)%>*cur_koef / cur_round) * cur_round);
+          document.shcart._t_bring_1000196.value=postTarif;
+    	  delivery=id;
+    	  switch (id) {
+			case 1000195:
+				{
+				shcart_summ2=document.shcart._t_bring_1000195.value;
+				document.shcart.bring_r_1000195.checked="checked";
+				document.shcart.bring_r_1000196.checked="";
+				}
+				break;
+				
+			case 1000196:
+			{
+			shcart_summ2=postTarif;
+			document.shcart.bring_r_1000196.checked="checked";
+			document.shcart.bring_r_1000195.checked="";
+			}
+			break;
+			
+			default:{
+				shcart_summ2=document.shcart._t_bring_1000195.value;
+			}
+  	  	}
+    	  count_all(0);
+      }
       
       
       
       function count_all(id){
+    	 
+    	  
+    	  
     		main_summ1=Number(shcart_summ1)+Number(shcart_summ2)+Number(shcart_summ3);
     		//if (!document.shcart._t_summ_main_i) {return false;}
     		//document.shcart._t_summ_main_i.value=main_summ1;
     		document.getElementById('_t_summ_main_i').innerHTML=main_summ1;
     		if (id==1){
-    			prepare_shcart_step1();
     			<%for (Phone phone:phones){%> 
     			document.shcart.item_<%=phone.getId()%>.disabled="disabled";
-    			document.shcart.del_<%=phone.getId()%>.disabled="disabled";
     			<%}%>
+    			document.shcart._t_bring_1000195.disabled="disabled";
+    			document.shcart._t_bring_1000196.disabled="disabled";
     			document.shcart.submit();
     			return true;
     		} else {
@@ -303,21 +340,22 @@ user.addItem("477");*/
           </tr>
 
           <tr>
-            <td class="trbcont"><input type="radio" name="bri" class="checkbox" id="bring_r_1000195" onclick=
-            "javascript:shcart_step2(1000195);"><label for="bring_r_1000195">Курьер</label></td>
+            <td class="trbcont"><input type="radio" name="courier" class="checkbox" id="bring_r_1000195" onclick=
+            "javascript:count_delivery(1000195);"/><label for="bring_r_1000195">Курьер</label></td>
 
-            <td class="tdesc">Доставка товара курьером</td>
+            <td class="tdesc">Доставка товара курьером. Расчет с курьером наличными</td>
 
             <td class="priceval"><input type="text" readonly class="price_value" name="_t_bring_1000195" value="0.00"></td>
           </tr>
           
           <tr>
-            <td class="trbcont"><input type="radio" name="bri" class="checkbox" id="bring_r_1000196" onclick=
-            "javascript:shcart_step2(1000196);"><label for="bring_r_1000196">Почта</label></td>
+            <td class="trbcont"><input type="radio" name="post" class="checkbox" id="bring_r_1000196" onclick=
+            "javascript:count_delivery(1000196);"><label for="bring_r_1000196">Почта</label></td>
 
-            <td class="tdesc">Доставка товара почтовой посылкой</td>
+            <td class="tdesc">Доставка товара почтовой посылкой. 
+            Оплата в почтовом отделении наложеным платежом</td>
 
-            <td class="priceval"><input type="text" readonly class="price_value" name="_t_bring_1000196" value=""></td>
+            <td class="priceval"><input type="text" readonly class="price_value" name="_t_bring_1000196" value="0"></td>
           </tr>
         </tbody>
       </table>
@@ -368,7 +406,16 @@ user.addItem("477");*/
     </form>
     
     
-    <script>select_currency(document.shcart.currency_id.value);</script>
+    <script>
+    for(var i=0;i<document.shcart.currency_id.options.length;i++){
+        if (document.shcart.currency_id.options[i].value == QueryString.currency_id) {
+        	document.shcart.currency_id.selectedIndex = i;
+            break;
+        }
+    }
+    select_currency(QueryString.currency_id);
+    //select_currency(document.shcart.currency_id.value);
+    </script>
     
     
     <%}else {%>

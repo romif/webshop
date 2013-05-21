@@ -85,6 +85,11 @@ public class GoogleMail {
         msg.setSubject(title);
         msg.setText(message, "utf-8");
         msg.setSentDate(new Date());
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(message);
+
+        msg.setContent(message, "text/html; charset=utf-8");
 
         SMTPTransport t = (SMTPTransport)session.getTransport("smtps");
 

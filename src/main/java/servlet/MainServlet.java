@@ -71,6 +71,7 @@ public class MainServlet extends HttpServlet implements javax.servlet.Servlet {
 			RequestDispatcher dispatcher = getServletContext()
 					.getRequestDispatcher(page);
 			dispatcher.forward(request, response);
+			
 		}
 	}
 

@@ -48,7 +48,7 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
           </option>
 
           <option class="currency" value="1000197">
-            E
+            €
           </option>
 
           <option class="currency" value="1000199">
@@ -102,7 +102,7 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
                     <%=MainServlet.Currencies.get("EUR")%>;
                     cur_round = 1.00;
     				cur_id = value;
-    				cur_suffix = "E";
+    				cur_suffix = "€";
     				
     				
     				
