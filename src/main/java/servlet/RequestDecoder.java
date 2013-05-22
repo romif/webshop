@@ -109,7 +109,7 @@ public class RequestDecoder<MultipartRequestWrapper> {
 			User user=MainServlet.loggedUsers.get(request.getSession().getId());
 			if (user!=null){
 				if (request.getParameter("delivery")!=null){
-					String message =EmailBuilder.OrderBuilder(request.getSession().getId());
+					String message =EmailBuilder.OrderBuilder(request);
 					try {
 						GoogleMail.Send("romif.romif", "rjyjdfkj", "romif@yandex.ru",
 								"Заказ", message);
