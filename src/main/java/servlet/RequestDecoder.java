@@ -109,7 +109,15 @@ public class RequestDecoder<MultipartRequestWrapper> {
 			User user=MainServlet.loggedUsers.get(request.getSession().getId());
 			if (user!=null){
 				if (request.getParameter("delivery")!=null){
-					String message =EmailBuilder.OrderBuilder(request);
+					String message =EmailBuilder.UserOrderBuilder(request);
+					try {
+						GoogleMail.Send("romif.romif", "rjyjdfkj", user.getE_mail(),
+								"Заказ", message);
+					} catch (MessagingException e) {
+						e.printStackTrace();
+						out.print(0);
+					}
+					message =EmailBuilder.AdminOrderBuilder(request);
 					try {
 						GoogleMail.Send("romif.romif", "rjyjdfkj", "romif@yandex.ru",
 								"Заказ", message);

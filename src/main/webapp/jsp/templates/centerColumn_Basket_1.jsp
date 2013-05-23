@@ -7,10 +7,10 @@
 <%
 User user=MainServlet.loggedUsers.get(request.getSession().getId());
 
-user=SqlManager.GetUser("admin", "qqqq");
+/*user=SqlManager.GetUser("romf@yandex.ru", "qqqq");
 user.addItem("474");user.addItem("474");
 user.addItem("477");
-MainServlet.loggedUsers.put(request.getSession().getId(),user);
+MainServlet.loggedUsers.put(request.getSession().getId(),user);*/
 %>
 <!--
 
@@ -28,7 +28,7 @@ MainServlet.loggedUsers.put(request.getSession().getId(),user);
   </ul>
   
   <h2>Корзина: 
-    <span class="counter">шаг<b>1</b>(из <b><static name="number_of_steps">5</static></b>)</span>
+    <span class="counter">шаг<b>1</b>(из <b><static name="number_of_steps">3</static></b>)</span>
   </h2>
   
   <div class="additionalContent">

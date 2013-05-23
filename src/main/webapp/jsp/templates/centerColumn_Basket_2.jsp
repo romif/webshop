@@ -27,7 +27,7 @@ user.addItem("477");*/
   </ul>
   
   <h2>Корзина: 
-    <span class="counter">шаг<b>2</b>(из <b><static name="number_of_steps">5</static></b>)</span>
+    <span class="counter">шаг<b>2</b>(из <b><static name="number_of_steps">3</static></b>)</span>
   </h2>
   
   <div class="additionalContent">

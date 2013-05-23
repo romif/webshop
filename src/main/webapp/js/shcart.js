@@ -2,6 +2,7 @@ toMesHide = null;
 tmSh = null;
 function add_item(data_id)
 {
+	document.getElementById('preload').style.display='block';
 	$.post('/index', {
 		isLogged : ''
 		},
@@ -17,6 +18,7 @@ function add_item(data_id)
 							alert('Товар не может быть добавлен');
 						if (data==1){
 							window.top.frames["win_basket"].location = '/index?shcart';
+							hideLoading();
 							alert('Товар добавлен');
 						}
 					}
