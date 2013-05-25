@@ -217,7 +217,7 @@ System.out.println(request.getParameter("sessionId"));
        						alert('Ошибка! Невозможно отправить заказ. Попробуйте еще раз');
        					} else if (data==1) {
        						hideLoading();
-       						alert('Заказ отправлен. В ближайшее время мы с вами свяжемся');
+       						alert('Заказ отправлен. В ближайшее время мы с Вами свяжемся');
        					}
        					document.location='/index';
        			});
