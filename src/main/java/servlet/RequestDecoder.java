@@ -212,7 +212,8 @@ public class RequestDecoder<MultipartRequestWrapper> {
 							}
 						MainServlet.restoreCodes.put(code, login);
 					}
-					String message = "Для восстановления пароля перейдите по следующей ссылке: "
+					String message = 
+							"Для восстановления пароля перейдите по следующей ссылке: "
 							+ "\n http://tomcat7-romif.rhcloud.com/index?mode=restore&code="
 							+ code;
 
