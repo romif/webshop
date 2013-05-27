@@ -4,3 +4,5 @@ target
 .project
 .classpath
 /bin
+/deploy.bat
+/deploy_localy.bat
